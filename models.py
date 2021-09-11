@@ -132,9 +132,14 @@ def render(data):
             'ranksep=0.4',
             'splines="ortho"',
             '',
-            ]+
-            renderHouse(data, data, [])
-            ,
+        ]+
+        sum([
+            renderFamily(data, data, f, [str(i)])
+            for i,f in enumerate(data.get('families',[]))
+        ] + [
+            renderPerson(data, p or {}, [str(n)])
+            for i,(n,p) in enumerate(data.get('people',ns()).items())
+        ], []),
         '}'
     ])
 
@@ -142,6 +147,10 @@ def renderHousePrelude(family, path):
     if not family.get('house', None):
         return []
     return [
+        '#'*76,
+        f'# House {".".join(path)} - {family.house}',
+        '#'*76,
+        '',
         f'label=<<b>{family.house}</b>>',
         #f'labelhref="{family.links and family.links[0]}"',
         # style :house before: label:label labelhref=labelhref
@@ -319,15 +328,6 @@ def renderSubFamilies(data, family, path):
         for i,f in enumerate(family.get('families',[]))
     ], [])
 
-
-def renderHouse(data, house, path):
-    return sum([
-        renderFamily(data, house, f or {}, path+[str(i)])
-        for i,f in enumerate(data.get('families',[]))
-    ] + [
-        renderPerson(data, p or {}, path+[str(n)])
-        for i,(n,p) in enumerate(data.get('people',ns()).items())
-    ],[])
 
 data = ns.load(sys.argv[1])
 p=KinFile(**data)
