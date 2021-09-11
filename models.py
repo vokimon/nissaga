@@ -7,6 +7,16 @@ from consolemsg import warn
 import sys
 from pathlib import Path
 
+colors=[
+    '#1abc9c',
+    '#2ecc71',
+    '#3498db',
+    '#9b59b6',
+    '#34495e',
+    '#f1c40f',
+    '#e67e22',
+    '#e74c3c',
+]
 
 class Person(BaseModel):
     born: Optional[Union[bool, datetime.date, str]] = True
@@ -146,7 +156,7 @@ def renderHousePrelude(family, id):
 
 
 def renderFamily(data, house, family, path):
-    family.color = 'blue'
+    family.color = colors[int(path[-1])%len(colors)]
     slug='_'.join(str(p) for p in path)
     jointparents = ', '.join([p for p in family.parents if p]) or "none"
     jointchildren = ', '.join([p for p in family.children if p]) or "none"
