@@ -43,6 +43,9 @@ default_styles = ns.loads("""
     label: ''
     height: 0.1
     width: 0.1
+    fontname: 'Helvetica, Arial, sans-serif'
+    fontsize: 9
+    fontcolor: '#660000'
 
   ':children':
     shape: 'box'

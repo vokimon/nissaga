@@ -86,8 +86,17 @@ def renderFamily(root, house, family, path):
             return ['# No parents']
 
         union = f'union_{id}'
+        state = (
+            '⚮' if family.divorced is True else (
+            f'⚮ {family.divorced}' if family.divorced is not False else (
+            '⚯' if family.married is False else (
+            '' if family.married is True else (
+            f'⚭ {family.married}'
+        )))))
+
         return [
             f'{union} [',
+            f'xlabel="{state}"' if state else [],
             applyStyles(root, ':union', pre=dict(
                 fillcolor=familyColor,
             )),

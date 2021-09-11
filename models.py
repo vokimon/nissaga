@@ -34,8 +34,8 @@ class Person(BaseModel):
 class Family(BaseModel):
     parents: List[Union[str, Dict[str, Person]]]
     children: Optional[List[Union[str, Dict[str, Person]]]]
-    married: Optional[Union[bool, datetime.date, str]] = True
-    divorced: Optional[Union[bool, datetime.date, str]] = False
+    married: Optional[Union[bool, int, datetime.date, str]] = True
+    divorced: Optional[Union[bool, int, datetime.date, str]] = False
     house: Optional[str]
     notes: Optional[str]
     docs: Optional[List[str]]
@@ -56,8 +56,6 @@ class KinFile(BaseModel):
 
     def normalize(self):
         processFamily(self, self.people)
-        #processFamily(data, data.setdefault('people', ns()))
-
 
 
 def processPerson(person, people):
@@ -73,7 +71,6 @@ def processPerson(person, people):
         return name
 
 def processFamily(context, people):
-    #if 'families' not in family: return
     for family in context.families:
         family.parents = [
             processPerson(parent, people)
@@ -98,8 +95,7 @@ if __name__ == '__main__':
     step("Normalizing...")
     p.normalize()
 
-    #print(data.dump())
-    print(ns(p.dict()).dump())
+    #print(ns(p.dict()).dump())
 
     step("Generating graph...")
     dot = render(p)
