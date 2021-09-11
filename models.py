@@ -17,7 +17,7 @@ familyColors=[
     '#e67e22',
     '#e74c3c',
 ]
-styles = ns.loads("""
+default_styles = ns.loads("""
   ':edge':
     dir: 'none'
     color: '#cccccc'
@@ -93,6 +93,26 @@ styles = ns.loads("""
 """)
 
 
+def renderStyle(styles):
+    return [
+        f"{name}={escape(value)}"
+        for name, value in styles.items()
+        if value is not None
+    ]
+
+def combineStyles(tree, *classes, pre={}, post={}, **additional):
+    result = ns(pre)
+    for clss in classes:
+        result.update(default_styles.get(clss, {}))
+        result.update(tree.get('styles',{}).get(clss, {}))
+    result.update(post)
+    return result
+
+def applyStyles(tree, *classes, pre={}, post={}, **additional):
+    return renderStyle(
+        combineStyles(tree, *classes, pre=pre, post=post, **additional)
+    )
+
 class Person(BaseModel):
     born: Optional[Union[bool, datetime.date, str]] = True
     died: Optional[Union[bool, datetime.date, str]] = False
@@ -140,7 +160,9 @@ class KinFile(BaseModel):
 
 def escape(s):
     # TODO: review this
-    return '"'+s+'"'
+    if type(s)==str:
+        return '"'+s+'"'
+    return s
 
 
 def processPerson(person, people):
@@ -182,26 +204,15 @@ def indenter(data, spacer='  '):
 def render(data):
     return indenter([
         'digraph G {', [
-            'edge [', [
-                'dir="none"',
-                'color="#cccccc"',
-                ],
+            'edge [',
+                applyStyles(data, ':edge'),
             ']',
             '',
-            'node [', [
-                'shape="box"',
-                'style="filled"',
-                'fontname="Helvetica, Arial, sans-serif"',
-                #'width=2.5',
-                'width=3.2', # This one from my file
-                'fillcolor="white"',
-                'color="#cccccc"',
-                ],
+            'node [',
+                applyStyles(data, ':node'),
             ']',
             '',
-            'rankdir="LR"',
-            'ranksep=0.4',
-            'splines="ortho"',
+            ] + applyStyles(data, ':digraph') + [
             '',
         ]+
         sum([
@@ -224,13 +235,11 @@ def renderHousePrelude(family, path):
         '',
         f'label=<<b>{family.house}</b>>',
         #f'labelhref="{family.links and family.links[0]}"',
-        # style :house before: label:label labelhref=labelhref
-        'style="filled"',
-        'color="#fafafa"' if not len(path)&1 else 'color="#f4f4f4"',
-        'labeljust="l"',
-        'fontname="Helvetica, Arial, sans-serif"',
-        'fontsize=16',
-        'margin=10',
+        ] + applyStyles(data, ':house',
+            post=dict(
+                color="#fafafa" if not len(path)&1 else "#f4f4f4"
+            )
+        ) + [
         '',
     ]
 
@@ -242,10 +251,7 @@ def renderFamily(data, house, family, path):
     jointchildren = ', '.join([p for p in family.children if p]) or "none"
     return [
         f'subgraph cluster_family_{slug} {{', [
-            # TODO style :family
-            'label=""',
-            'style="invis"',
-            'margin=0',
+            ] + applyStyles(data, ':family') + [
             '',
             ] +
             renderHousePrelude(family, path) +
@@ -271,25 +277,18 @@ def renderParents(family, id):
 
     union = f'union_{id}'
     return [
-        f'{union} [', [
-            f'fillcolor="{family.color}"',
-            # style :union fillcolor=color
-            'shape="circle"',
-            'style="filled"',
-            'penwidth=1',
-            'color="white"',
-            'label=""',
-            'height=0.1',
-            'width=0.1',
-            ],
+        f'{union} [',
+        applyStyles({}, ':union', pre=dict(
+            fillcolor=family.color,
+        )),
         ']',
         '',
     ] + ([
-        f'{{{", ".join([escape(p) for p in family.parents])}}} -> {union} [', [
-            # TODO: style :parent-link color=color
-            f'color="{family.color}"',
-            'weight=2', # give priority to be straighter than parent2
-        ], ']',
+        f'{{{", ".join([escape(p) for p in family.parents])}}} -> {union} [',
+        applyStyles({}, ':parent-link', pre=dict(
+            color=family.color,
+        )),
+        ']',
     ] if family.parents else [])
 
 def renderLink(family, id):
@@ -297,11 +296,15 @@ def renderLink(family, id):
     if not family.children: return []
 
     return [
-      f'union_{id} -> siblings_{id} [', [
-          # TODO style :parent-link, :parent-child-link color=color
-          f'color="{family.color}"',
-          'weight=3',
-      ], ']',
+      f'union_{id} -> siblings_{id} [',
+        applyStyles({},
+            ':parent-link',
+            ':parent-child-link', 
+            pre=dict(
+                color=family.color
+            ),
+        ),
+      ']',
     ]
 
 def renderKids(family, id):
@@ -311,39 +314,23 @@ def renderKids(family, id):
     kids = f'siblings_{id}'
     union = f'union_{id}'
     return [
-        f'{kids} [', [
-            f'fillcolor="{family.color}"',
-            # TODO style :children fillcolor: color
-            'shape="box"',
-            'style="filled"',
-            'label=""',
-            'height=0.005', # Make it look like a line. Brilliant!
-            'penwidth=0',
-            'width=0.1',
-
-        ], ']',
+        f'{kids} [',
+        applyStyles({}, ':children', pre=dict(fillcolor=family.color),
+        ),
+        ']',
     ] + [
-        f'{kids} -> {{{", ".join([escape(p) for p in family.children])}}} [', [
-            # TODO: style :child-link color=colora
-            f'color="{family.color}"',
-            'dir="forward"',
-            'arrowhead="tee"',
-            'arrowsize=2',
-            'weight=2',
-        ], ']',
+        f'{kids} -> {{{", ".join([escape(p) for p in family.children])}}} [',
+        applyStyles({}, ':child-link', pre=dict(color=family.color)),
+        ']',
     ]
 
+# TODO: Unused
 def renderKidLinks(family, id):
     return [
         '',
-        f'{" -> ".join([escape(p) for p in family.children])} [', [
-            # style :child-links  before:style:invis ???
-            'dir="forward"',
-            'arrowhead="tee"',
-            'arrowsize=2',
-            'weight=2',
-            'style="invis"',
-        ], ']'
+        f'{" -> ".join([escape(p) for p in family.children])} [',
+        applyStyles({}, ':child-link', pre=dict(style='invis')),
+        ']'
     ]
 
 
