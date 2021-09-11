@@ -18,14 +18,20 @@ def escape(s):
         return '"'+s+'"'
     return s
 
+def low(lines):
+    "Reduces a level of sublisting"
+    return sum((l for l in lines), [])
+
 def indenter(lines, spacer='  '):
+    "Considers each level of sublisting an indented block"
+
     def subindenter(lines, level=-1):
         if type(lines) == str:
             return [level*spacer + lines]
-        return sum((
+        return low(
             subindenter(element, level+1)
             for element in lines
-        ), [])
+        )
 
     return '\n'.join(subindenter(lines))
 
@@ -43,13 +49,14 @@ def render(data):
             ] + applyStyles(data, ':digraph') + [
             '',
         ]+
-        sum([
+        low(
             renderFamily(data, data, f, [str(i)])
             for i,f in enumerate(data.families or [])
-        ] + [
+        )+
+        low(
             renderPerson(data, p, [str(n)])
             for i,(n,p) in enumerate((data.people or ns()).items())
-        ], []),
+        ),
         '}'
     ])
 
@@ -221,9 +228,9 @@ def renderPerson(data, person, path):
     ]
 
 def renderSubFamilies(data, family, path):
-    return sum([
+    return low(
         renderFamily(data, family, f or {}, path+[str(i)])
         for i,f in enumerate(family.families or [])
-    ], [])
+    )
 
 
