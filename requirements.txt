@@ -1,3 +1,4 @@
 yamlns
 pydantic
 consolemsg
+graphviz
