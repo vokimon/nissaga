@@ -14,10 +14,38 @@ very similar to the one used by [kingraph].
 pip install nissaga
 ```
 
-You need to need [graphviz]
+You need to install [graphviz]. Not the python wrapper library, but the program itself.
 
 [kingraph]: https://github.com/rstacruz/kingraph
 [graphviz]: https://graphviz.org
+
+## Usage
+
+The command line interface is still quite simple and
+future versions will evolve it to a more powerful one.
+Right now it works like this:
+
+```bash
+nissaga myfamily.yaml
+```
+
+It would output several files:
+
+- `output.dot`
+- `output.pdf`
+
+## Input file
+
+The input file follows this [Schema](docs/schema_doc.html)
+
+In order to regenerate this documentation
+
+```bash
+pip install json-schema-for-humans
+cd docs
+generate-schema-doc ../nissaga-schema.json
+```
+
 
 ## Differences with kingraph
 
@@ -29,7 +57,7 @@ The following kingraph features are not supported:
 
 - `family.children2` and `family.parents2` relations are not yet supported
 
-The following features are new to nissaga, and not in kingraph
+The following features have been introduced by nissaga, and are not available in kingraph (but the yaml would be still compatible).
 
 - Rich person boxes with dates, photos and separated first name and surname.
 	- `person.born` maybe set to a date, and will appear as `*YYYY-MM-DD` bellow the person's name.

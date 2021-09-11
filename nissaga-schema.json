@@ -1,0 +1,261 @@
+{
+  "title": "KinFile",
+  "description": "Represents the data required to build a family tree",
+  "type": "object",
+  "properties": {
+    "styles": {
+      "title": "Styles",
+      "type": "object"
+    },
+    "families": {
+      "title": "Families",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Family"
+      }
+    },
+    "people": {
+      "title": "People",
+      "default": {},
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/Person"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "Person": {
+      "title": "Person",
+      "description": "Represents the data of a person",
+      "type": "object",
+      "properties": {
+        "fullname": {
+          "title": "Fullname",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "born": {
+          "title": "Born",
+          "default": true,
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "string",
+              "format": "date"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "died": {
+          "title": "Died",
+          "default": false,
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "string",
+              "format": "date"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "age": {
+          "title": "Age",
+          "type": "integer"
+        },
+        "comment": {
+          "title": "Comment",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          ]
+        },
+        "notes": {
+          "title": "Notes",
+          "type": "string"
+        },
+        "alias": {
+          "title": "Alias",
+          "type": "string"
+        },
+        "from": {
+          "title": "From",
+          "type": "string"
+        },
+        "todo": {
+          "title": "Todo",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          ]
+        },
+        "pics": {
+          "title": "Pics",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "docs": {
+          "title": "Docs",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "links": {
+          "title": "Links",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "class": {
+          "title": "Class",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "Family": {
+      "title": "Family",
+      "description": "Represents a family kernel with parents and children and any descendant family",
+      "type": "object",
+      "properties": {
+        "parents": {
+          "title": "Parents",
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/definitions/Person"
+                }
+              }
+            ]
+          }
+        },
+        "children": {
+          "title": "Children",
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/definitions/Person"
+                }
+              }
+            ]
+          }
+        },
+        "married": {
+          "title": "Married",
+          "default": true,
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "string",
+              "format": "date"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "divorced": {
+          "title": "Divorced",
+          "default": false,
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "string",
+              "format": "date"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "house": {
+          "title": "House",
+          "type": "string"
+        },
+        "notes": {
+          "title": "Notes",
+          "type": "string"
+        },
+        "docs": {
+          "title": "Docs",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "families": {
+          "title": "Families",
+          "default": [],
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Family"
+          }
+        }
+      },
+      "required": [
+        "parents"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

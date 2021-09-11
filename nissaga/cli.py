@@ -7,7 +7,7 @@ from consolemsg import step
 import graphviz
 from pathlib import Path
 
-if __name__ == '__main__':
+def main():
     import sys
 
     step("Loading {}...", sys.argv[1])
