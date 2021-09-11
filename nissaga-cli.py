@@ -24,6 +24,6 @@ if __name__ == '__main__':
     Path('output.dot').write_text(dot, encoding='utf8')
 
     step("Generating pdf...")
-    graphviz.Source(dot).render('output.pdf', format='pdf', view=True)
+    graphviz.Source(dot).render('output', format='pdf', view=True)
 
 
