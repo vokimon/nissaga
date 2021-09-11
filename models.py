@@ -7,7 +7,7 @@ from consolemsg import warn
 import sys
 from pathlib import Path
 
-colors=[
+familyColors=[
     '#1abc9c',
     '#2ecc71',
     '#3498db',
@@ -151,11 +151,12 @@ def renderHousePrelude(family, path):
         'fontname="Helvetica, Arial, sans-serif"',
         'fontsize=16',
         'margin=10',
+        '',
     ]
 
 
 def renderFamily(data, house, family, path):
-    family.color = colors[int(path[-1])%len(colors)]
+    family.color = familyColors[ int(path[-1]) % len(familyColors) ]
     slug='_'.join(str(p) for p in path)
     jointparents = ', '.join([p for p in family.parents if p]) or "none"
     jointchildren = ', '.join([p for p in family.children if p]) or "none"
