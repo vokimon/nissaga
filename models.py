@@ -138,16 +138,15 @@ def render(data):
         '}'
     ])
 
-def renderHousePrelude(family, id):
+def renderHousePrelude(family, path):
     if not family.get('house', None):
         return []
-    print(family.keys())
     return [
         f'label=<<b>{family.house}</b>>',
         #f'labelhref="{family.links and family.links[0]}"',
         # style :house before: label:label labelhref=labelhref
         'style="filled"',
-        'color="#fafafa"',
+        'color="#fafafa"' if not len(path)&1 else 'color="#f4f4f4"',
         'labeljust="l"',
         'fontname="Helvetica, Arial, sans-serif"',
         'fontsize=16',
@@ -168,7 +167,7 @@ def renderFamily(data, house, family, path):
             'margin=0',
             '',
             ] +
-            renderHousePrelude(family, slug) +
+            renderHousePrelude(family, path) +
             renderSubFamilies(data, family, path) +
             [
             f'# Family [{jointparents}] -> [{jointchildren}]', 
@@ -337,9 +336,9 @@ def renderHouse(data, house, path):
             '#'*76,
             f'subgraph cluster_{slugify(path)} {{', [
                 f'label=<<b>{name}</b>>',
-                # TODO: apply style :house and :house-{len(path)}a
+                # TODO: apply style :house and :house-{len(path)}
                 'style="filled"',
-                'color="#fafafa"',
+                'color="#00fafa"' if len(path)%2 else 'color="#ff00ff"',
                 'labeljust="l"',
                 'fontname="Helvetica, Arial, sans-serif"',
                 'fontsize=16',
