@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from nissaga.models import KinFile
 from nissaga.render import render
 from yamlns import namespace as ns
