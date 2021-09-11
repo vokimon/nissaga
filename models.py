@@ -146,6 +146,7 @@ def renderHousePrelude(family, id):
 
 
 def renderFamily(data, house, family, path):
+    family.color = 'blue'
     slug='_'.join(str(p) for p in path)
     jointparents = ', '.join([p for p in family.parents if p]) or "none"
     jointchildren = ', '.join([p for p in family.children if p]) or "none"
@@ -179,10 +180,9 @@ def renderParents(family, id):
         return ['# No parents']
 
     union = f'union_{id}'
-    color = 'green' # TODO: circular palette
     return [
         f'{union} [', [
-            f'fillcolor="{color}"',
+            f'fillcolor="{family.color}"',
             # style :union fillcolor=color
             'shape="circle"',
             'style="filled"',
@@ -197,7 +197,7 @@ def renderParents(family, id):
     ] + ([
         f'{{{", ".join([escape(p) for p in family.parents])}}} -> {union} [', [
             # TODO: style :parent-link color=color
-            f'color="{color}"',
+            f'color="{family.color}"',
             'weight=2', # give priority to be straighter than parent2
         ], ']',
     ] if family.parents else [])
@@ -206,11 +206,10 @@ def renderLink(family, id):
     if not family.parents: return []
     if not family.children: return []
 
-    color = 'green' # TODO: circular palette
     return [
       f'union_{id} -> siblings_{id} [', [
           # TODO style :parent-link, :parent-child-link color=color
-          f'color="{color}"',
+          f'color="{family.color}"',
           'weight=3',
       ], ']',
     ]
@@ -221,10 +220,9 @@ def renderKids(family, id):
 
     kids = f'siblings_{id}'
     union = f'union_{id}'
-    color = 'green' # TODO: circular palette
     return [
         f'{kids} [', [
-            f'fillcolor="{color}"',
+            f'fillcolor="{family.color}"',
             # TODO style :children fillcolor: color
             'shape="box"',
             'style="filled"',
@@ -237,7 +235,7 @@ def renderKids(family, id):
     ] + [
         f'{kids} -> {{{", ".join([escape(p) for p in family.children])}}} [', [
             # TODO: style :child-link color=colora
-            f'color="{color}"',
+            f'color="{family.color}"',
             'dir="forward"',
             'arrowhead="tee"',
             'arrowsize=2',
