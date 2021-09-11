@@ -3,15 +3,16 @@ from pydantic import BaseModel, Extra, AnyHttpUrl
 from yamlns import namespace as ns
 from typing import Union, Optional, Dict, List 
 import datetime
-from consolemsg import warn
-import sys
+from consolemsg import warn, step
 from pathlib import Path
 
 from render import render
 
 class Person(BaseModel):
-    born: Optional[Union[bool, datetime.date, str]] = True
-    died: Optional[Union[bool, datetime.date, str]] = False
+    fullname: Optional[str]
+    name: Optional[str]
+    born: Optional[Union[bool, int, datetime.date, str]] = True
+    died: Optional[Union[bool, int, datetime.date, str]] = False
     age: Optional[int]
     comment: Optional[Union[str,List[str]]]
     notes: Optional[str]
@@ -48,10 +49,15 @@ Family.update_forward_refs()
 class KinFile(BaseModel):
     styles: Dict = None
     families: List[Family] = None
-    people: Dict[str, Person] = None
+    people: Dict[str, Person] = ns()
 
     class Config:
         extra = Extra.forbid
+
+    def normalize(self):
+        processFamily(self, self.people)
+        #processFamily(data, data.setdefault('people', ns()))
+
 
 
 def processPerson(person, people):
@@ -66,31 +72,43 @@ def processPerson(person, people):
         people[name] = p
         return name
 
-def processFamily(data, people):
-    if 'families' not in data: return
-    for family in data.families:
+def processFamily(context, people):
+    #if 'families' not in family: return
+    for family in context.families:
         family.parents = [
             processPerson(parent, people)
             for parent in family.parents
         ]
+        print (family.parents)
         family.children = [
             processPerson(child, people)
-            for child in family.get('children', [])
+            for child in family.children or []
         ]
+        print (family.children)
         processFamily(family, people)
 
 
+if __name__ == '__main__':
+    import sys
 
-data = ns.load(sys.argv[1])
-p=KinFile(**data)
-print(ns(p.dict()).dump())
+    step("Loading {}...", sys.argv[1])
+    data = ns.load(sys.argv[1])
 
-processFamily(data, data.setdefault('people', ns()))
-print(data.dump())
-dot = render(data)
-print(dot)
-Path('output.dot').write_text(dot, encoding='utf8')
-graphviz.Source(render(data)).render('output.pdf', format='pdf', view=True)
+    step("Validating...")
+    p=KinFile(**data)
+
+    step("Normalizing...")
+    p.normalize()
+
+    #print(data.dump())
+    print(ns(p.dict()).dump())
+
+    step("Generating graph...")
+    dot = render(p)
+    Path('output.dot').write_text(dot, encoding='utf8')
+
+    step("Generating pdf...")
+    graphviz.Source(dot).render('output.pdf', format='pdf', view=True)
 
 
 

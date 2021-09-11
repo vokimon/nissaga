@@ -93,7 +93,7 @@ def combineStyles(tree, *classes, pre={}, post={}, **additional):
     result = ns(pre)
     for clss in classes:
         result.update(default_styles.get(clss, {}))
-        result.update(tree.get('styles',{}).get(clss, {}))
+        result.update((tree.styles or {}).get(clss, {}))
     result.update(post)
     return result
 
