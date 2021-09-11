@@ -9,6 +9,7 @@ from pathlib import Path
 from .render import render
 
 class Person(BaseModel):
+    """Represents the data of a person"""
     fullname: Optional[str]
     name: Optional[str]
     born: Optional[Union[bool, int, datetime.date, str]] = True
@@ -32,6 +33,7 @@ class Person(BaseModel):
         )
 
 class Family(BaseModel):
+    """Represents a family kernel with parents and children and any descendant family"""
     parents: List[Union[str, Dict[str, Person]]]
     children: Optional[List[Union[str, Dict[str, Person]]]]
     married: Optional[Union[bool, int, datetime.date, str]] = True
@@ -47,6 +49,7 @@ class Family(BaseModel):
 Family.update_forward_refs()
  
 class KinFile(BaseModel):
+    """Represents the data required to build a family tree"""
     styles: Dict = None
     families: List[Family] = None
     people: Dict[str, Person] = ns()
@@ -81,5 +84,9 @@ def processFamily(context, people):
             for child in family.children or []
         ]
         processFamily(family, people)
+
+def schema():
+    return KinFile.schema_json(indent=2)
+
 
 

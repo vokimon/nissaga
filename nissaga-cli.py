@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from nissaga.models import KinFile
+from nissaga.models import KinFile, schema
 from nissaga.render import render
 from yamlns import namespace as ns
 from consolemsg import step
@@ -24,8 +24,10 @@ if __name__ == '__main__':
     step("Generating graph...")
     dot = render(p)
     Path('output.dot').write_text(dot, encoding='utf8')
+    Path('nissaga-schema.json').write_text(schema(), encoding='utf8')
+    Path('nissaga-schema.yaml').write_text(ns(KinFile.schema()).dump(), encoding='utf8')
 
     step("Generating pdf...")
-    graphviz.Source(dot).render('output', format='pdf', view=True)
+    graphviz.Source(dot).render('output', format='pdf', view=False)
 
 

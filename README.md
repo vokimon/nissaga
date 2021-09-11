@@ -1,2 +1,54 @@
-# nissaga
-Genealogy tree builder from simple yaml files (kingraph python clone with extensions)
+# Nissaga
+
+Genealogy tree builder from simple yaml files (kingraph python clone with extensions).
+
+## About
+
+Nissaga can be used to generate Genealogy trees
+from a simple data description in yaml, following a format
+very similar to the one used by [kingraph].
+
+## Installation
+
+```bash
+pip install nissaga
+```
+
+You need to need [graphviz]
+
+[kingraph]: https://github.com/rstacruz/kingraph
+[graphviz]: https://graphviz.org
+
+## Differences with kingraph
+
+This application was started as a clone of the functionality of kingraph
+to overcome the performance and scalability problems with big trees,
+but also extending the functionality.
+
+The following kingraph features are not supported:
+
+- `family.children2` and `family.parents2` relations are not yet supported
+
+The following features are new to nissaga, and not in kingraph
+
+- Rich person boxes with dates, photos and separated first name and surname.
+	- `person.born` maybe set to a date, and will appear as `*YYYY-MM-DD` bellow the person's name.
+	- `person.died` maybe set to a date or true and will appear as `+YYYY-MM-DD` bellow the person's name.
+	- `person.age` age of dead, not used, just to keep track of it when that's the only data we have.
+	- `person.pics` is a list of pictures files relative to the yaml file. The first one will be added as person's face. The other pics are not used yet.
+- Rich relations with marriage and divorce annotations
+	- `family.married`: defaults to true. Set it to false to indicate unmarried patnership. Set it to a date to see `⚭YYYY-MM-DD` in the union node.
+	- `family.divorced`: defaults to false. Set it to true to indicate a divorce. Set it to a date to see `⚮YYYY-MM-DD` in the union node.
+- Attributes for internal documentation
+	- `person.todo` a string or list of strings of pending tasks for the person
+	- `person.from` origin of the person (country, city...)
+	- `person.notes` a string or list of strings of notes
+	- `person.comments` a string or list of strings of comments
+	- `person.docs` documentation about the person. A list of document paths relative to the yaml file. Not used yet but it is suposed to provide links to the research sources.
+	- `family.notes` a string or list of strings of notes
+	- `family.docs` documentation about the family. A list of document paths relative to the yaml file. Not used yet but it is suposed to provide links to the research sources.
+
+
+
+
+
