@@ -68,7 +68,7 @@ def escape(s):
     return '"'+s+'"'
 
 
-def addPerson(person, people):
+def processPerson(person, people):
     if type(person) is str:
         if person not in people:
             people[person] = None
@@ -79,10 +79,6 @@ def addPerson(person, people):
             warn(f"Person {name} specified twice")
         people[name] = p
         return name
-
-
-def processPerson(person, people):
-    return addPerson(person, people)
 
 def processFamily(data, people):
     if 'families' not in data: return
