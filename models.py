@@ -6,18 +6,9 @@ import datetime
 from consolemsg import warn
 import sys
 from pathlib import Path
-from styles import applyStyles
 
-familyColors=[
-    '#1abc9c',
-    '#2ecc71',
-    '#3498db',
-    '#9b59b6',
-    '#34495e',
-    '#f1c40f',
-    '#e67e22',
-    '#e74c3c',
-]
+from render import render
+
 class Person(BaseModel):
     born: Optional[Union[bool, datetime.date, str]] = True
     died: Optional[Union[bool, datetime.date, str]] = False
@@ -63,13 +54,6 @@ class KinFile(BaseModel):
         extra = Extra.forbid
 
 
-def escape(s):
-    # TODO: review this
-    if type(s)==str:
-        return '"'+s+'"'
-    return s
-
-
 def processPerson(person, people):
     if type(person) is str:
         if person not in people:
@@ -95,200 +79,6 @@ def processFamily(data, people):
         ]
         processFamily(family, people)
 
-def indenter(data, spacer='  '):
-    def subindenter(data, level=-1):
-        if type(data) == str:
-            return [level*spacer + data]
-        return sum((
-            subindenter(element, level+1)
-            for element in data
-        ), [])
-
-    return '\n'.join(subindenter(data))
-
-def render(data):
-    return indenter([
-        'digraph G {', [
-            'edge [',
-                applyStyles(data, ':edge'),
-            ']',
-            '',
-            'node [',
-                applyStyles(data, ':node'),
-            ']',
-            '',
-            ] + applyStyles(data, ':digraph') + [
-            '',
-        ]+
-        sum([
-            renderFamily(data, data, f, [str(i)])
-            for i,f in enumerate(data.get('families',[]))
-        ] + [
-            renderPerson(data, p or {}, [str(n)])
-            for i,(n,p) in enumerate(data.get('people',ns()).items())
-        ], []),
-        '}'
-    ])
-
-def renderHousePrelude(family, path):
-    if not family.get('house', None):
-        return []
-    return [
-        '#'*76,
-        f'# House {".".join(path)} - {family.house}',
-        '#'*76,
-        '',
-        f'label=<<b>{family.house}</b>>',
-        #f'labelhref="{family.links and family.links[0]}"',
-        ] + applyStyles(data, ':house',
-            post=dict(
-                color="#fafafa" if not len(path)&1 else "#f4f4f4"
-            )
-        ) + [
-        '',
-    ]
-
-
-def renderFamily(data, house, family, path):
-    family.color = familyColors[ int(path[-1]) % len(familyColors) ]
-    slug='_'.join(str(p) for p in path)
-    jointparents = ', '.join([p for p in family.parents if p]) or "none"
-    jointchildren = ', '.join([p for p in family.children if p]) or "none"
-    return [
-        f'subgraph cluster_family_{slug} {{', [
-            ] + applyStyles(data, ':family') + [
-            '',
-            ] +
-            renderHousePrelude(family, path) +
-            renderSubFamilies(data, family, path) +
-            [
-            f'# Family [{jointparents}] -> [{jointchildren}]', 
-            '# ' + '-'*74,
-            '',
-            ] +
-            renderParents(family, slug) +
-            renderLink(family, slug) +
-            (renderKids(family, slug) if family.children else ['# No children']) +
-            #(renderKidLinks(family, slug) if len(family.children)>1 else []) +
-            [
-            ],
-        '}',
-        '',
-    ]
-
-def renderParents(family, id):
-    if not family.parents:
-        return ['# No parents']
-
-    union = f'union_{id}'
-    return [
-        f'{union} [',
-        applyStyles({}, ':union', pre=dict(
-            fillcolor=family.color,
-        )),
-        ']',
-        '',
-    ] + ([
-        f'{{{", ".join([escape(p) for p in family.parents])}}} -> {union} [',
-        applyStyles({}, ':parent-link', pre=dict(
-            color=family.color,
-        )),
-        ']',
-    ] if family.parents else [])
-
-def renderLink(family, id):
-    if not family.parents: return []
-    if not family.children: return []
-
-    return [
-      f'union_{id} -> siblings_{id} [',
-        applyStyles({},
-            ':parent-link',
-            ':parent-child-link', 
-            pre=dict(
-                color=family.color
-            ),
-        ),
-      ']',
-    ]
-
-def renderKids(family, id):
-    if not family.children:
-        return ['# No children']
-
-    kids = f'siblings_{id}'
-    union = f'union_{id}'
-    return [
-        f'{kids} [',
-        applyStyles({}, ':children', pre=dict(fillcolor=family.color),
-        ),
-        ']',
-    ] + [
-        f'{kids} -> {{{", ".join([escape(p) for p in family.children])}}} [',
-        applyStyles({}, ':child-link', pre=dict(color=family.color)),
-        ']',
-    ]
-
-# TODO: Unused
-def renderKidLinks(family, id):
-    return [
-        '',
-        f'{" -> ".join([escape(p) for p in family.children])} [',
-        applyStyles({}, ':child-link', pre=dict(style='invis')),
-        ']'
-    ]
-
-
-def renderPerson(data, person, path):
-    id = path[-1]
-    href = person.get('links',None) and person.links[0]
-
-    unknown = '????-??-??'
-
-    born = person.get('born', None)
-    if not born: born = '????'
-    else: born = str(born)
-
-    died = person.get('died', None)
-    if died is None: died = ''
-    elif died is True: died = unknown
-    else: died = str(died)
-
-    name = person.get('fullname', None) or person.get('name', None) or id
-    surname, firstname = (name.split(',')+[''])[:2]
- 
-    label = (
-      '<<table align="center" border="0" cellpadding="0" cellspacing="2" width="5">\n' +
-      '<tr>\n'+
-      (
-          f'<td rowspan="2" WIDTH="40" HEIGHT="40" FIXEDSIZE="TRUE"><img src="pics/{person.pics[0]}" scale="TRUE"></img></td>'
-          if person.get('pics', None) else
-          '<td rowspan="2" WIDTH="40" HEIGHT="40" FIXEDSIZE="TRUE" border="1"></td>\n'
-      )+
-      f'<td align="left" width="100">{firstname}</td>' +
-      f'<td align="right" width="100">{surname}</td>' +
-      '\n</tr>\n' +
-      #'<tr><td align="center">' +
-      #'<font point-size="10" color="#aaaaaa">' +
-      #`{person.fullname || person.name}</font></td></tr>` +
-      '<tr><td colspan="2" align="center">\n' +
-      '<font point-size="10" color="#aa7777">' +
-      (f'*{born}' if born else '*????-??-??') +
-      (f'  +{died}' if died else '') +
-      '</font></td></tr>' +
-      '</table>>'
-      )
-    return [
-        f'{escape(name)} [', [
-        f'label={label}',
-        ], ']',
-    ]
-
-def renderSubFamilies(data, family, path):
-    return sum([
-        renderFamily(data, family, f or {}, path+[str(i)])
-        for i,f in enumerate(family.get('families',[]))
-    ], [])
 
 
 data = ns.load(sys.argv[1])
