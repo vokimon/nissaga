@@ -87,17 +87,16 @@ def processFamily(data, people):
         ]
         processFamily(family, people)
 
-
-def subindenter(data, spacer='\t', level=-1):
-    if type(data) == str:
-        return [level*spacer + data]
-    return sum((
-        subindenter(element, spacer, level+1)
-        for element in data
-    ), [])
-
 def indenter(data, spacer='  '):
-    return '\n'.join(subindenter(data, spacer))
+    def subindenter(data, level=-1):
+        if type(data) == str:
+            return [level*spacer + data]
+        return sum((
+            subindenter(element, level+1)
+            for element in data
+        ), [])
+
+    return '\n'.join(subindenter(data))
 
 def render(data):
     return indenter([
