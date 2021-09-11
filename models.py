@@ -321,34 +321,13 @@ def renderSubFamilies(data, family, path):
 
 
 def renderHouse(data, house, path):
-    content = sum([
+    return sum([
         renderFamily(data, house, f or {}, path+[str(i)])
         for i,f in enumerate(data.get('families',[]))
     ] + [
         renderPerson(data, p or {}, path+[str(n)])
         for i,(n,p) in enumerate(data.get('people',ns()).items())
     ],[])
-    if not path: return content
-    if path:
-        return [
-            '',
-            '#'*76,
-            f'# House {path}',
-            '#'*76,
-            f'subgraph cluster_{slugify(path)} {{', [
-                f'label=<<b>{name}</b>>',
-                # TODO: apply style :house and :house-{len(path)}
-                'style="filled"',
-                'color="#00fafa"' if len(path)%2 else 'color="#ff00ff"',
-                'labeljust="l"',
-                'fontname="Helvetica, Arial, sans-serif"',
-                'fontsize=16',
-                'margin=10',
-
-                '',
-            ] + content
-        ]
-
 
 data = ns.load(sys.argv[1])
 p=KinFile(**data)
