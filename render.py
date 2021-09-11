@@ -18,16 +18,16 @@ def escape(s):
         return '"'+s+'"'
     return s
 
-def indenter(data, spacer='  '):
-    def subindenter(data, level=-1):
-        if type(data) == str:
-            return [level*spacer + data]
+def indenter(lines, spacer='  '):
+    def subindenter(lines, level=-1):
+        if type(lines) == str:
+            return [level*spacer + lines]
         return sum((
             subindenter(element, level+1)
-            for element in data
+            for element in lines
         ), [])
 
-    return '\n'.join(subindenter(data))
+    return '\n'.join(subindenter(lines))
 
 def render(data):
     return indenter([

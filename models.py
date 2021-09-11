@@ -79,12 +79,10 @@ def processFamily(context, people):
             processPerson(parent, people)
             for parent in family.parents
         ]
-        print (family.parents)
         family.children = [
             processPerson(child, people)
             for child in family.children or []
         ]
-        print (family.children)
         processFamily(family, people)
 
 
