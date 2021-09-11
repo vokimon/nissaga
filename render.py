@@ -35,33 +35,33 @@ def indenter(lines, spacer='  '):
 
     return '\n'.join(subindenter(lines))
 
-def render(data):
+def render(root):
     return indenter([
         'digraph G {', [
             'edge [',
-                applyStyles(data, ':edge'),
+                applyStyles(root, ':edge'),
             ']',
             '',
             'node [',
-                applyStyles(data, ':node'),
+                applyStyles(root, ':node'),
             ']',
             '',
-            ] + applyStyles(data, ':digraph') + [
+            ] + applyStyles(root, ':digraph') + [
             '',
         ]+
         low(
-            renderFamily(data, data, f, [str(i)])
-            for i,f in enumerate(data.families or [])
+            renderFamily(root, root, f, [str(i)])
+            for i,f in enumerate(root.families or [])
         )+
         low(
-            renderPerson(data, p, [str(n)])
-            for i,(n,p) in enumerate((data.people or ns()).items())
+            renderPerson(root, p, [str(n)])
+            for i,(n,p) in enumerate((root.people or ns()).items())
         ),
         '}'
     ])
 
 
-def renderFamily(data, house, family, path):
+def renderFamily(root, house, family, path):
 
     def renderHousePrelude(family, path):
         if not family.house:
@@ -73,7 +73,7 @@ def renderFamily(data, house, family, path):
             '',
             f'label=<<b>{family.house}</b>>',
             #f'labelhref="{family.links and family.links[0]}"',
-            ] + applyStyles(data, ':house',
+            ] + applyStyles(root, ':house',
                 post=dict(
                     color="#fafafa" if not len(path)&1 else "#f4f4f4"
                 )
@@ -88,14 +88,14 @@ def renderFamily(data, house, family, path):
         union = f'union_{id}'
         return [
             f'{union} [',
-            applyStyles(data, ':union', pre=dict(
+            applyStyles(root, ':union', pre=dict(
                 fillcolor=familyColor,
             )),
             ']',
             '',
         ] + ([
             f'{{{", ".join([escape(p) for p in family.parents])}}} -> {union} [',
-            applyStyles(data, ':parent-link', pre=dict(
+            applyStyles(root, ':parent-link', pre=dict(
                 color=familyColor,
             )),
             ']',
@@ -107,7 +107,7 @@ def renderFamily(data, house, family, path):
 
         return [
           f'union_{id} -> siblings_{id} [',
-            applyStyles(data,
+            applyStyles(root,
                 ':parent-link',
                 ':parent-child-link', 
                 pre=dict(
@@ -125,12 +125,12 @@ def renderFamily(data, house, family, path):
         union = f'union_{id}'
         return [
             f'{kids} [',
-            applyStyles(data, ':children', pre=dict(fillcolor=familyColor),
+            applyStyles(root, ':children', pre=dict(fillcolor=familyColor),
             ),
             ']',
         ] + [
             f'{kids} -> {{{", ".join([escape(p) for p in family.children])}}} [',
-            applyStyles(data, ':child-link', pre=dict(color=familyColor)),
+            applyStyles(root, ':child-link', pre=dict(color=familyColor)),
             ']',
         ]
 
@@ -139,7 +139,7 @@ def renderFamily(data, house, family, path):
         return [
             '',
             f'{" -> ".join([escape(p) for p in family.children])} [',
-            applyStyles(data, ':child-link', pre=dict(style='invis')),
+            applyStyles(root, ':child-link', pre=dict(style='invis')),
             ']'
         ]
 
@@ -149,11 +149,11 @@ def renderFamily(data, house, family, path):
     jointchildren = ', '.join([p for p in family.children or [] if p]) or "none"
     return [
         f'subgraph cluster_family_{slug} {{', [
-            ] + applyStyles(data, ':family') + [
+            ] + applyStyles(root, ':family') + [
             '',
             ] +
             renderHousePrelude(family, path) +
-            renderSubFamilies(data, family, path) +
+            renderSubFamilies(root, family, path) +
             [
             f'# Family [{jointparents}] -> [{jointchildren}]', 
             '# ' + '-'*74,
@@ -170,7 +170,7 @@ def renderFamily(data, house, family, path):
     ]
 
 
-def renderPerson(data, person, path):
+def renderPerson(root, person, path):
     id = path[-1]
     unknown = '????-??-??'
 
@@ -227,9 +227,9 @@ def renderPerson(data, person, path):
         ], ']',
     ]
 
-def renderSubFamilies(data, family, path):
+def renderSubFamilies(root, family, path):
     return low(
-        renderFamily(data, family, f or {}, path+[str(i)])
+        renderFamily(root, family, f or {}, path+[str(i)])
         for i,f in enumerate(family.families or [])
     )
 
