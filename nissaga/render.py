@@ -1,5 +1,5 @@
 from yamlns import namespace as ns
-from styles import applyStyles
+from .styles import applyStyles
 
 familyColors=[
     '#1abc9c',

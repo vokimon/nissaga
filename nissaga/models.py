@@ -6,7 +6,7 @@ import datetime
 from consolemsg import warn, step
 from pathlib import Path
 
-from render import render
+from .render import render
 
 class Person(BaseModel):
     fullname: Optional[str]
@@ -81,29 +81,5 @@ def processFamily(context, people):
             for child in family.children or []
         ]
         processFamily(family, people)
-
-
-if __name__ == '__main__':
-    import sys
-
-    step("Loading {}...", sys.argv[1])
-    data = ns.load(sys.argv[1])
-
-    step("Validating...")
-    p=KinFile(**data)
-
-    step("Normalizing...")
-    p.normalize()
-
-    #print(ns(p.dict()).dump())
-
-    step("Generating graph...")
-    dot = render(p)
-    Path('output.dot').write_text(dot, encoding='utf8')
-
-    step("Generating pdf...")
-    graphviz.Source(dot).render('output.pdf', format='pdf', view=True)
-
-
 
 
