@@ -68,11 +68,11 @@ def processPerson(person, people):
             people[person] = None
         return person
 
-    for name, p in person.items():
-        if people.get(name, None) is not None:
-            warn(f"Person {name} specified twice")
-        people[name] = p
-        return name
+    for id, p in person.items():
+        if people.get(id, None) is not None:
+            warn(f"Person {id} specified twice")
+        people[id] = p
+        return id
 
 def processFamily(context, people):
     for family in context.families:
