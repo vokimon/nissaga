@@ -35,7 +35,7 @@ class Person(BaseModel):
 
 class Family(BaseModel):
     """Represents a family kernel with parents and children and any descendant family"""
-    parents: List[Union[str, Dict[str, Person]]]
+    parents: Optional[List[Union[str, Dict[str, Person]]]]
     children: Optional[List[Union[str, Dict[str, Person]]]]
     married: Optional[Union[bool, int, datetime.date, str]] = True
     divorced: Optional[Union[bool, int, datetime.date, str]] = False
@@ -78,7 +78,7 @@ def processFamily(context, people):
     for family in context.families:
         family.parents = [
             processPerson(parent, people)
-            for parent in family.parents
+            for parent in family.parents or []
         ]
         family.children = [
             processPerson(child, people)
