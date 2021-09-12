@@ -231,7 +231,7 @@ def renderPerson(root, person, path):
       '</table>>'
       )
     return [
-        f'{escape(name)} [', [
+        f'{escape(id)} [', [
         f'label={label}',
         ], ']',
     ]
