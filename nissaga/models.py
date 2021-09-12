@@ -23,6 +23,7 @@ class Person(BaseModel):
     pics: Optional[List[str]]
     docs: Optional[List[str]]
     links: Optional[List[str]] #Optional[List[AnyHttpUrl]]
+    gender: Optional[str]
     class_: Optional[List[str]]
 
     class Config:
