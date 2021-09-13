@@ -1,12 +1,10 @@
-# Nissaga
-
-Genealogy tree builder from simple yaml files (kingraph python clone with extensions).
+# Nissaga, genealogy tree generator
 
 ## About
 
 Nissaga can be used to generate Genealogy trees
 from a simple data description in yaml, following a format
-very similar to the one used by [kingraph].
+which extends the one used by [kingraph].
 
 ## Installation
 
