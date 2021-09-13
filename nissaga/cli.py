@@ -10,8 +10,14 @@ from pathlib import Path
 def main():
     import sys
 
-    step("Loading {}...", sys.argv[1])
-    data = ns.load(sys.argv[1])
+    inputfile = Path(sys.argv[1])
+    format='pdf'
+    if len(sys.argv)>2:
+        format=sys.argv[2]
+    outputfile = inputfile.with_suffix('.'+format)
+
+    step("Loading {}...", inputfile)
+    data = ns.load(inputfile)
 
     step("Validating...")
     p=KinFile(**data)
@@ -27,7 +33,7 @@ def main():
     Path('nissaga-schema.json').write_text(schema(), encoding='utf8')
     Path('nissaga-schema.yaml').write_text(ns(KinFile.schema()).dump(), encoding='utf8')
 
-    step("Generating pdf...")
-    graphviz.Source(dot).render('output', format='pdf', view=False)
-
+    step("Generating {}...", outputfile)
+    temp = graphviz.Source(dot).render('output', format=format, view=False)
+    Path(temp).rename(outputfile)
 

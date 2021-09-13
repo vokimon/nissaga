@@ -29,10 +29,13 @@ Right now it works like this:
 nissaga myfamily.yaml
 ```
 
-It would output several files:
+This generates a file `myfamily.pdf`
 
-- `output.dot`
-- `output.pdf`
+You can specify a second parameter to choose the output format: png, svg or any supported by graphviz.
+
+```bash
+nissaga myfamily.yaml svg
+```
 
 ## Input file
 
