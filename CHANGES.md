@@ -1,4 +1,4 @@
-# 0.2.0 unreleased
+# 0.2.0 2021-09-23
 
 - Choose the output format at the command line interface
 - Accepting gender parameter from some kingraph examples

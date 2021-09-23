@@ -141,6 +141,10 @@
             "type": "string"
           }
         },
+        "gender": {
+          "title": "Gender",
+          "type": "string"
+        },
         "class": {
           "title": "Class",
           "type": "array",
@@ -252,9 +256,6 @@
           }
         }
       },
-      "required": [
-        "parents"
-      ],
       "additionalProperties": false
     }
   }
