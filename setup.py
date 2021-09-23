@@ -30,8 +30,8 @@ setup(
 		'Programming Language :: Python :: 3',
         'Topic :: Sociology :: Genealogy',
 		'Intended Audience :: Developers',
-        'Development Status :: 5 - Production/Stable'
-		'License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)',
+        'Development Status :: 5 - Production/Stable',
+        'License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)',
 		'Operating System :: OS Independent',
 	],
 )
