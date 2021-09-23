@@ -86,13 +86,18 @@ def renderFamily(root, house, family, path):
             return ['# No parents']
 
         union = f'union_{id}'
-        state = (
-            '⚮' if family.divorced is True else (
-            f'⚮ {family.divorced}' if family.divorced is not False else (
-            '⚯' if family.married is False else (
-            '' if family.married is True else (
-            f'⚭ {family.married}'
-        )))))
+        state = []
+        if family.married is False:
+            state.append('⚯')
+        elif family.married is not True:
+            state.append(f'⚭ {family.married}')
+
+        if family.divorced is True:
+            state.append('⚮')
+        elif family.divorced is not False:
+            state.append(f'⚮ {family.divorced}')
+
+        state = '\n'.join(state)
 
         return [
             f'{union} [',

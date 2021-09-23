@@ -9,8 +9,7 @@ readme = open("README.md").read()
 setup(
 	name = "nissaga",
 	version = __version__,
-	description =
-		__doc__,
+	description = __doc__,
 	author = "David García Garzón",
 	author_email = "voki@canvoki.net",
 	url = 'https://github.com/vokimon/nissaga',

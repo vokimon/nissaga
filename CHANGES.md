@@ -2,6 +2,7 @@
 
 - Choose the output format at the command line interface
 - Accepting gender parameter from some kingraph examples
+- Display divorced and married dates at the same time
 - Fix: using ids diferent than the fullname, splitted the person
 - Fix: Play nice with parentless families
 
