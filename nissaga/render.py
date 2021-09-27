@@ -234,9 +234,10 @@ def renderPerson(root, person, path):
       (f'  +{died}' if died else '') +
       '</font></td></tr>' +
       '</table>>'
-      )
+    )
+    link = [f'URL="{person.links[0]}"'] if person.links else []
     return [
-        f'{escape(id)} [', [
+        f'{escape(id)} [', link + [
         f'label={label}',
         ], ']',
     ]
