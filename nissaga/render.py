@@ -213,7 +213,7 @@ def renderPerson(root, person, path):
     else: died = f"† {died}"
 
     name = person and person.fullname or person.name or id
-    surname, firstname = (name.split(',')+[''])[:2]
+    surname, firstname = ([' ']+name.split(','))[-2:]
  
     label = (
       '<<table align="center" border="0" cellpadding="0" cellspacing="2" width="5">\n' +
