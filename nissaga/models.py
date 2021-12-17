@@ -60,6 +60,13 @@ class KinFile(BaseModel):
 
     def normalize(self):
         processFamily(self, self.people)
+        instantianteUndetailedPersons(self.people)
+
+def instantianteUndetailedPersons(persons):
+    for id, person in persons.items():
+        if person is not None: continue
+        warn(f"Person {id} not detailed")
+        persons[id] = Person()
 
 
 def processPerson(person, people):
