@@ -201,15 +201,16 @@ def renderPerson(root, person, path):
     pic = person.pics and person.pics[0]
 
     born = person.born
-    if born is None: born = '????'
-    elif born is True: born = '????'
-    else: born = str(born)
+    if born is False: born='†*' # stillborn
+    elif born is None: born = ' '
+    elif born is True: born = ' '
+    else: born = f"* {born}"
 
     died = person.died
-    if died is None: died = ''
-    elif died is False: died = ''
-    elif died is True: died = unknown
-    else: died = str(died)
+    if died is None: died = '' # Not specified
+    elif died is False: died = '' # Explicit alive
+    elif died is True: died = "†" # Dead but no date
+    else: died = f"† {died}"
 
     name = person and person.fullname or person.name or id
     surname, firstname = (name.split(',')+[''])[:2]
