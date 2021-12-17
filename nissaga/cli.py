@@ -3,7 +3,7 @@
 from nissaga.models import KinFile, schema
 from nissaga.render import render
 from yamlns import namespace as ns
-from consolemsg import step
+from consolemsg import step, error
 import graphviz
 from pathlib import Path
 

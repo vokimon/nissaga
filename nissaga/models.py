@@ -24,7 +24,7 @@ class Person(BaseModel):
     docs: Optional[List[str]]
     links: Optional[List[str]] #Optional[List[AnyHttpUrl]]
     gender: Optional[str]
-    class_: Optional[List[str]]
+    class_: Optional[List[str]] = []
 
     class Config:
         extra = Extra.forbid

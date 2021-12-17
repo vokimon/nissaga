@@ -237,9 +237,14 @@ def renderPerson(root, person, path):
     )
     link = [f'URL="{person.links[0]}"'] if person.links else []
     return [
-        f'{escape(id)} [', link + [
-        f'label={label}',
-        ], ']',
+        f'{escape(id)} [',
+            [link] +
+            [
+                applyStyles(root, cls)
+                for cls in person.class_
+            ]+
+            [f'label={label}'],
+        ']',
     ]
 
 def renderSubFamilies(root, family, path):
