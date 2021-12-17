@@ -1,0 +1,169 @@
+families:
+  - house: Pritchett
+    families:
+    - parents: [Jay, Gloria]
+      children: [Joe]
+    - parents: [Javier, Gloria]
+      children: [Manny]
+      divorced: true
+  - house: Dunphy
+    families:
+      - parents: [Phil, Claire]
+        children: [Alex, Luke, Haley]
+  - house: Tucker
+    families:
+      - parents: [Cam, Mitchell]
+        children: [Lily]
+  - parents: [Jay, Dede]
+    children: [Claire, Mitchell]
+    divorced: true
+  - parents: [Frank, Grace]
+    children: [Phil]
+  - parents: [Barb, Merle]
+    children: [Cam, Pam]
+people:
+  Phil:
+    links:
+      - https://modernfamily.fandom.com/wiki/Phil_Dunphy
+    fullname: Dunphy, Phil
+    born: 1968-04-03
+    pics:
+      - phil.png
+  Claire:
+    links:
+      - https://modernfamily.fandom.com/wiki/Claire_Dunphy
+    fullname: Dunphy (neé Pritchett), Claire
+    born: 1970-03-03
+    pics:
+      - claire.png
+  Mitchell:
+    links:
+      - https://modernfamily.fandom.com/wiki/Mitchell_Pritchett
+    fullname: Pritchett, Mitchell
+    born: 1973-01-06
+    pics:
+      - mitchell.png
+  Cam:
+    links:
+      - https://modernfamily.fandom.com/wiki/Cameron_Tucker
+    fullname: Tucker, Cam
+    born: 1972-02-29
+    pics:
+      - cam.png
+  Jay:
+    links:
+      - https://modernfamily.fandom.com/wiki/Jay_Pritchett
+    fullname: Pritchett, Jay
+    born: 1947-05-23
+    pics:
+      - jay.png
+  Gloria:
+    links:
+      - https://modernfamily.fandom.com/wiki/Gloria_Pritchett
+    fullname: Pritchett (neé Ramírez), Gloria
+    born: 1971-09-24
+    pics:
+      - gloria.png
+  Joe:
+    links:
+      - https://modernfamily.fandom.com/wiki/Joe_Pritchett
+    fullname: Pritchett, Joe
+    born: 2013-01-20
+    pics:
+      - joe.png
+  Manny:
+    links:
+      - https://modernfamily.fandom.com/wiki/Manny_Delgado
+    fullname: Delgado, Manny
+    born: 1999-01-19
+    pics:
+      - manny.png
+  Haley:
+    links:
+      - https://modernfamily.fandom.com/wiki/Haley_Marshall
+    fullname: Marshall (neé Dunphy), Haley
+    born: 1993-12-10
+    pics:
+      - haley.png
+  Alex:
+    links:
+      - https://modernfamily.fandom.com/wiki/Alex_Dunphy
+    fullname: Dunphy, Alex
+    born: 1997-01-14
+    pics:
+      - alex.png
+  Luke:
+    links:
+      - https://modernfamily.fandom.com/wiki/Luke_Dunphy
+    fullname: Dunphy, Luke
+    born: 1998-11-28
+    pics:
+      - luke.png
+  Lily:
+    links:
+      - https://modernfamily.fandom.com/wiki/Lily_Tucker_Pritchett
+    fullname: Tucker Pritchett, Lily
+    born: 2009-02-16
+    pics:
+      - lily.png
+  Dede:
+    links:
+      - https://modernfamily.fandom.com/wiki/DeDe_Pritchett
+    fullname: Pritchett (neé Williams), DeDe
+    class: [minor]
+    born: 1948-01-23
+    died: 2018-10-31
+    pics:
+      - dede.png
+  Frank:
+    links:
+      - https://modernfamily.fandom.com/wiki/Frank_Dunphy
+    fullname: Dunphy, Frank
+    class: [minor]
+    died: 2019
+    pics:
+      - frank.png
+  Grace:
+    links:
+      - https://modernfamily.fandom.com/wiki/Grace_Dunphy
+    fullname: Dunphy, Grace
+    class: [minor]
+    died: 2013
+  Barb:
+    links:
+      - https://modernfamily.fandom.com/wiki/Barb_Tucker
+    fullname: Tucker, Barb
+    class: [minor]
+    pics:
+      - barb.png
+  Merle:
+    links:
+      - https://modernfamily.fandom.com/wiki/Merle_Tucker
+    fullname: Tucker, Merle
+    class: [minor]
+    pics:
+      - merle.png
+  Pam:
+    links:
+      - https://modernfamily.fandom.com/wiki/Pam_Tucker
+    fullname: Tucker, Pam
+    class: [minor]
+    born: 1970-12-18
+    pics:
+      - pam.png
+  Javier:
+    links:
+      - https://modernfamily.fandom.com/wiki/Javier_Delgado
+    fullname: Delgado, Javier
+    class: [minor]
+    born: 1969
+    pics:
+      - javier.png
+styles:
+  minor:
+    style: "filled"
+    fillcolor: "#f4f4f4"
+    color: white
+  ':node':
+    width: 0
+    #shape: plain
