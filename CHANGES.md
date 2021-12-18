@@ -1,3 +1,15 @@
+# unreleased
+
+- Person box is a link to person.link[0] if specified
+- Fix: Person classes styles are now applied
+- Fix: Undetailed persons are warned but properly handled
+- Person box redesigned:
+  - Name on top, below surname, smaller and dimmer
+  - remove spurious margins
+  - always born and died on the left and right halves
+- Stillborn symbol when `born: false`
+- bigger family bullet
+
 # 0.2.0 2021-09-23
 
 - Choose the output format at the command line interface
