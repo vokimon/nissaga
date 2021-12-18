@@ -202,8 +202,8 @@ def renderPerson(root, person, path):
 
     born = person.born
     if born is False: born='†*' # stillborn
-    elif born is None: born = ' '
-    elif born is True: born = ' '
+    elif born is None: born = ' ' # just as True, the default
+    elif born is True: born = ' ' # born
     else: born = f"* {born}"
 
     died = person.died
