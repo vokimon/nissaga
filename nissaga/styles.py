@@ -43,7 +43,7 @@ default_styles = ns.loads("""
     color: 'white'
     label: ''
     height: 0.1
-    width: 0.1
+    width: 0.12
     fontname: 'Helvetica, Arial, sans-serif'
     fontsize: 9
     fontcolor: '#660000'
@@ -54,7 +54,7 @@ default_styles = ns.loads("""
     label: ''
     height: 0.005 # Make it look like a line. Brilliant!
     penwidth: 0
-    width: 0.1
+    width: 0.12
 
   ':parent-link':
     weight: 2 # give priority to be straighter than parent2
