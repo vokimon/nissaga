@@ -448,7 +448,7 @@
 <title>Grace</title>
 <g id="a_node27"><a xlink:href="https://modernfamily.fandom.com/wiki/Grace_Dunphy" xlink:title="&lt;TABLE&gt;">
 <polygon fill="#f4f4f4" stroke="white" points="183.5,-306 19.5,-306 19.5,-262 183.5,-262 183.5,-306"/>
-<polygon fill="none" stroke="white" points="20.5,-264 20.5,-304 60.5,-304 60.5,-264 20.5,-264"/>
+<polygon fill="#eeeeee" stroke="transparent" points="20.5,-264 20.5,-304 60.5,-304 60.5,-264 20.5,-264"/>
 <text text-anchor="start" x="101" y="-293.8" font-family="Helvetica, Arial, sans-serif" font-size="14.00"> Grace</text>
 <text text-anchor="start" x="100.5" y="-279.4" font-family="Helvetica, Arial, sans-serif" font-size="12.00" fill="#666666">Dunphy</text>
 <text text-anchor="start" x="61.5" y="-266.5" font-family="Helvetica, Arial, sans-serif" font-size="10.00" fill="#aa7777"> &#160;&#160;</text>
