@@ -4,11 +4,18 @@ Nissaga input format is a YAML with the following content:
 
 ## Kinfile
 
-- **people:** `map(id -> Person)`
-- **families:** `list(Family)`
-- **styles:** `map(selector -> Style)`
+Root node containing the information required to generate the family tree.
+
+- **people:** `map(id -> Person)` Persons details. Details can be also inlined in the family specification.
+- **families:** `list(Family)` Relatives information.
+- **styles:** `map(selector -> Style)` Graphviz attributes to apply to each selector.
 
 ## Family
+
+Relatives information. A family is a set of (maybe unkwown) parents and children.
+Subfamilies can be defined when children become parents in their own families.
+Subfamilies enables write the yaml using a tree like the resulting one
+but using them is not required.
 
 - **parents:** `list[id|map(id -> Person)` The parents of the family (you can use the id or detail the person inline)
 - **children:** `list[id|map(id -> Person)` The children of the family (you can use the id or detail the person inline)
@@ -28,6 +35,8 @@ Nissaga input format is a YAML with the following content:
 
 ## Person
 
+Person details. They can be specified both in `people` or inline in `parents`, `children` instead of using just the id.
+
 - **name:** `str` TODO: Explain difference between id, name, fullname and alias.
 - **fullname:** `str` Surnames are placed first, followed by a comma and then the first name.
 - **alias:** `str`
@@ -45,12 +54,11 @@ Nissaga input format is a YAML with the following content:
 - **age:** `int` Age at death. Sometimes is the only data available. For the record, not shown.
 - **links:** `List[URL]` Links related to the person. By clicking on the person, the first one will be followed.
 - **notes:** `str|List[str]` Any notes regarding the person
+- **comment:** `str|List[str]` Any comments regarding the person information gathering
 - **todo:** `str|List[str]` A list of pending tasks about the person information gathering
-- **comment:** `str|List[str]` Any comments regarding the person
 - **docs:** `list[files]` A list of files serving as documentation for the information
 - **pics:** `list[files]` A list of image files containing pictures of the person.
   The first one will be used as avatar.
-
 
 
 
