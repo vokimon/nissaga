@@ -3,10 +3,13 @@
 ## About
 
 Nissaga can be used to generate Genealogy trees
-from a simple data description in yaml, following a format
-which extends the one used by [kingraph].
+from a simple data description in [YAML](https://en.wikipedia.org/wiki/YAML).
+
+<img alt="Example: Modern Family Genealogy" src="examples/modernfamily/modernfamily.png" width=50% />
 
 ## Installation
+
+![](https://shields.io/pypi/v/nissaga)
 
 ```bash
 pip install nissaga
@@ -50,9 +53,11 @@ generate-schema-doc ../nissaga-schema.json
 
 ## Differences with kingraph
 
-This application was started as a clone of the functionality of kingraph
-to overcome the performance and scalability problems with big trees,
-but also extending the functionality.
+This application was started as a clone of the functionality of [kingraph]
+to overcome performance and scalability problems with big trees,
+and also to extend its functionality.
+
+So, it is mostly back compatible with kingraph format.
 
 The following kingraph features are not supported:
 
@@ -74,8 +79,4 @@ The following features have been introduced by nissaga, and are not available in
 	- `person.comments` a string or list of strings of comments
 	- `family.notes` a string or list of strings of notes
 	- `family.docs` documentation about the family. A list of document paths relative to the yaml file. Not used yet but it is suposed to provide links to the research sources.
-
-
-
-
 
