@@ -214,38 +214,36 @@ def renderPerson(root, person, path):
 
     name = person and person.fullname or person.name or id
     surname, firstname = ([' ']+name.split(','))[-2:]
- 
-    label = (
-      '<<table align="center" border="0" cellpadding="0" cellspacing="2" width="5">\n' +
-      '<tr>\n'+
+    picsize = 40, 40 # TODO: configurable
+    label = "\n".join([
+      '<table align="center" border="0" cellpadding="0" cellspacing="1">',
+      '<tr>',
       (
-          f'<td rowspan="2" WIDTH="40" HEIGHT="40" FIXEDSIZE="TRUE"><img src="pics/{pic}" scale="TRUE"></img></td>'
+          f'<td rowspan="3" width="{picsize[0]}" height="{picsize[1]}" fixedsize="true"><img src="pics/{pic}" scale="TRUE"></img></td>'
           if pic else
-          '<td rowspan="2" WIDTH="40" HEIGHT="40" FIXEDSIZE="TRUE" border="1"></td>\n'
-      )+
-      f'<td align="left" width="100">{firstname}</td>' +
-      f'<td align="right" width="100">{surname}</td>' +
-      '\n</tr>\n' +
-      #'<tr><td align="center">' +
-      #'<font point-size="10" color="#aaaaaa">' +
-      #`{person.fullname || person.name}</font></td></tr>` +
-      '<tr><td colspan="2" align="center">\n' +
-      '<font point-size="10" color="#aa7777">' +
-      (f'*{born}' if born else '*????-??-??') +
-      (f'  +{died}' if died else '') +
-      '</font></td></tr>' +
-      '</table>>'
-    )
+          f'<td rowspan="3" width="{picsize[0]}" height="{picsize[1]}" fixedsize="true" bgcolor="#eeeeee"></td>\n'
+      ),
+      f'<td align="center" colspan="2">{firstname}</td>',
+      "</tr>",
+      "<tr>",
+      f'<td align="center" colspan="2"><font point-size="12" color="#666666">{surname}</font></td>',
+      '</tr>',
+      '<tr>',
+      f'<td align="left" width="60"><font point-size="10" color="#aa7777"> {born} </font></td>',
+      f'<td align="left" width="60"><font point-size="10" color="#aa7777"> {died} </font></td>',
+      '</tr>',
+      '</table>',
+    ])
     link = [f'URL="{person.links[0]}"'] if person.links else []
     return [
-        f'{escape(id)} [',
-            [link] +
-            [
+        f'{escape(id)} [', [
+            link,
+            low([
                 applyStyles(root, cls)
                 for cls in person.class_
-            ]+
-            [f'label={label}'],
-        ']',
+            ]),
+            f'label=<{label}>',
+        ],']',
     ]
 
 def renderSubFamilies(root, family, path):

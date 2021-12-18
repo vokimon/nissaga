@@ -26,9 +26,10 @@ default_styles = ns.loads("""
     shape: 'box'
     style: 'filled'
     fontname: 'Helvetica, Arial, sans-serif'
-    width: 2.5
+    width: 0
     fillcolor: 'white'
     color: '#cccccc'
+    margin: 0
 
   ':digraph':
     rankdir: 'LR'
