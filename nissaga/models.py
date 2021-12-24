@@ -16,7 +16,7 @@ class Person(BaseModel):
     died: Optional[Union[bool, int, datetime.date, str]] = False
     age: Optional[int]
     comment: Optional[Union[str,List[str]]]
-    notes: Optional[str]
+    notes: Optional[Union[str,List[str]]]
     alias: Optional[str]
     from_: Optional[str]
     todo: Optional[Union[str,List[str]]]
