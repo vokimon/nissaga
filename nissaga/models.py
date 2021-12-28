@@ -96,8 +96,11 @@ def processFamily(context, people):
         ]
         processFamily(family, people)
 
-def schema():
+def schema_json():
     return KinFile.schema_json(indent=2)
+
+def schema_yaml():
+    return ns(KinFile.schema()).dump()
 
 
 

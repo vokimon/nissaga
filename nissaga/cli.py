@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from nissaga.models import KinFile, schema
+from nissaga.models import KinFile, schema_json, schema_yaml
 from nissaga.render import render
 from yamlns import namespace as ns
 from consolemsg import step, error
@@ -9,6 +9,14 @@ from pathlib import Path
 
 def main():
     import sys
+
+    if 'schema' in sys.argv:
+        formats = [a for a in sys.argv if a in ('json', 'yaml')] or ['yaml']
+        if 'json' in formats:
+            Path('nissaga-schema.json').write_text(schema_json(), encoding='utf8')
+        if 'yaml' in formats:
+            Path('nissaga-schema.yaml').write_text(schema_yaml(), encoding='utf8')
+        sys.exit(0)
 
     inputfile = Path(sys.argv[1])
     format='pdf'
