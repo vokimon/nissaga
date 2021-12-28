@@ -33,10 +33,13 @@ class Person(BaseModel):
             class_ = 'class',
         )
 
+# You can reference persons by its id but you an also define them inline 
+PersonRef = Union[str, Dict[str, Person]]
+
 class Family(BaseModel):
     """Represents a family kernel with parents and children and any descendant family"""
-    parents: Optional[List[Union[str, Dict[str, Person]]]]
-    children: Optional[List[Union[str, Dict[str, Person]]]]
+    parents: Optional[List[PersonRef]]
+    children: Optional[List[PersonRef]]
     married: Optional[Union[bool, int, datetime.date, str]] = True
     divorced: Optional[Union[bool, int, datetime.date, str]] = False
     house: Optional[str]
@@ -50,7 +53,7 @@ class Family(BaseModel):
 Family.update_forward_refs()
  
 class KinFile(BaseModel):
-    """Represents the data required to build a family tree"""
+    """Top level element containing the data required to build a family tree"""
     styles: Dict = None
     families: List[Family] = None
     people: Dict[str, Person] = ns()
