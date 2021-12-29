@@ -2,7 +2,7 @@
 
 Nissaga input format is a YAML with the following content:
 
-## Kinfile
+## Nissaga
 
 Root node containing the information required to generate the family tree.
 
