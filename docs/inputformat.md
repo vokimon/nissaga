@@ -49,8 +49,8 @@ Person details. They can be specified both in `people` or inline in `parents`, `
 	- Any other text just shows it besides the `*`
 - **died:** `bool|int|Date|str` (Default: false) Date of death
 	- If False, the default, nothing is shown
-	- If True, a divorce symbol is shown on the family dot
-	- If a date or a text, it is shown besides the divorce symbol
+	- If True, a dagger symbol is shown indicating death at unkwown date
+	- If a date or a text, it is shown besides the dagger symbol
 - **age:** `int` Age at death. Sometimes is the only data available. For the record, not shown.
 - **links:** `List[URL]` Links related to the person. By clicking on the person, the first one will be followed.
 - **notes:** `str|List[str]` Any notes regarding the person
@@ -59,8 +59,31 @@ Person details. They can be specified both in `people` or inline in `parents`, `
 - **docs:** `list[files]` A list of files serving as documentation for the information
 - **pics:** `list[files]` A list of image files containing pictures of the person.
   The first one will be used as avatar.
+- **class:** `str` Space separated classes to alter the design of a person box.
+  See `styles`
 
+### Style selectors
 
+Generic selectors. Apply to all the tree:
+
+- `:digraph`: The full tree
+- `:edge`: All graphviz edges
+- `:node`: All graphviz nodes
+- `:house` (cluster): The house box
+- `:union` (node): The union node (the dot where the marriage labels are attached)
+- `:parent-link` (edge): The lines from the parents to the union node
+- `:parent-child-link` (edge): The lines from the union to the children
+- `:children: `(node): The colored rectangle before the person box on the parent link
+- `:child-link` (edge): The lines from union node to the children
+- `:family` (cluster):
+
+Besides you can define your own classes and choose which one
+apply to each person.
+
+### Style
+
+A map of [graphviz attributes](https://graphviz.org/doc/info/attrs.html)
+to set for the descriptor.
 
 
 

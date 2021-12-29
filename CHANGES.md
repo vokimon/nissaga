@@ -1,5 +1,6 @@
 # unreleased
 
+- Better input format documentation
 - Person box is a link to person.link[0] if specified
 - Fix: Person classes styles are now applied
 - Fix: Undetailed persons are warned but properly handled
@@ -7,8 +8,11 @@
   - Name on top, below surname, smaller and dimmer
   - remove spurious margins
   - always born and died on the left and right halves
-- Stillborn symbol when `born: false`
-- bigger family bullet
+  - Stillborn symbol when `born: false`
+- Unions:
+  - Bigger family bullet
+  - Multiple union data (ie. having both married and divorded dates)
+- `scheme` command to generate schema.
 
 # 0.2.0 2021-09-23
 
