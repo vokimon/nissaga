@@ -1,72 +1,72 @@
 # KinFile
 
-- [1. [Optional] Property KinFile > styles](#styles)
-- [2. [Optional] Property KinFile > families](#families)
-  - [2.1. KinFile > families > Family](#families_items)
-    - [2.1.1. [Optional] Property KinFile > families > Family > parents](#families_items_parents)
-      - [2.1.1.1. KinFile > families > Family > parents > items](#families_items_parents_items)
-        - [2.1.1.1.1. Property `KinFile > families > Family > parents > items > anyOf > item 0`](#families_items_parents_items_anyOf_i0)
-        - [2.1.1.1.2. Property `KinFile > families > Family > parents > items > anyOf > item 1`](#families_items_parents_items_anyOf_i1)
-          - [2.1.1.1.2.1. [Optional] Property KinFile > families > Family > parents > items > anyOf > item 1 > Person](#families_items_parents_items_anyOf_i1_additionalProperties)
-    - [2.1.2. [Optional] Property KinFile > families > Family > children](#families_items_children)
-      - [2.1.2.1. KinFile > families > Family > children > items](#families_items_children_items)
-        - [2.1.2.1.1. Property `KinFile > families > Family > children > items > anyOf > item 0`](#families_items_children_items_anyOf_i0)
-        - [2.1.2.1.2. Property `KinFile > families > Family > children > items > anyOf > item 1`](#families_items_children_items_anyOf_i1)
-          - [2.1.2.1.2.1. [Optional] Property KinFile > families > Family > children > items > anyOf > item 1 > Person](#families_items_children_items_anyOf_i1_additionalProperties)
-    - [2.1.3. [Optional] Property KinFile > families > Family > married](#families_items_married)
-      - [2.1.3.1. Property `KinFile > families > Family > married > anyOf > item 0`](#families_items_married_anyOf_i0)
-      - [2.1.3.2. Property `KinFile > families > Family > married > anyOf > item 1`](#families_items_married_anyOf_i1)
-      - [2.1.3.3. Property `KinFile > families > Family > married > anyOf > item 2`](#families_items_married_anyOf_i2)
-      - [2.1.3.4. Property `KinFile > families > Family > married > anyOf > item 3`](#families_items_married_anyOf_i3)
-    - [2.1.4. [Optional] Property KinFile > families > Family > divorced](#families_items_divorced)
-      - [2.1.4.1. Property `KinFile > families > Family > divorced > anyOf > item 0`](#families_items_divorced_anyOf_i0)
-      - [2.1.4.2. Property `KinFile > families > Family > divorced > anyOf > item 1`](#families_items_divorced_anyOf_i1)
-      - [2.1.4.3. Property `KinFile > families > Family > divorced > anyOf > item 2`](#families_items_divorced_anyOf_i2)
-      - [2.1.4.4. Property `KinFile > families > Family > divorced > anyOf > item 3`](#families_items_divorced_anyOf_i3)
-    - [2.1.5. [Optional] Property KinFile > families > Family > house](#families_items_house)
-    - [2.1.6. [Optional] Property KinFile > families > Family > notes](#families_items_notes)
-    - [2.1.7. [Optional] Property KinFile > families > Family > docs](#families_items_docs)
-      - [2.1.7.1. KinFile > families > Family > docs > items](#families_items_docs_items)
-    - [2.1.8. [Optional] Property KinFile > families > Family > families](#families_items_families)
-      - [2.1.8.1. KinFile > families > Family > families > Family](#families_items_families_items)
-- [3. [Optional] Property KinFile > people](#people)
-  - [3.1. [Optional] Property KinFile > people > Person](#people_additionalProperties)
-    - [3.1.1. [Optional] Property KinFile > families > Family > parents > items > anyOf > item 1 > Person > fullname](#families_items_parents_items_anyOf_i1_additionalProperties_fullname)
-    - [3.1.2. [Optional] Property KinFile > families > Family > parents > items > anyOf > item 1 > Person > name](#families_items_parents_items_anyOf_i1_additionalProperties_name)
-    - [3.1.3. [Optional] Property KinFile > families > Family > parents > items > anyOf > item 1 > Person > born](#families_items_parents_items_anyOf_i1_additionalProperties_born)
-      - [3.1.3.1. Property `KinFile > families > Family > parents > items > anyOf > item 1 > Person > born > anyOf > item 0`](#families_items_parents_items_anyOf_i1_additionalProperties_born_anyOf_i0)
-      - [3.1.3.2. Property `KinFile > families > Family > parents > items > anyOf > item 1 > Person > born > anyOf > item 1`](#families_items_parents_items_anyOf_i1_additionalProperties_born_anyOf_i1)
-      - [3.1.3.3. Property `KinFile > families > Family > parents > items > anyOf > item 1 > Person > born > anyOf > item 2`](#families_items_parents_items_anyOf_i1_additionalProperties_born_anyOf_i2)
-      - [3.1.3.4. Property `KinFile > families > Family > parents > items > anyOf > item 1 > Person > born > anyOf > item 3`](#families_items_parents_items_anyOf_i1_additionalProperties_born_anyOf_i3)
-    - [3.1.4. [Optional] Property KinFile > families > Family > parents > items > anyOf > item 1 > Person > died](#families_items_parents_items_anyOf_i1_additionalProperties_died)
-      - [3.1.4.1. Property `KinFile > families > Family > parents > items > anyOf > item 1 > Person > died > anyOf > item 0`](#families_items_parents_items_anyOf_i1_additionalProperties_died_anyOf_i0)
-      - [3.1.4.2. Property `KinFile > families > Family > parents > items > anyOf > item 1 > Person > died > anyOf > item 1`](#families_items_parents_items_anyOf_i1_additionalProperties_died_anyOf_i1)
-      - [3.1.4.3. Property `KinFile > families > Family > parents > items > anyOf > item 1 > Person > died > anyOf > item 2`](#families_items_parents_items_anyOf_i1_additionalProperties_died_anyOf_i2)
-      - [3.1.4.4. Property `KinFile > families > Family > parents > items > anyOf > item 1 > Person > died > anyOf > item 3`](#families_items_parents_items_anyOf_i1_additionalProperties_died_anyOf_i3)
-    - [3.1.5. [Optional] Property KinFile > families > Family > parents > items > anyOf > item 1 > Person > age](#families_items_parents_items_anyOf_i1_additionalProperties_age)
-    - [3.1.6. [Optional] Property KinFile > families > Family > parents > items > anyOf > item 1 > Person > comment](#families_items_parents_items_anyOf_i1_additionalProperties_comment)
-      - [3.1.6.1. Property `KinFile > families > Family > parents > items > anyOf > item 1 > Person > comment > anyOf > item 0`](#families_items_parents_items_anyOf_i1_additionalProperties_comment_anyOf_i0)
-      - [3.1.6.2. Property `KinFile > families > Family > parents > items > anyOf > item 1 > Person > comment > anyOf > item 1`](#families_items_parents_items_anyOf_i1_additionalProperties_comment_anyOf_i1)
-        - [3.1.6.2.1. KinFile > families > Family > parents > items > anyOf > item 1 > Person > comment > anyOf > item 1 > items](#families_items_parents_items_anyOf_i1_additionalProperties_comment_anyOf_i1_items)
-    - [3.1.7. [Optional] Property KinFile > families > Family > parents > items > anyOf > item 1 > Person > notes](#families_items_parents_items_anyOf_i1_additionalProperties_notes)
-      - [3.1.7.1. Property `KinFile > families > Family > parents > items > anyOf > item 1 > Person > notes > anyOf > item 0`](#families_items_parents_items_anyOf_i1_additionalProperties_notes_anyOf_i0)
-      - [3.1.7.2. Property `KinFile > families > Family > parents > items > anyOf > item 1 > Person > notes > anyOf > item 1`](#families_items_parents_items_anyOf_i1_additionalProperties_notes_anyOf_i1)
-        - [3.1.7.2.1. KinFile > families > Family > parents > items > anyOf > item 1 > Person > notes > anyOf > item 1 > items](#families_items_parents_items_anyOf_i1_additionalProperties_notes_anyOf_i1_items)
-    - [3.1.8. [Optional] Property KinFile > families > Family > parents > items > anyOf > item 1 > Person > alias](#families_items_parents_items_anyOf_i1_additionalProperties_alias)
-    - [3.1.9. [Optional] Property KinFile > families > Family > parents > items > anyOf > item 1 > Person > from](#families_items_parents_items_anyOf_i1_additionalProperties_from)
-    - [3.1.10. [Optional] Property KinFile > families > Family > parents > items > anyOf > item 1 > Person > todo](#families_items_parents_items_anyOf_i1_additionalProperties_todo)
-      - [3.1.10.1. Property `KinFile > families > Family > parents > items > anyOf > item 1 > Person > todo > anyOf > item 0`](#families_items_parents_items_anyOf_i1_additionalProperties_todo_anyOf_i0)
-      - [3.1.10.2. Property `KinFile > families > Family > parents > items > anyOf > item 1 > Person > todo > anyOf > item 1`](#families_items_parents_items_anyOf_i1_additionalProperties_todo_anyOf_i1)
-        - [3.1.10.2.1. KinFile > families > Family > parents > items > anyOf > item 1 > Person > todo > anyOf > item 1 > items](#families_items_parents_items_anyOf_i1_additionalProperties_todo_anyOf_i1_items)
-    - [3.1.11. [Optional] Property KinFile > families > Family > parents > items > anyOf > item 1 > Person > pics](#families_items_parents_items_anyOf_i1_additionalProperties_pics)
-      - [3.1.11.1. KinFile > families > Family > parents > items > anyOf > item 1 > Person > pics > items](#families_items_parents_items_anyOf_i1_additionalProperties_pics_items)
-    - [3.1.12. [Optional] Property KinFile > families > Family > parents > items > anyOf > item 1 > Person > docs](#families_items_parents_items_anyOf_i1_additionalProperties_docs)
-      - [3.1.12.1. KinFile > families > Family > parents > items > anyOf > item 1 > Person > docs > items](#families_items_parents_items_anyOf_i1_additionalProperties_docs_items)
-    - [3.1.13. [Optional] Property KinFile > families > Family > parents > items > anyOf > item 1 > Person > links](#families_items_parents_items_anyOf_i1_additionalProperties_links)
-      - [3.1.13.1. KinFile > families > Family > parents > items > anyOf > item 1 > Person > links > items](#families_items_parents_items_anyOf_i1_additionalProperties_links_items)
-    - [3.1.14. [Optional] Property KinFile > families > Family > parents > items > anyOf > item 1 > Person > gender](#families_items_parents_items_anyOf_i1_additionalProperties_gender)
-    - [3.1.15. [Optional] Property KinFile > families > Family > parents > items > anyOf > item 1 > Person > class](#families_items_parents_items_anyOf_i1_additionalProperties_class)
-      - [3.1.15.1. KinFile > families > Family > parents > items > anyOf > item 1 > Person > class > items](#families_items_parents_items_anyOf_i1_additionalProperties_class_items)
+- [1. [Optional] Property styles](#styles)
+- [2. [Optional] Property families](#families)
+  - [2.1. Family](#families_items)
+    - [2.1.1. [Optional] Property parents](#families_items_parents)
+      - [2.1.1.1. items](#families_items_parents_items)
+        - [2.1.1.1.1. Property `item 0`](#families_items_parents_items_anyOf_i0)
+        - [2.1.1.1.2. Property `item 1`](#families_items_parents_items_anyOf_i1)
+          - [2.1.1.1.2.1. [Optional] Property Person](#families_items_parents_items_anyOf_i1_additionalProperties)
+    - [2.1.2. [Optional] Property children](#families_items_children)
+      - [2.1.2.1. items](#families_items_children_items)
+        - [2.1.2.1.1. Property `item 0`](#families_items_children_items_anyOf_i0)
+        - [2.1.2.1.2. Property `item 1`](#families_items_children_items_anyOf_i1)
+          - [2.1.2.1.2.1. [Optional] Property Person](#families_items_children_items_anyOf_i1_additionalProperties)
+    - [2.1.3. [Optional] Property married](#families_items_married)
+      - [2.1.3.1. Property `item 0`](#families_items_married_anyOf_i0)
+      - [2.1.3.2. Property `item 1`](#families_items_married_anyOf_i1)
+      - [2.1.3.3. Property `item 2`](#families_items_married_anyOf_i2)
+      - [2.1.3.4. Property `item 3`](#families_items_married_anyOf_i3)
+    - [2.1.4. [Optional] Property divorced](#families_items_divorced)
+      - [2.1.4.1. Property `item 0`](#families_items_divorced_anyOf_i0)
+      - [2.1.4.2. Property `item 1`](#families_items_divorced_anyOf_i1)
+      - [2.1.4.3. Property `item 2`](#families_items_divorced_anyOf_i2)
+      - [2.1.4.4. Property `item 3`](#families_items_divorced_anyOf_i3)
+    - [2.1.5. [Optional] Property house](#families_items_house)
+    - [2.1.6. [Optional] Property notes](#families_items_notes)
+    - [2.1.7. [Optional] Property docs](#families_items_docs)
+      - [2.1.7.1. items](#families_items_docs_items)
+    - [2.1.8. [Optional] Property families](#families_items_families)
+      - [2.1.8.1. Family](#families_items_families_items)
+- [3. [Optional] Property people](#people)
+  - [3.1. [Optional] Property Person](#people_additionalProperties)
+    - [3.1.1. [Optional] Property fullname](#families_items_parents_items_anyOf_i1_additionalProperties_fullname)
+    - [3.1.2. [Optional] Property name](#families_items_parents_items_anyOf_i1_additionalProperties_name)
+    - [3.1.3. [Optional] Property born](#families_items_parents_items_anyOf_i1_additionalProperties_born)
+      - [3.1.3.1. Property `item 0`](#families_items_parents_items_anyOf_i1_additionalProperties_born_anyOf_i0)
+      - [3.1.3.2. Property `item 1`](#families_items_parents_items_anyOf_i1_additionalProperties_born_anyOf_i1)
+      - [3.1.3.3. Property `item 2`](#families_items_parents_items_anyOf_i1_additionalProperties_born_anyOf_i2)
+      - [3.1.3.4. Property `item 3`](#families_items_parents_items_anyOf_i1_additionalProperties_born_anyOf_i3)
+    - [3.1.4. [Optional] Property died](#families_items_parents_items_anyOf_i1_additionalProperties_died)
+      - [3.1.4.1. Property `item 0`](#families_items_parents_items_anyOf_i1_additionalProperties_died_anyOf_i0)
+      - [3.1.4.2. Property `item 1`](#families_items_parents_items_anyOf_i1_additionalProperties_died_anyOf_i1)
+      - [3.1.4.3. Property `item 2`](#families_items_parents_items_anyOf_i1_additionalProperties_died_anyOf_i2)
+      - [3.1.4.4. Property `item 3`](#families_items_parents_items_anyOf_i1_additionalProperties_died_anyOf_i3)
+    - [3.1.5. [Optional] Property age](#families_items_parents_items_anyOf_i1_additionalProperties_age)
+    - [3.1.6. [Optional] Property comment](#families_items_parents_items_anyOf_i1_additionalProperties_comment)
+      - [3.1.6.1. Property `item 0`](#families_items_parents_items_anyOf_i1_additionalProperties_comment_anyOf_i0)
+      - [3.1.6.2. Property `item 1`](#families_items_parents_items_anyOf_i1_additionalProperties_comment_anyOf_i1)
+        - [3.1.6.2.1. items](#families_items_parents_items_anyOf_i1_additionalProperties_comment_anyOf_i1_items)
+    - [3.1.7. [Optional] Property notes](#families_items_parents_items_anyOf_i1_additionalProperties_notes)
+      - [3.1.7.1. Property `item 0`](#families_items_parents_items_anyOf_i1_additionalProperties_notes_anyOf_i0)
+      - [3.1.7.2. Property `item 1`](#families_items_parents_items_anyOf_i1_additionalProperties_notes_anyOf_i1)
+        - [3.1.7.2.1. items](#families_items_parents_items_anyOf_i1_additionalProperties_notes_anyOf_i1_items)
+    - [3.1.8. [Optional] Property alias](#families_items_parents_items_anyOf_i1_additionalProperties_alias)
+    - [3.1.9. [Optional] Property from](#families_items_parents_items_anyOf_i1_additionalProperties_from)
+    - [3.1.10. [Optional] Property todo](#families_items_parents_items_anyOf_i1_additionalProperties_todo)
+      - [3.1.10.1. Property `item 0`](#families_items_parents_items_anyOf_i1_additionalProperties_todo_anyOf_i0)
+      - [3.1.10.2. Property `item 1`](#families_items_parents_items_anyOf_i1_additionalProperties_todo_anyOf_i1)
+        - [3.1.10.2.1. items](#families_items_parents_items_anyOf_i1_additionalProperties_todo_anyOf_i1_items)
+    - [3.1.11. [Optional] Property pics](#families_items_parents_items_anyOf_i1_additionalProperties_pics)
+      - [3.1.11.1. items](#families_items_parents_items_anyOf_i1_additionalProperties_pics_items)
+    - [3.1.12. [Optional] Property docs](#families_items_parents_items_anyOf_i1_additionalProperties_docs)
+      - [3.1.12.1. items](#families_items_parents_items_anyOf_i1_additionalProperties_docs_items)
+    - [3.1.13. [Optional] Property links](#families_items_parents_items_anyOf_i1_additionalProperties_links)
+      - [3.1.13.1. items](#families_items_parents_items_anyOf_i1_additionalProperties_links_items)
+    - [3.1.14. [Optional] Property gender](#families_items_parents_items_anyOf_i1_additionalProperties_gender)
+    - [3.1.15. [Optional] Property class](#families_items_parents_items_anyOf_i1_additionalProperties_class)
+      - [3.1.15.1. items](#families_items_parents_items_anyOf_i1_additionalProperties_class_items)
 
 **Title:** KinFile
 
@@ -78,7 +78,7 @@
 **Description:** Top level element containing the data required to build a family tree
 
 <details>
-<summary><strong> <a name="styles"></a>1. [Optional] Property KinFile > styles</strong>  
+<summary><strong> <a name="styles"></a>1. [Optional] Property styles</strong>  
 
 </summary>
 <blockquote>
@@ -94,7 +94,7 @@
 </details>
 
 <details>
-<summary><strong> <a name="families"></a>2. [Optional] Property KinFile > families</strong>  
+<summary><strong> <a name="families"></a>2. [Optional] Property families</strong>  
 
 </summary>
 <blockquote>
@@ -120,7 +120,7 @@
 | [Family](#families_items)       | Represents a family kernel with parents and children and any descendant family |
 |                                 |                                                                                |
 
-### <a name="families_items"></a>2.1. KinFile > families > Family
+### <a name="families_items"></a>2.1. Family
 
 | Type                      | `object`                                                                  |
 | ------------------------- | ------------------------------------------------------------------------- |
@@ -131,7 +131,7 @@
 **Description:** Represents a family kernel with parents and children and any descendant family
 
 <details>
-<summary><strong> <a name="families_items_parents"></a>2.1.1. [Optional] Property KinFile > families > Family > parents</strong>  
+<summary><strong> <a name="families_items_parents"></a>2.1.1. [Optional] Property parents</strong>  
 
 </summary>
 <blockquote>
@@ -157,7 +157,7 @@
 | [items](#families_items_parents_items) | -           |
 |                                        |             |
 
-##### <a name="families_items_parents_items"></a>2.1.1.1. KinFile > families > Family > parents > items
+##### <a name="families_items_parents_items"></a>2.1.1.1. items
 
 | Type                      | `combining`                                                               |
 | ------------------------- | ------------------------------------------------------------------------- |
@@ -174,7 +174,7 @@
 
 <blockquote>
 
-##### <a name="families_items_parents_items_anyOf_i0"></a>2.1.1.1.1. Property `KinFile > families > Family > parents > items > anyOf > item 0`
+##### <a name="families_items_parents_items_anyOf_i0"></a>2.1.1.1.1. Property `item 0`
 
 | Type                      | `string`                                                                  |
 | ------------------------- | ------------------------------------------------------------------------- |
@@ -184,7 +184,7 @@
 </blockquote>
 <blockquote>
 
-##### <a name="families_items_parents_items_anyOf_i1"></a>2.1.1.1.2. Property `KinFile > families > Family > parents > items > anyOf > item 1`
+##### <a name="families_items_parents_items_anyOf_i1"></a>2.1.1.1.2. Property `item 1`
 
 | Type                      | `object`                                                                                                                                        |
 | ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -192,7 +192,7 @@
 |                           |                                                                                                                                                 |
 
 <details>
-<summary><strong> <a name="families_items_parents_items_anyOf_i1_additionalProperties"></a>2.1.1.1.2.1. [Optional] Property KinFile > families > Family > parents > items > anyOf > item 1 > Person</strong>  
+<summary><strong> <a name="families_items_parents_items_anyOf_i1_additionalProperties"></a>2.1.1.1.2.1. [Optional] Property Person</strong>  
 
 </summary>
 <blockquote>
@@ -216,7 +216,7 @@
 </details>
 
 <details>
-<summary><strong> <a name="families_items_children"></a>2.1.2. [Optional] Property KinFile > families > Family > children</strong>  
+<summary><strong> <a name="families_items_children"></a>2.1.2. [Optional] Property children</strong>  
 
 </summary>
 <blockquote>
@@ -242,7 +242,7 @@
 | [items](#families_items_children_items) | -           |
 |                                         |             |
 
-##### <a name="families_items_children_items"></a>2.1.2.1. KinFile > families > Family > children > items
+##### <a name="families_items_children_items"></a>2.1.2.1. items
 
 | Type                      | `combining`                                                               |
 | ------------------------- | ------------------------------------------------------------------------- |
@@ -259,7 +259,7 @@
 
 <blockquote>
 
-##### <a name="families_items_children_items_anyOf_i0"></a>2.1.2.1.1. Property `KinFile > families > Family > children > items > anyOf > item 0`
+##### <a name="families_items_children_items_anyOf_i0"></a>2.1.2.1.1. Property `item 0`
 
 | Type                      | `string`                                                                  |
 | ------------------------- | ------------------------------------------------------------------------- |
@@ -269,7 +269,7 @@
 </blockquote>
 <blockquote>
 
-##### <a name="families_items_children_items_anyOf_i1"></a>2.1.2.1.2. Property `KinFile > families > Family > children > items > anyOf > item 1`
+##### <a name="families_items_children_items_anyOf_i1"></a>2.1.2.1.2. Property `item 1`
 
 | Type                      | `object`                                                                                                                                         |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -277,7 +277,7 @@
 |                           |                                                                                                                                                  |
 
 <details>
-<summary><strong> <a name="families_items_children_items_anyOf_i1_additionalProperties"></a>2.1.2.1.2.1. [Optional] Property KinFile > families > Family > children > items > anyOf > item 1 > Person</strong>  
+<summary><strong> <a name="families_items_children_items_anyOf_i1_additionalProperties"></a>2.1.2.1.2.1. [Optional] Property Person</strong>  
 
 </summary>
 <blockquote>
@@ -301,7 +301,7 @@
 </details>
 
 <details>
-<summary><strong> <a name="families_items_married"></a>2.1.3. [Optional] Property KinFile > families > Family > married</strong>  
+<summary><strong> <a name="families_items_married"></a>2.1.3. [Optional] Property married</strong>  
 
 </summary>
 <blockquote>
@@ -326,7 +326,7 @@
 
 <blockquote>
 
-##### <a name="families_items_married_anyOf_i0"></a>2.1.3.1. Property `KinFile > families > Family > married > anyOf > item 0`
+##### <a name="families_items_married_anyOf_i0"></a>2.1.3.1. Property `item 0`
 
 | Type                      | `boolean`                                                                 |
 | ------------------------- | ------------------------------------------------------------------------- |
@@ -336,7 +336,7 @@
 </blockquote>
 <blockquote>
 
-##### <a name="families_items_married_anyOf_i1"></a>2.1.3.2. Property `KinFile > families > Family > married > anyOf > item 1`
+##### <a name="families_items_married_anyOf_i1"></a>2.1.3.2. Property `item 1`
 
 | Type                      | `integer`                                                                 |
 | ------------------------- | ------------------------------------------------------------------------- |
@@ -346,7 +346,7 @@
 </blockquote>
 <blockquote>
 
-##### <a name="families_items_married_anyOf_i2"></a>2.1.3.3. Property `KinFile > families > Family > married > anyOf > item 2`
+##### <a name="families_items_married_anyOf_i2"></a>2.1.3.3. Property `item 2`
 
 | Type                      | `string`                                                                  |
 | ------------------------- | ------------------------------------------------------------------------- |
@@ -356,7 +356,7 @@
 </blockquote>
 <blockquote>
 
-##### <a name="families_items_married_anyOf_i3"></a>2.1.3.4. Property `KinFile > families > Family > married > anyOf > item 3`
+##### <a name="families_items_married_anyOf_i3"></a>2.1.3.4. Property `item 3`
 
 | Type                      | `string`                                                                  |
 | ------------------------- | ------------------------------------------------------------------------- |
@@ -371,7 +371,7 @@
 </details>
 
 <details>
-<summary><strong> <a name="families_items_divorced"></a>2.1.4. [Optional] Property KinFile > families > Family > divorced</strong>  
+<summary><strong> <a name="families_items_divorced"></a>2.1.4. [Optional] Property divorced</strong>  
 
 </summary>
 <blockquote>
@@ -396,7 +396,7 @@
 
 <blockquote>
 
-##### <a name="families_items_divorced_anyOf_i0"></a>2.1.4.1. Property `KinFile > families > Family > divorced > anyOf > item 0`
+##### <a name="families_items_divorced_anyOf_i0"></a>2.1.4.1. Property `item 0`
 
 | Type                      | `boolean`                                                                 |
 | ------------------------- | ------------------------------------------------------------------------- |
@@ -406,7 +406,7 @@
 </blockquote>
 <blockquote>
 
-##### <a name="families_items_divorced_anyOf_i1"></a>2.1.4.2. Property `KinFile > families > Family > divorced > anyOf > item 1`
+##### <a name="families_items_divorced_anyOf_i1"></a>2.1.4.2. Property `item 1`
 
 | Type                      | `integer`                                                                 |
 | ------------------------- | ------------------------------------------------------------------------- |
@@ -416,7 +416,7 @@
 </blockquote>
 <blockquote>
 
-##### <a name="families_items_divorced_anyOf_i2"></a>2.1.4.3. Property `KinFile > families > Family > divorced > anyOf > item 2`
+##### <a name="families_items_divorced_anyOf_i2"></a>2.1.4.3. Property `item 2`
 
 | Type                      | `string`                                                                  |
 | ------------------------- | ------------------------------------------------------------------------- |
@@ -426,7 +426,7 @@
 </blockquote>
 <blockquote>
 
-##### <a name="families_items_divorced_anyOf_i3"></a>2.1.4.4. Property `KinFile > families > Family > divorced > anyOf > item 3`
+##### <a name="families_items_divorced_anyOf_i3"></a>2.1.4.4. Property `item 3`
 
 | Type                      | `string`                                                                  |
 | ------------------------- | ------------------------------------------------------------------------- |
@@ -441,7 +441,7 @@
 </details>
 
 <details>
-<summary><strong> <a name="families_items_house"></a>2.1.5. [Optional] Property KinFile > families > Family > house</strong>  
+<summary><strong> <a name="families_items_house"></a>2.1.5. [Optional] Property house</strong>  
 
 </summary>
 <blockquote>
@@ -457,7 +457,7 @@
 </details>
 
 <details>
-<summary><strong> <a name="families_items_notes"></a>2.1.6. [Optional] Property KinFile > families > Family > notes</strong>  
+<summary><strong> <a name="families_items_notes"></a>2.1.6. [Optional] Property notes</strong>  
 
 </summary>
 <blockquote>
@@ -473,7 +473,7 @@
 </details>
 
 <details>
-<summary><strong> <a name="families_items_docs"></a>2.1.7. [Optional] Property KinFile > families > Family > docs</strong>  
+<summary><strong> <a name="families_items_docs"></a>2.1.7. [Optional] Property docs</strong>  
 
 </summary>
 <blockquote>
@@ -499,7 +499,7 @@
 | [items](#families_items_docs_items) | -           |
 |                                     |             |
 
-##### <a name="families_items_docs_items"></a>2.1.7.1. KinFile > families > Family > docs > items
+##### <a name="families_items_docs_items"></a>2.1.7.1. items
 
 | Type                      | `string`                                                                  |
 | ------------------------- | ------------------------------------------------------------------------- |
@@ -510,7 +510,7 @@
 </details>
 
 <details>
-<summary><strong> <a name="families_items_families"></a>2.1.8. [Optional] Property KinFile > families > Family > families</strong>  
+<summary><strong> <a name="families_items_families"></a>2.1.8. [Optional] Property families</strong>  
 
 </summary>
 <blockquote>
@@ -537,7 +537,7 @@
 | [Family](#families_items_families_items) | Represents a family kernel with parents and children and any descendant family |
 |                                          |                                                                                |
 
-##### <a name="families_items_families_items"></a>2.1.8.1. KinFile > families > Family > families > Family
+##### <a name="families_items_families_items"></a>2.1.8.1. Family
 
 | Type                      | `object`                                                                  |
 | ------------------------- | ------------------------------------------------------------------------- |
@@ -554,7 +554,7 @@
 </details>
 
 <details>
-<summary><strong> <a name="people"></a>3. [Optional] Property KinFile > people</strong>  
+<summary><strong> <a name="people"></a>3. [Optional] Property people</strong>  
 
 </summary>
 <blockquote>
@@ -568,7 +568,7 @@
 |                           |                                                                                                                  |
 
 <details>
-<summary><strong> <a name="people_additionalProperties"></a>3.1. [Optional] Property KinFile > people > Person</strong>  
+<summary><strong> <a name="people_additionalProperties"></a>3.1. [Optional] Property Person</strong>  
 
 </summary>
 <blockquote>
@@ -582,7 +582,7 @@
 **Description:** Represents the data of a person
 
 <details>
-<summary><strong> <a name="families_items_parents_items_anyOf_i1_additionalProperties_fullname"></a>3.1.1. [Optional] Property KinFile > families > Family > parents > items > anyOf > item 1 > Person > fullname</strong>  
+<summary><strong> <a name="families_items_parents_items_anyOf_i1_additionalProperties_fullname"></a>3.1.1. [Optional] Property fullname</strong>  
 
 </summary>
 <blockquote>
@@ -600,7 +600,7 @@
 </details>
 
 <details>
-<summary><strong> <a name="families_items_parents_items_anyOf_i1_additionalProperties_name"></a>3.1.2. [Optional] Property KinFile > families > Family > parents > items > anyOf > item 1 > Person > name</strong>  
+<summary><strong> <a name="families_items_parents_items_anyOf_i1_additionalProperties_name"></a>3.1.2. [Optional] Property name</strong>  
 
 </summary>
 <blockquote>
@@ -618,7 +618,7 @@
 </details>
 
 <details>
-<summary><strong> <a name="families_items_parents_items_anyOf_i1_additionalProperties_born"></a>3.1.3. [Optional] Property KinFile > families > Family > parents > items > anyOf > item 1 > Person > born</strong>  
+<summary><strong> <a name="families_items_parents_items_anyOf_i1_additionalProperties_born"></a>3.1.3. [Optional] Property born</strong>  
 
 </summary>
 <blockquote>
@@ -645,7 +645,7 @@
 
 <blockquote>
 
-##### <a name="families_items_parents_items_anyOf_i1_additionalProperties_born_anyOf_i0"></a>3.1.3.1. Property `KinFile > families > Family > parents > items > anyOf > item 1 > Person > born > anyOf > item 0`
+##### <a name="families_items_parents_items_anyOf_i1_additionalProperties_born_anyOf_i0"></a>3.1.3.1. Property `item 0`
 
 | Type                      | `boolean`                                                                 |
 | ------------------------- | ------------------------------------------------------------------------- |
@@ -655,7 +655,7 @@
 </blockquote>
 <blockquote>
 
-##### <a name="families_items_parents_items_anyOf_i1_additionalProperties_born_anyOf_i1"></a>3.1.3.2. Property `KinFile > families > Family > parents > items > anyOf > item 1 > Person > born > anyOf > item 1`
+##### <a name="families_items_parents_items_anyOf_i1_additionalProperties_born_anyOf_i1"></a>3.1.3.2. Property `item 1`
 
 | Type                      | `integer`                                                                 |
 | ------------------------- | ------------------------------------------------------------------------- |
@@ -665,7 +665,7 @@
 </blockquote>
 <blockquote>
 
-##### <a name="families_items_parents_items_anyOf_i1_additionalProperties_born_anyOf_i2"></a>3.1.3.3. Property `KinFile > families > Family > parents > items > anyOf > item 1 > Person > born > anyOf > item 2`
+##### <a name="families_items_parents_items_anyOf_i1_additionalProperties_born_anyOf_i2"></a>3.1.3.3. Property `item 2`
 
 | Type                      | `string`                                                                  |
 | ------------------------- | ------------------------------------------------------------------------- |
@@ -675,7 +675,7 @@
 </blockquote>
 <blockquote>
 
-##### <a name="families_items_parents_items_anyOf_i1_additionalProperties_born_anyOf_i3"></a>3.1.3.4. Property `KinFile > families > Family > parents > items > anyOf > item 1 > Person > born > anyOf > item 3`
+##### <a name="families_items_parents_items_anyOf_i1_additionalProperties_born_anyOf_i3"></a>3.1.3.4. Property `item 3`
 
 | Type                      | `string`                                                                  |
 | ------------------------- | ------------------------------------------------------------------------- |
@@ -690,7 +690,7 @@
 </details>
 
 <details>
-<summary><strong> <a name="families_items_parents_items_anyOf_i1_additionalProperties_died"></a>3.1.4. [Optional] Property KinFile > families > Family > parents > items > anyOf > item 1 > Person > died</strong>  
+<summary><strong> <a name="families_items_parents_items_anyOf_i1_additionalProperties_died"></a>3.1.4. [Optional] Property died</strong>  
 
 </summary>
 <blockquote>
@@ -717,7 +717,7 @@
 
 <blockquote>
 
-##### <a name="families_items_parents_items_anyOf_i1_additionalProperties_died_anyOf_i0"></a>3.1.4.1. Property `KinFile > families > Family > parents > items > anyOf > item 1 > Person > died > anyOf > item 0`
+##### <a name="families_items_parents_items_anyOf_i1_additionalProperties_died_anyOf_i0"></a>3.1.4.1. Property `item 0`
 
 | Type                      | `boolean`                                                                 |
 | ------------------------- | ------------------------------------------------------------------------- |
@@ -727,7 +727,7 @@
 </blockquote>
 <blockquote>
 
-##### <a name="families_items_parents_items_anyOf_i1_additionalProperties_died_anyOf_i1"></a>3.1.4.2. Property `KinFile > families > Family > parents > items > anyOf > item 1 > Person > died > anyOf > item 1`
+##### <a name="families_items_parents_items_anyOf_i1_additionalProperties_died_anyOf_i1"></a>3.1.4.2. Property `item 1`
 
 | Type                      | `integer`                                                                 |
 | ------------------------- | ------------------------------------------------------------------------- |
@@ -737,7 +737,7 @@
 </blockquote>
 <blockquote>
 
-##### <a name="families_items_parents_items_anyOf_i1_additionalProperties_died_anyOf_i2"></a>3.1.4.3. Property `KinFile > families > Family > parents > items > anyOf > item 1 > Person > died > anyOf > item 2`
+##### <a name="families_items_parents_items_anyOf_i1_additionalProperties_died_anyOf_i2"></a>3.1.4.3. Property `item 2`
 
 | Type                      | `string`                                                                  |
 | ------------------------- | ------------------------------------------------------------------------- |
@@ -747,7 +747,7 @@
 </blockquote>
 <blockquote>
 
-##### <a name="families_items_parents_items_anyOf_i1_additionalProperties_died_anyOf_i3"></a>3.1.4.4. Property `KinFile > families > Family > parents > items > anyOf > item 1 > Person > died > anyOf > item 3`
+##### <a name="families_items_parents_items_anyOf_i1_additionalProperties_died_anyOf_i3"></a>3.1.4.4. Property `item 3`
 
 | Type                      | `string`                                                                  |
 | ------------------------- | ------------------------------------------------------------------------- |
@@ -762,7 +762,7 @@
 </details>
 
 <details>
-<summary><strong> <a name="families_items_parents_items_anyOf_i1_additionalProperties_age"></a>3.1.5. [Optional] Property KinFile > families > Family > parents > items > anyOf > item 1 > Person > age</strong>  
+<summary><strong> <a name="families_items_parents_items_anyOf_i1_additionalProperties_age"></a>3.1.5. [Optional] Property age</strong>  
 
 </summary>
 <blockquote>
@@ -778,7 +778,7 @@
 </details>
 
 <details>
-<summary><strong> <a name="families_items_parents_items_anyOf_i1_additionalProperties_comment"></a>3.1.6. [Optional] Property KinFile > families > Family > parents > items > anyOf > item 1 > Person > comment</strong>  
+<summary><strong> <a name="families_items_parents_items_anyOf_i1_additionalProperties_comment"></a>3.1.6. [Optional] Property comment</strong>  
 
 </summary>
 <blockquote>
@@ -800,7 +800,7 @@
 
 <blockquote>
 
-##### <a name="families_items_parents_items_anyOf_i1_additionalProperties_comment_anyOf_i0"></a>3.1.6.1. Property `KinFile > families > Family > parents > items > anyOf > item 1 > Person > comment > anyOf > item 0`
+##### <a name="families_items_parents_items_anyOf_i1_additionalProperties_comment_anyOf_i0"></a>3.1.6.1. Property `item 0`
 
 | Type                      | `string`                                                                  |
 | ------------------------- | ------------------------------------------------------------------------- |
@@ -810,7 +810,7 @@
 </blockquote>
 <blockquote>
 
-##### <a name="families_items_parents_items_anyOf_i1_additionalProperties_comment_anyOf_i1"></a>3.1.6.2. Property `KinFile > families > Family > parents > items > anyOf > item 1 > Person > comment > anyOf > item 1`
+##### <a name="families_items_parents_items_anyOf_i1_additionalProperties_comment_anyOf_i1"></a>3.1.6.2. Property `item 1`
 
 | Type                      | `array of string`                                                         |
 | ------------------------- | ------------------------------------------------------------------------- |
@@ -831,7 +831,7 @@
 | [items](#families_items_parents_items_anyOf_i1_additionalProperties_comment_anyOf_i1_items) | -           |
 |                                                                                             |             |
 
-##### <a name="families_items_parents_items_anyOf_i1_additionalProperties_comment_anyOf_i1_items"></a>3.1.6.2.1. KinFile > families > Family > parents > items > anyOf > item 1 > Person > comment > anyOf > item 1 > items
+##### <a name="families_items_parents_items_anyOf_i1_additionalProperties_comment_anyOf_i1_items"></a>3.1.6.2.1. items
 
 | Type                      | `string`                                                                  |
 | ------------------------- | ------------------------------------------------------------------------- |
@@ -846,7 +846,7 @@
 </details>
 
 <details>
-<summary><strong> <a name="families_items_parents_items_anyOf_i1_additionalProperties_notes"></a>3.1.7. [Optional] Property KinFile > families > Family > parents > items > anyOf > item 1 > Person > notes</strong>  
+<summary><strong> <a name="families_items_parents_items_anyOf_i1_additionalProperties_notes"></a>3.1.7. [Optional] Property notes</strong>  
 
 </summary>
 <blockquote>
@@ -868,7 +868,7 @@
 
 <blockquote>
 
-##### <a name="families_items_parents_items_anyOf_i1_additionalProperties_notes_anyOf_i0"></a>3.1.7.1. Property `KinFile > families > Family > parents > items > anyOf > item 1 > Person > notes > anyOf > item 0`
+##### <a name="families_items_parents_items_anyOf_i1_additionalProperties_notes_anyOf_i0"></a>3.1.7.1. Property `item 0`
 
 | Type                      | `string`                                                                  |
 | ------------------------- | ------------------------------------------------------------------------- |
@@ -878,7 +878,7 @@
 </blockquote>
 <blockquote>
 
-##### <a name="families_items_parents_items_anyOf_i1_additionalProperties_notes_anyOf_i1"></a>3.1.7.2. Property `KinFile > families > Family > parents > items > anyOf > item 1 > Person > notes > anyOf > item 1`
+##### <a name="families_items_parents_items_anyOf_i1_additionalProperties_notes_anyOf_i1"></a>3.1.7.2. Property `item 1`
 
 | Type                      | `array of string`                                                         |
 | ------------------------- | ------------------------------------------------------------------------- |
@@ -899,7 +899,7 @@
 | [items](#families_items_parents_items_anyOf_i1_additionalProperties_notes_anyOf_i1_items) | -           |
 |                                                                                           |             |
 
-##### <a name="families_items_parents_items_anyOf_i1_additionalProperties_notes_anyOf_i1_items"></a>3.1.7.2.1. KinFile > families > Family > parents > items > anyOf > item 1 > Person > notes > anyOf > item 1 > items
+##### <a name="families_items_parents_items_anyOf_i1_additionalProperties_notes_anyOf_i1_items"></a>3.1.7.2.1. items
 
 | Type                      | `string`                                                                  |
 | ------------------------- | ------------------------------------------------------------------------- |
@@ -914,7 +914,7 @@
 </details>
 
 <details>
-<summary><strong> <a name="families_items_parents_items_anyOf_i1_additionalProperties_alias"></a>3.1.8. [Optional] Property KinFile > families > Family > parents > items > anyOf > item 1 > Person > alias</strong>  
+<summary><strong> <a name="families_items_parents_items_anyOf_i1_additionalProperties_alias"></a>3.1.8. [Optional] Property alias</strong>  
 
 </summary>
 <blockquote>
@@ -930,7 +930,7 @@
 </details>
 
 <details>
-<summary><strong> <a name="families_items_parents_items_anyOf_i1_additionalProperties_from"></a>3.1.9. [Optional] Property KinFile > families > Family > parents > items > anyOf > item 1 > Person > from</strong>  
+<summary><strong> <a name="families_items_parents_items_anyOf_i1_additionalProperties_from"></a>3.1.9. [Optional] Property from</strong>  
 
 </summary>
 <blockquote>
@@ -946,7 +946,7 @@
 </details>
 
 <details>
-<summary><strong> <a name="families_items_parents_items_anyOf_i1_additionalProperties_todo"></a>3.1.10. [Optional] Property KinFile > families > Family > parents > items > anyOf > item 1 > Person > todo</strong>  
+<summary><strong> <a name="families_items_parents_items_anyOf_i1_additionalProperties_todo"></a>3.1.10. [Optional] Property todo</strong>  
 
 </summary>
 <blockquote>
@@ -968,7 +968,7 @@
 
 <blockquote>
 
-##### <a name="families_items_parents_items_anyOf_i1_additionalProperties_todo_anyOf_i0"></a>3.1.10.1. Property `KinFile > families > Family > parents > items > anyOf > item 1 > Person > todo > anyOf > item 0`
+##### <a name="families_items_parents_items_anyOf_i1_additionalProperties_todo_anyOf_i0"></a>3.1.10.1. Property `item 0`
 
 | Type                      | `string`                                                                  |
 | ------------------------- | ------------------------------------------------------------------------- |
@@ -978,7 +978,7 @@
 </blockquote>
 <blockquote>
 
-##### <a name="families_items_parents_items_anyOf_i1_additionalProperties_todo_anyOf_i1"></a>3.1.10.2. Property `KinFile > families > Family > parents > items > anyOf > item 1 > Person > todo > anyOf > item 1`
+##### <a name="families_items_parents_items_anyOf_i1_additionalProperties_todo_anyOf_i1"></a>3.1.10.2. Property `item 1`
 
 | Type                      | `array of string`                                                         |
 | ------------------------- | ------------------------------------------------------------------------- |
@@ -999,7 +999,7 @@
 | [items](#families_items_parents_items_anyOf_i1_additionalProperties_todo_anyOf_i1_items) | -           |
 |                                                                                          |             |
 
-##### <a name="families_items_parents_items_anyOf_i1_additionalProperties_todo_anyOf_i1_items"></a>3.1.10.2.1. KinFile > families > Family > parents > items > anyOf > item 1 > Person > todo > anyOf > item 1 > items
+##### <a name="families_items_parents_items_anyOf_i1_additionalProperties_todo_anyOf_i1_items"></a>3.1.10.2.1. items
 
 | Type                      | `string`                                                                  |
 | ------------------------- | ------------------------------------------------------------------------- |
@@ -1014,7 +1014,7 @@
 </details>
 
 <details>
-<summary><strong> <a name="families_items_parents_items_anyOf_i1_additionalProperties_pics"></a>3.1.11. [Optional] Property KinFile > families > Family > parents > items > anyOf > item 1 > Person > pics</strong>  
+<summary><strong> <a name="families_items_parents_items_anyOf_i1_additionalProperties_pics"></a>3.1.11. [Optional] Property pics</strong>  
 
 </summary>
 <blockquote>
@@ -1040,7 +1040,7 @@
 | [items](#families_items_parents_items_anyOf_i1_additionalProperties_pics_items) | -           |
 |                                                                                 |             |
 
-##### <a name="families_items_parents_items_anyOf_i1_additionalProperties_pics_items"></a>3.1.11.1. KinFile > families > Family > parents > items > anyOf > item 1 > Person > pics > items
+##### <a name="families_items_parents_items_anyOf_i1_additionalProperties_pics_items"></a>3.1.11.1. items
 
 | Type                      | `string`                                                                  |
 | ------------------------- | ------------------------------------------------------------------------- |
@@ -1051,7 +1051,7 @@
 </details>
 
 <details>
-<summary><strong> <a name="families_items_parents_items_anyOf_i1_additionalProperties_docs"></a>3.1.12. [Optional] Property KinFile > families > Family > parents > items > anyOf > item 1 > Person > docs</strong>  
+<summary><strong> <a name="families_items_parents_items_anyOf_i1_additionalProperties_docs"></a>3.1.12. [Optional] Property docs</strong>  
 
 </summary>
 <blockquote>
@@ -1077,7 +1077,7 @@
 | [items](#families_items_parents_items_anyOf_i1_additionalProperties_docs_items) | -           |
 |                                                                                 |             |
 
-##### <a name="families_items_parents_items_anyOf_i1_additionalProperties_docs_items"></a>3.1.12.1. KinFile > families > Family > parents > items > anyOf > item 1 > Person > docs > items
+##### <a name="families_items_parents_items_anyOf_i1_additionalProperties_docs_items"></a>3.1.12.1. items
 
 | Type                      | `string`                                                                  |
 | ------------------------- | ------------------------------------------------------------------------- |
@@ -1088,7 +1088,7 @@
 </details>
 
 <details>
-<summary><strong> <a name="families_items_parents_items_anyOf_i1_additionalProperties_links"></a>3.1.13. [Optional] Property KinFile > families > Family > parents > items > anyOf > item 1 > Person > links</strong>  
+<summary><strong> <a name="families_items_parents_items_anyOf_i1_additionalProperties_links"></a>3.1.13. [Optional] Property links</strong>  
 
 </summary>
 <blockquote>
@@ -1114,7 +1114,7 @@
 | [items](#families_items_parents_items_anyOf_i1_additionalProperties_links_items) | -           |
 |                                                                                  |             |
 
-##### <a name="families_items_parents_items_anyOf_i1_additionalProperties_links_items"></a>3.1.13.1. KinFile > families > Family > parents > items > anyOf > item 1 > Person > links > items
+##### <a name="families_items_parents_items_anyOf_i1_additionalProperties_links_items"></a>3.1.13.1. items
 
 | Type                      | `string`                                                                  |
 | ------------------------- | ------------------------------------------------------------------------- |
@@ -1125,7 +1125,7 @@
 </details>
 
 <details>
-<summary><strong> <a name="families_items_parents_items_anyOf_i1_additionalProperties_gender"></a>3.1.14. [Optional] Property KinFile > families > Family > parents > items > anyOf > item 1 > Person > gender</strong>  
+<summary><strong> <a name="families_items_parents_items_anyOf_i1_additionalProperties_gender"></a>3.1.14. [Optional] Property gender</strong>  
 
 </summary>
 <blockquote>
@@ -1141,7 +1141,7 @@
 </details>
 
 <details>
-<summary><strong> <a name="families_items_parents_items_anyOf_i1_additionalProperties_class"></a>3.1.15. [Optional] Property KinFile > families > Family > parents > items > anyOf > item 1 > Person > class</strong>  
+<summary><strong> <a name="families_items_parents_items_anyOf_i1_additionalProperties_class"></a>3.1.15. [Optional] Property class</strong>  
 
 </summary>
 <blockquote>
@@ -1168,7 +1168,7 @@
 | [items](#families_items_parents_items_anyOf_i1_additionalProperties_class_items) | -           |
 |                                                                                  |             |
 
-##### <a name="families_items_parents_items_anyOf_i1_additionalProperties_class_items"></a>3.1.15.1. KinFile > families > Family > parents > items > anyOf > item 1 > Person > class > items
+##### <a name="families_items_parents_items_anyOf_i1_additionalProperties_class_items"></a>3.1.15.1. items
 
 | Type                      | `string`                                                                  |
 | ------------------------- | ------------------------------------------------------------------------- |
@@ -1185,4 +1185,4 @@
 </details>
 
 ----------------------------------------------------------------------------------------------------------------------------
-Generated using [json-schema-for-humans](https://github.com/coveooss/json-schema-for-humans) on 2021-12-29 at 17:47:26 +0100
+Generated using [json-schema-for-humans](https://github.com/coveooss/json-schema-for-humans) on 2021-12-29 at 17:52:25 +0100
