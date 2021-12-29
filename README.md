@@ -40,14 +40,15 @@ nissaga myfamily.yaml svg
 
 ## Input file
 
-The input file follows this [Schema](docs/schema_doc.html)
+The input file follows this [Schema](docs/inputformat.md)
 
 In order to regenerate this documentation
 
 ```bash
 pip install json-schema-for-humans
 cd docs
-generate-schema-doc ../nissaga-schema.json
+nissaga schema json   # generates nissaga-schema.json
+generate-schema-doc ./nissaga-schema.json # generates
 ```
 
 
