@@ -52,7 +52,7 @@ class Family(BaseModel):
 
 Family.update_forward_refs()
  
-class KinFile(BaseModel):
+class Nissaga(BaseModel):
     """Top level element containing the data required to build a family tree"""
     styles: Dict = None
     families: List[Family] = None
@@ -97,10 +97,10 @@ def processFamily(context, people):
         processFamily(family, people)
 
 def schema_json():
-    return KinFile.schema_json(indent=2)
+    return Nissaga.schema_json(indent=2)
 
 def schema_yaml():
-    return ns(KinFile.schema()).dump()
+    return ns(Nissaga.schema()).dump()
 
 
 

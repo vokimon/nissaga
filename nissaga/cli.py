@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from nissaga.models import KinFile, schema_json, schema_yaml
+from nissaga.models import Nissaga, schema_json, schema_yaml
 from nissaga.render import render
 from yamlns import namespace as ns
 from consolemsg import step, error
@@ -28,7 +28,7 @@ def main():
     data = ns.load(inputfile)
 
     step("Validating...")
-    p=KinFile(**data)
+    p=Nissaga(**data)
 
     step("Normalizing...")
     p.normalize()
