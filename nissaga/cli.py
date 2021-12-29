@@ -7,6 +7,8 @@ from consolemsg import step, error
 import graphviz
 from pathlib import Path
 
+supportedFormats = 'pdf svg png jpg'
+
 def main():
     import sys
 
@@ -19,10 +21,7 @@ def main():
         sys.exit(0)
 
     inputfile = Path(sys.argv[1])
-    format='pdf'
-    if len(sys.argv)>2:
-        format=sys.argv[2]
-    outputfile = inputfile.with_suffix('.'+format)
+    formats = [f for f in sys.argv[2:]] or ['pdf']
 
     step("Loading {}...", inputfile)
     data = ns.load(inputfile)
@@ -35,13 +34,25 @@ def main():
 
     #print(ns(p.dict()).dump())
 
+    dotfile = inputfile.with_suffix('.dot')
+
     step("Generating graph...")
     dot = render(p)
-    Path('output.dot').write_text(dot, encoding='utf8')
-    Path('nissaga-schema.json').write_text(schema(), encoding='utf8')
-    Path('nissaga-schema.yaml').write_text(ns(KinFile.schema()).dump(), encoding='utf8')
+    Path(dotfile).write_text(dot, encoding='utf8')
 
-    step("Generating {}...", outputfile)
-    temp = graphviz.Source(dot).render('output', format=format, view=False)
-    Path(temp).rename(outputfile)
+    gv = graphviz.Source(dot)
+    for format in formats:
+        if format == 'dot': continue
+        outputfile = inputfile.with_suffix('.'+format)
+        step("Generating {}...", outputfile)
+        try:
+            temp = gv.render(dotfile, format=format, view=False)
+            Path(temp).rename(outputfile)
+        except graphviz.backend.CalledProcessError as exception:
+            print(dir(exception))
+            error(exception.stderr)
+            error("Intermediate dot file dumped as output.dot")
+    if 'dot' not in formats:
+        dotfile.unlink()
+
 
