@@ -12,18 +12,18 @@ class KinFile_Test(TestCase):
             age: null
             alias: null
             class_: []
-            comment: null
+            comment: []
             died: false
             born: true
-            docs: null
+            docs: []
             from_: null
             fullname: null
             gender: null
-            links: null
+            links: []
             name: null
-            notes: null
-            pics: null
-            todo: null
+            notes: []
+            pics: []
+            todo: []
         """)
 
     def test_Person_overrides(self):
@@ -39,15 +39,15 @@ class KinFile_Test(TestCase):
             comment: A comment
             died: false
             born: true
-            docs: null
+            docs: []
             from_: null
             fullname: Perico Palotes
             gender: null
-            links: null
+            links: []
             name: null
-            notes: null
-            pics: null
-            todo: null
+            notes: []
+            pics: []
+            todo: []
         """)
 
 
