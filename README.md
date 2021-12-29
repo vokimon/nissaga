@@ -7,6 +7,8 @@ from a simple data description in [YAML](https://en.wikipedia.org/wiki/YAML).
 
 <img alt="Example: Modern Family Genealogy" src="examples/modernfamily/modernfamily.png" width=50% />
 
+[Nissaga](https://en.wiktionary.org/wiki/nissaga) is a Catalan word for _lineage_.
+
 ## Installation
 
 ![](https://shields.io/pypi/v/nissaga)
