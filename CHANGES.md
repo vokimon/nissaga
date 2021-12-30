@@ -1,9 +1,6 @@
-# unreleased
+# 0.3.0 2021-12-30
 
 - Better input format documentation
-- Person box is a link to person.link[0] if specified
-- Fix: Person classes styles are now applied
-- Fix: Undetailed persons are warned but properly handled
 - Person box redesigned:
   - Name on top, below surname, smaller and dimmer
   - remove spurious margins
@@ -12,7 +9,10 @@
 - Unions:
   - Bigger family bullet
   - Multiple union data (ie. having both married and divorded dates)
-- `scheme` command to generate schema.
+- Subcommand `scheme` to generate the schema.
+- Fix: Person box is a link to person.link[0] if specified
+- Fix: Person classes styles are now applied
+- Fix: Undetailed persons are warned but properly handled
 
 # 0.2.0 2021-09-23
 

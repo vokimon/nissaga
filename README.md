@@ -48,17 +48,48 @@ nissaga myfamily.yaml svg
 
 ## Input file
 
-The input file follows this [Schema](docs/inputformat.md)
+The input file follows this [Schema](nissaga-schema.json) documented [here](docs/inputformat.md)
 
-In order to regenerate this documentation
+A simple example:
 
-```bash
-pip install json-schema-for-humans
-cd docs
-nissaga schema json   # generates nissaga-schema.json
-generate-schema-doc ./nissaga-schema.json # generates
+```yaml
+people:
+  me:
+    fullname: Alférez Boye, Carmen
+    born: 1988-06-12
+  sis:
+    fullname: Alférez Boye, Diana
+    born: 1985-07-04
+  dad:
+    fullname: Alférez Esquerra, Fran
+    born: 1957-03-23
+  mom:
+    fullname: Boye Gener, Hipatia
+    born: 1951-10-28
+  dadgranpa:
+    fullname: Boye Isidro, Javier
+    born: 1932-07-22
+    died: 2013-03-19
+  dadgranma:
+    fullname: Gener Krahe, Laura
+    born: 1933-02-12
+    died: 2017-09-19
+  momgranpa:
+    fullname: Alférez Miró, Natanael
+    born: 1944-04-15
+  momgranma:
+    fullname: Esquerra Olivera, Pandora
+    born: 1931-01-13
+    died: 2007-05-19
+
+families:
+  - parents: [mom, dad]
+    children: [sis, me] 
+  - parents: [dadgranma, dadgranpa]
+    children: [dad]
+  - parents: [momgranma, momgranpa]
+    children: [mom]
 ```
-
 
 ## Differences with kingraph
 
