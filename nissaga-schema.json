@@ -1,6 +1,6 @@
 {
-  "title": "KinFile",
-  "description": "Represents the data required to build a family tree",
+  "title": "Nissaga",
+  "description": "Top level element containing the data required to build a family tree",
   "type": "object",
   "properties": {
     "styles": {
@@ -32,14 +32,22 @@
       "properties": {
         "fullname": {
           "title": "Fullname",
+          "description": "Surnames are placed first, followed by a comma and then the first name. If no comma, it is just considered the first name",
           "type": "string"
         },
         "name": {
           "title": "Name",
+          "description": "TODO: Explain difference between id, name, fullname and alias. ",
+          "type": "string"
+        },
+        "alias": {
+          "title": "Alias",
+          "description": "TODO: Explain difference between id, name, fullname and alias. ",
           "type": "string"
         },
         "born": {
           "title": "Born",
+          "description": "Date of birth or false to indicate stillborn, or true to indicate unknown date or a year or a string annotation.",
           "default": true,
           "anyOf": [
             {
@@ -59,6 +67,7 @@
         },
         "died": {
           "title": "Died",
+          "description": "Date of death of true to indicate dead but unknown date or a year or a string annotation.",
           "default": false,
           "anyOf": [
             {
@@ -78,10 +87,18 @@
         },
         "age": {
           "title": "Age",
+          "description": "Age at death, instead of `died`. Just for the record, not shown. Sometimes is the only information available in gravestones.",
           "type": "integer"
+        },
+        "from": {
+          "title": "From",
+          "description": "Place of origin. Just for the record, not shown.",
+          "type": "string"
         },
         "comment": {
           "title": "Comment",
+          "description": "Any comments regarding the person information gathering. Just for the record, not shown.",
+          "default": [],
           "anyOf": [
             {
               "type": "string"
@@ -96,18 +113,24 @@
         },
         "notes": {
           "title": "Notes",
-          "type": "string"
-        },
-        "alias": {
-          "title": "Alias",
-          "type": "string"
-        },
-        "from": {
-          "title": "From",
-          "type": "string"
+          "description": "Any comments regardin the person.Just for the record, not shown.",
+          "default": [],
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          ]
         },
         "todo": {
           "title": "Todo",
+          "description": "A list of pending tasks about the person information gathering. Just for the record, not shown.",
+          "default": [],
           "anyOf": [
             {
               "type": "string"
@@ -122,6 +145,8 @@
         },
         "pics": {
           "title": "Pics",
+          "description": "A list of image files containing pictures of the person. The first one is used as avatar and it should have an almost squared aspect ratio.",
+          "default": [],
           "type": "array",
           "items": {
             "type": "string"
@@ -129,6 +154,8 @@
         },
         "docs": {
           "title": "Docs",
+          "description": "A list of files serving as documentation of the gathered information.",
+          "default": [],
           "type": "array",
           "items": {
             "type": "string"
@@ -136,17 +163,25 @@
         },
         "links": {
           "title": "Links",
+          "description": "A list of links related to the person. Clicking on the person box will go to the first one.",
+          "default": [],
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 65536,
+            "format": "uri"
           }
         },
         "gender": {
           "title": "Gender",
+          "description": "Not used yet.",
           "type": "string"
         },
         "class": {
           "title": "Class",
+          "description": "Space separated style classes for the person. Specific attributes can be specified for the persons having a given class.",
+          "default": [],
           "type": "array",
           "items": {
             "type": "string"
@@ -162,6 +197,8 @@
       "properties": {
         "parents": {
           "title": "Parents",
+          "description": "Parents of the family. You can use the person's id, or detail the person inline.",
+          "default": [],
           "type": "array",
           "items": {
             "anyOf": [
@@ -179,6 +216,8 @@
         },
         "children": {
           "title": "Children",
+          "description": "Children of the family. You can use the person's id, or detail the person inline.",
+          "default": [],
           "type": "array",
           "items": {
             "anyOf": [
@@ -196,6 +235,7 @@
         },
         "married": {
           "title": "Married",
+          "description": "Date of marriage. False to indicate unmarried couple, or true to indicate unknown date or a year or a string annotation after the marriage symbol.",
           "default": true,
           "anyOf": [
             {
@@ -215,6 +255,7 @@
         },
         "divorced": {
           "title": "Divorced",
+          "description": "Date of divorce. If false, the default, nothing is shown. Set to true to show a divorce symbol. If it is a date, an integer (year) or any other string, will be displayeed after the divorce symbol.",
           "default": false,
           "anyOf": [
             {
@@ -234,14 +275,29 @@
         },
         "house": {
           "title": "House",
+          "description": "House the family belongs to. It is represented by a labeled gray box grouping the persons",
           "type": "string"
         },
         "notes": {
           "title": "Notes",
-          "type": "string"
+          "description": "Any comments regardin the family.Just for the record, not shown.",
+          "default": [],
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          ]
         },
         "docs": {
           "title": "Docs",
+          "description": "A list of files serving as documentation of the gathered information.",
+          "default": [],
           "type": "array",
           "items": {
             "type": "string"
@@ -249,6 +305,7 @@
         },
         "families": {
           "title": "Families",
+          "description": "Subfamilies. They can be defined when children become parents in their own families. Nesting is not mandatory, just to keep data in a tree like structure if you prefer that. You could alternatively define children's families at the same level.",
           "default": [],
           "type": "array",
           "items": {
