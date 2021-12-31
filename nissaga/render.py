@@ -1,5 +1,6 @@
 from yamlns import namespace as ns
 from .styles import applyStyles
+import datetime
 
 familyColors=[
     '#1abc9c',
@@ -17,6 +18,11 @@ def escape(s):
     if type(s)==str:
         return '"'+s+'"'
     return s
+
+def formatdate(date):
+    if not isinstance(date, datetime.date):
+        return date
+    return f"{date:%Y-%m-%d}"
 
 def low(lines):
     "Reduces a level of sublisting"
@@ -87,15 +93,17 @@ def renderFamily(root, house, family, path):
 
         union = f'union_{id}'
         state = []
-        if family.married is False:
+        married = formatdate(family.married)
+        if married is False:
             state.append('⚯')
-        elif family.married is not True:
-            state.append(f'⚭ {family.married}')
+        elif married is not True:
+            state.append(f'⚭ {married}')
 
-        if family.divorced is True:
+        divorced = formatdate(family.divorced)
+        if divorced is True:
             state.append('⚮')
-        elif family.divorced is not False:
-            state.append(f'⚮ {family.divorced}')
+        elif divorced is not False:
+            state.append(f'⚮ {divorced}')
 
         state = '\n'.join(state)
 
@@ -200,13 +208,13 @@ def renderPerson(root, person, path):
     href = person.links and person.links[0]
     pic = person.pics and person.pics[0]
 
-    born = person.born
+    born = formatdate(person.born)
     if born is False: born='†*' # stillborn
     elif born is None: born = '' # just as True, the default
     elif born is True: born = '' # born
     else: born = f"* {born}"
 
-    died = person.died
+    died = formatdate(person.died)
     if died is None: died = '' # Not specified
     elif died is False: died = '' # Explicit alive
     elif died is True: died = "†" # Dead but no date
