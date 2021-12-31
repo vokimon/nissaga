@@ -130,7 +130,6 @@ def renderFamily(root, house, family, path):
         return [
           f'union_{id} -> siblings_{id} [',
             applyStyles(root,
-                ':parent-link',
                 ':parent-child-link', 
                 pre=dict(
                     color=familyColor
