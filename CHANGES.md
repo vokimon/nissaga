@@ -1,4 +1,4 @@
-# 0.3.0 2021-12-30
+# 0.3.0 2021-12-31
 
 - Better input format documentation
 - Person box redesigned:
@@ -8,11 +8,14 @@
   - Stillborn symbol when `born: false`
 - Unions:
   - Bigger family bullet
-  - Multiple union data (ie. having both married and divorded dates)
+  - Children node is a small turned triangle
+  - Married and divorded dates are not exclusively displayed
+  - Less chaotic children links
 - Subcommand `scheme` to generate the schema.
 - Fix: Person box is a link to person.link[0] if specified
 - Fix: Person classes styles are now applied
 - Fix: Undetailed persons are warned but properly handled
+- Some test coverage added
 
 # 0.2.0 2021-09-23
 
