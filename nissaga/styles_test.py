@@ -1,5 +1,5 @@
 import unittest
-from .styles import renderStyle, combineStyles
+from .styles import renderStyle, combineStyles, applyStyles
 from .models import Nissaga
 from yamlns import namespace as ns
 
@@ -105,9 +105,11 @@ class Styles_Test(unittest.TestCase):
             class1:
               preattribute1: class1value
               postattribute1: class1value
+              class1attribute: class1value
             class2:
               preattribute2: class2value
               postattribute2: class2value
+              class2attribute: class2value
             
         """)
         result = combineStyles(tree,
@@ -122,10 +124,48 @@ class Styles_Test(unittest.TestCase):
             ),
         )
         self.assertNsEqual(result, """\
-          preattribute1: class1value # set by class
-          postattribute1: postvalue # set by class but overwritten
-          preattribute2: prevalue # not set by class, pre kept
-          postattribute2: postvalue # not set by class, pre kept
+          preattribute1: class1value # set by class1, overwritting pre
+          postattribute1: postvalue # set by class1 but overwritten
+          class1attribute: class1value # set by class1
+          preattribute2: prevalue # not set by class1, pre kept
+          postattribute2: postvalue # not set by class1, pre kept
+          # class2attribute not set at all
+        """)
+
+    def test_combineStyles_multipleClassApplied(self):
+        tree = self.setupClasses("""
+            class1:
+              preattribute1: class1value
+              postattribute1: class1value
+              class1attribute: class1value
+              commonattribute: class1value
+            class2:
+              preattribute2: class2value
+              postattribute2: class2value
+              class2attribute: class2value
+              commonattribute: class2value
+            
+        """)
+        result = combineStyles(tree,
+            'class1',
+            'class2',
+            pre=ns(
+                preattribute1='prevalue',
+                preattribute2='prevalue',
+            ),
+            post=ns(
+                postattribute1='postvalue',
+                postattribute2='postvalue',
+            ),
+        )
+        self.assertNsEqual(result, """\
+          preattribute1: class1value # set by class1
+          postattribute1: postvalue # set by class1 but overwritten
+          class1attribute: class1value # set by class1
+          commonattribute: class2value # the later class remains
+          preattribute2: class2value # set by class2
+          postattribute2: postvalue # set by class2, but overwritten
+          class2attribute: class2value # set by class2
         """)
 
     def test_combineStyles_defaults(self):
@@ -167,6 +207,30 @@ class Styles_Test(unittest.TestCase):
             ranksep: 0.4           # from default
             splines: polylines     # from post, overwrite
         """)
+
+    def test_applyStyles(self):
+        tree = self.setupClasses("""
+            :digraph:
+              rankdir: TL # overwrites
+              styleattribute: value
+        """)
+        result = applyStyles(tree,
+            ':digraph',
+            pre=ns(
+                preattribute='prevalue', # merged
+                rankdir='caca', # ignored
+            ),
+            post=ns(
+                splines='polylines',
+            ),
+        )
+        self.assertEqual(result, [
+            'preattribute="prevalue"',
+            'rankdir="TL"',
+            'ranksep=0.4',
+            'splines="polylines"',
+            'styleattribute="value"',
+        ])
 
 
 
