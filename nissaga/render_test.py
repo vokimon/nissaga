@@ -1,5 +1,4 @@
 import unittest
-import b2btest
 from .render import indenter, low, render
 from .models import Nissaga
 from yamlns import namespace as ns
