@@ -42,19 +42,20 @@ default_styles = ns.loads("""
     penwidth: 1
     color: 'white'
     label: ''
-    height: 0.1
-    width: 0.12
+    height: 0.11
+    width: 0.11
     fontname: 'Helvetica, Arial, sans-serif'
     fontsize: 9
     fontcolor: '#660000'
 
   ':children':
-    shape: 'box'
+    shape: triangle
+    orientation: 90
     style: 'filled'
     label: ''
-    height: 0.005 # Make it look like a line. Brilliant!
     penwidth: 0
-    width: 0.12
+    height: 0.1
+    width: 0.1
 
   ':parent-link':
     weight: 2 # give priority to be straighter than parent2
@@ -72,6 +73,7 @@ default_styles = ns.loads("""
     arrowhead: 'tee'
     arrowsize: 2
     weight: 2
+    tailport: se
 
   ':child2-link':
     style: 'dashed'
