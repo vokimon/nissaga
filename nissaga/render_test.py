@@ -68,12 +68,62 @@ class Renderer_Test(unittest.TestCase):
         self.maxDiff=None
         self.b2bdatapath = 'b2bdata'
 
+    def personTemplate(self,
+        id="",
+        name="",
+        surname=" ",
+        born="",
+        died="",
+    ):
+        return f"""\
+digraph G {{
+  edge [
+    dir="none"
+    color="#cccccc"
+  ]
+  
+  node [
+    shape="box"
+    style="filled"
+    fontname="Helvetica, Arial, sans-serif"
+    width=0
+    fillcolor="white"
+    color="#cccccc"
+    margin=0
+  ]
+  
+  rankdir="LR"
+  ranksep=0.4
+  splines="ortho"
+  
+  "{id}" [
+    label=<<table align="center" border="0" cellpadding="0" cellspacing="1">
+<tr>
+<td rowspan="3" width="40" height="40" fixedsize="true" bgcolor="#eeeeee"></td>
+
+<td colspan="2">{name}</td>
+</tr>
+<tr>
+<td colspan="2"><font point-size="12" color="#666666">{surname}</font></td>
+</tr>
+<tr>
+<td align="left" width="60"><font point-size="10" color="#aa7777"> {born} </font></td>
+<td align="left" width="60"><font point-size="10" color="#aa7777"> {died} </font></td>
+</tr>
+</table>>
+  ]
+}}"""
+
     def test_render_defaultPerson(self):
         tree = Nissaga(**ns.loads("""
             people:
               Alice: {}
         """))
-        self.assertB2BEqual(render(tree))
+        self.assertEqual(render(tree),
+            self.personTemplate(
+                id="Alice",
+                name="Alice",
+        ))
 
     def test_render_namedPerson(self):
         tree = Nissaga(**ns.loads("""
@@ -81,17 +131,114 @@ class Renderer_Test(unittest.TestCase):
               Alice:
                 fullname: In Chains, Alice
         """))
-        # "In Chains" should be added in the second row
-        self.assertB2BEqual(render(tree))
+        self.assertEqual(render(tree),
+            self.personTemplate(
+                id="Alice",
+                name=" Alice", # TODO: fix strip
+                surname="In Chains",
+        ))
 
     def test_render_bornAtDate(self):
         tree = Nissaga(**ns.loads("""
             people:
               Alice:
-                born: 2021-01-01
+                born: 2021-01-02
         """))
-        # "In Chains" should be added in the second row
-        self.assertB2BEqual(render(tree))
+        self.assertEqual(render(tree),
+            self.personTemplate(
+                id="Alice",
+                name="Alice",
+                born="* 2021-01-02",
+        ))
 
+    def test_render_born_justDefault(self):
+        tree = Nissaga(**ns.loads("""
+            people:
+              Alice:
+                born: true
+        """))
+        self.assertEqual(render(tree),
+            self.personTemplate(
+                id="Alice",
+                name="Alice",
+                born="",
+        ))
 
+    def test_render_unborn(self):
+        tree = Nissaga(**ns.loads("""
+            people:
+              Alice:
+                born: false
+        """))
+        self.assertEqual(render(tree),
+            self.personTemplate(
+                id="Alice",
+                name="Alice",
+                born="†*",
+        ))
+
+    def test_render_bornAnnotation(self):
+        tree = Nissaga(**ns.loads("""
+            people:
+              Alice:
+                born: aprox 1987
+        """))
+        self.assertEqual(render(tree),
+            self.personTemplate(
+                id="Alice",
+                name="Alice",
+                born="* aprox 1987",
+        ))
+
+    def test_render_died(self):
+        tree = Nissaga(**ns.loads("""
+            people:
+              Alice:
+                died: true
+        """))
+        self.assertEqual(render(tree),
+            self.personTemplate(
+                id="Alice",
+                name="Alice",
+                died="†",
+        ))
+
+    def test_render_diedFalse_default(self):
+        tree = Nissaga(**ns.loads("""
+            people:
+              Alice:
+                died: false
+        """))
+        self.assertEqual(render(tree),
+            self.personTemplate(
+                id="Alice",
+                name="Alice",
+                died="",
+        ))
+
+    def test_render_diedAtDate(self):
+        tree = Nissaga(**ns.loads("""
+            people:
+              Alice:
+                died: 1888-04-30
+        """))
+        self.assertEqual(render(tree),
+            self.personTemplate(
+                id="Alice",
+                name="Alice",
+                died="† 1888-04-30",
+        ))
+
+    def test_render_diedAnnotated(self):
+        tree = Nissaga(**ns.loads("""
+            people:
+              Alice:
+                died: aprox 1888
+        """))
+        self.assertEqual(render(tree),
+            self.personTemplate(
+                id="Alice",
+                name="Alice",
+                died="† aprox 1888",
+        ))
 

@@ -1,8 +1,4 @@
-click
 yamlns
 pydantic
 consolemsg
 graphviz
-b2btest
-wavefile
-lxml
