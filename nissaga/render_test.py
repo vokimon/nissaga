@@ -73,7 +73,14 @@ class Renderer_Test(unittest.TestCase):
         surname=" ",
         born="",
         died="",
+        extra="",
+        avatar=None,
     ):
+        if avatar:
+            avatarLine=f'><img src="{avatar}" scale="TRUE"></img'
+        else:
+            avatarLine=f' bgcolor="#eeeeee"'
+
         return f"""\
 digraph G {{
   edge [
@@ -95,11 +102,10 @@ digraph G {{
   ranksep=0.4
   splines="ortho"
   
-  "{id}" [
+  "{id}" [{extra}
     label=<<table align="center" border="0" cellpadding="0" cellspacing="1">
 <tr>
-<td rowspan="3" width="40" height="40" fixedsize="true" bgcolor="#eeeeee"></td>
-
+<td rowspan="3" width="40" height="40" fixedsize="true"{avatarLine}></td>
 <td colspan="2">{name}</td>
 </tr>
 <tr>
@@ -150,7 +156,7 @@ digraph G {{
                 born="* 2021-01-02",
         ))
 
-    def test_render_born_justDefault(self):
+    def test_render_born_asDefault(self):
         tree = Nissaga(**ns.loads("""
             people:
               Alice:
@@ -202,7 +208,7 @@ digraph G {{
                 died="†",
         ))
 
-    def test_render_diedFalse_default(self):
+    def test_render_diedFalse_asDefault(self):
         tree = Nissaga(**ns.loads("""
             people:
               Alice:
@@ -239,5 +245,33 @@ digraph G {{
                 id="Alice",
                 name="Alice",
                 died="† aprox 1888",
+        ))
+
+    def test_render_withLink(self):
+        tree = Nissaga(**ns.loads("""
+            people:
+              Alice:
+                links:
+                - http://google.com
+        """))
+        self.assertEqual(render(tree),
+            self.personTemplate(
+                id="Alice",
+                name="Alice",
+                extra='\n    URL="http://google.com"',
+        ))
+
+    def test_render_withPics(self):
+        tree = Nissaga(**ns.loads("""
+            people:
+              Alice:
+                pics:
+                - avatar.jpg
+        """))
+        self.assertEqual(render(tree),
+            self.personTemplate(
+                id="Alice",
+                name="Alice",
+                avatar='pics/avatar.jpg',
         ))
 

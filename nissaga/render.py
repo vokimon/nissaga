@@ -208,7 +208,7 @@ def renderPerson(root, person, path):
     pic = person.pics and person.pics[0]
 
     born = formatdate(person.born)
-    if born is False: born='†*' # stillborn
+    if born is False: born = '†*' # stillborn
     elif born is None: born = '' # just as True, the default
     elif born is True: born = '' # born
     else: born = f"* {born}"
@@ -228,7 +228,7 @@ def renderPerson(root, person, path):
       (
           f'<td rowspan="3" width="{picsize[0]}" height="{picsize[1]}" fixedsize="true"><img src="pics/{pic}" scale="TRUE"></img></td>'
           if pic else
-          f'<td rowspan="3" width="{picsize[0]}" height="{picsize[1]}" fixedsize="true" bgcolor="#eeeeee"></td>\n'
+          f'<td rowspan="3" width="{picsize[0]}" height="{picsize[1]}" fixedsize="true" bgcolor="#eeeeee"></td>'
       ),
       f'<td colspan="2">{firstname}</td>',
       "</tr>",
@@ -241,7 +241,7 @@ def renderPerson(root, person, path):
       '</tr>',
       '</table>',
     ])
-    link = [f'URL="{person.links[0]}"'] if person.links else []
+    link = f'URL="{person.links[0]}"' if person.links else []
     return [
         f'{escape(id)} [', [
             link,
