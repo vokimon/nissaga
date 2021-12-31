@@ -208,15 +208,15 @@ def renderPerson(root, person, path):
     pic = person.pics and person.pics[0]
 
     born = formatdate(person.born)
-    if born is False: born = '†*' # stillborn
+    if born is False or born == 0: born = '†*' # stillborn
     elif born is None: born = '' # just as True, the default
-    elif born is True: born = '' # born
+    elif born is True or born == 1: born = '' # born
     else: born = f"* {born}"
 
     died = formatdate(person.died)
     if died is None: died = '' # Not specified
-    elif died is False: died = '' # Explicit alive
-    elif died is True: died = "†" # Dead but no date
+    elif died is False or died == 0: died = '' # Explicit alive
+    elif died is True or died == 1: died = "†" # Dead but no date
     else: died = f"† {died}"
 
     name = person and person.fullname or person.name or id
