@@ -1,6 +1,6 @@
 # Nissaga, genealogy tree generator
 
-![CI](https://img.shields.io/github/workflow/status/vokimon/nissaga/CI/master?style=flat-square)
+[![CI](https://github.com/vokimon/nissaga/actions/workflows/main.yml/badge.svg)](https://github.com/vokimon/nissaga/actions/workflows/main.yml)
 [![Coverage](https://img.shields.io/coveralls/vokimon/nissaga/master.svg?style=flat-square&label=Coverage)](https://coveralls.io/r/vokimon/nissaga)
 [![PyPi](https://img.shields.io/pypi/v/nissaga.svg?style=flat-square&label=PyPI)](https://pypi.org/project/nissaga/)
 [![license: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
