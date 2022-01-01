@@ -6,18 +6,16 @@
 [![license: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 [![downloads](https://img.shields.io/pypi/dm/nissaga.svg?style=flat-square&label=PyPI%20Downloads)](https://pypi.org/project/nissaga/)
 
-## About
-
-Nissaga can be used to generate Genealogy trees
+Nissaga is a tool to generate genealogy trees
 from a simple data description in [YAML](https://en.wikipedia.org/wiki/YAML).
+
+It is an extended rewrite in Python of the JavaScript tool [kingraph].
+'Nissaga' is [a catalan word meaning _lineage_](https://en.wiktionary.org/wiki/nissaga). 
 
 <img alt="Example: Modern Family Genealogy" src="examples/modernfamily/modernfamily.png" width=50% />
 
-[Nissaga](https://en.wiktionary.org/wiki/nissaga) is a Catalan word for _lineage_.
 
 ## Installation
-
-![](https://shields.io/pypi/v/nissaga)
 
 ```bash
 pip install nissaga
