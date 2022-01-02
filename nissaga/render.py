@@ -93,16 +93,19 @@ def renderFamily(root, house, family, path):
 
         union = f'union_{id}'
         state = []
+
+        # TODO: Pydantic in python 3.6 turns bools into ints
         married = formatdate(family.married)
         if married is False or married == 0:
             state.append('⚯')
         elif married is not True and married != 1:
             state.append(f'⚭ {married}')
 
+        # TODO: Pydantic in python 3.6 turns bools into ints
         divorced = formatdate(family.divorced)
-        if divorced is True:
+        if divorced is True or divorced == 1:
             state.append('⚮')
-        elif divorced is not False:
+        elif divorced is not False and divorced != 0:
             state.append(f'⚮ {divorced}')
 
         state = '\n'.join(state)
@@ -197,12 +200,14 @@ def renderPerson(root, person, path):
     href = person.links and person.links[0]
     pic = person.pics and person.pics[0]
 
+    # TODO: Pydantic in python 3.6 turns bools into ints
     born = formatdate(person.born)
     if born is False or born == 0: born = '†*' # stillborn
     elif born is None: born = '' # just as True, the default
     elif born is True or born == 1: born = '' # born
     else: born = f"* {born}"
 
+    # TODO: Pydantic in python 3.6 turns bools into ints
     died = formatdate(person.died)
     if died is None: died = '' # Not specified
     elif died is False or died == 0: died = '' # Explicit alive
