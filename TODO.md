@@ -18,6 +18,9 @@
 - [ ] Config: dateformat: date format to display, defaut ISO-8601 ("%Y-%m-%d", resulting in YYYY-MM-DD)
 - [ ] Config: avatarsize: tuple (width, height) in pixels in which to embed the avatar picture
 - [ ] Config: persontemplate: being able to personalize
+- [ ] Config: picdir: prefix to the pics
+- [ ] Config: docdir: prefix to the docs
+- [ ] CLI documentation: typer nissaga.cli utils docs --output cli.md
 
 # Done
 

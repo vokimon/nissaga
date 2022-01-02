@@ -71,6 +71,8 @@ def draw(
             error("Intermediate dot file dumped as output.dot")
     if 'dot' not in formats:
         dotfile.unlink()
+    else:
+        step("Generating {}...", dotfile)
 
 
 @app.command("schema")

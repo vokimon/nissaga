@@ -130,16 +130,16 @@ class Cli_Test(unittest.TestCase):
             result = self.runner.invoke(app, [
                 'draw',
                 'alice.yaml',
-                'svg',
+                'dot',
             ])
             self.assertEqual(result.output, (
                 "\x1b[34;1m:: Validating...\x1b[0m\n"
                 "\x1b[34;1m:: Normalizing...\x1b[0m\n"
                 "\x1b[34;1m:: Generating graph...\x1b[0m\n"
-                "\x1b[34;1m:: Generating alice.svg...\x1b[0m\n"
+                "\x1b[34;1m:: Generating alice.dot...\x1b[0m\n"
                 ))
             self.assertFiles([
-                'alice.svg',
+                'alice.dot',
                 'alice.yaml',
             ])
             self.assertEqual(result.exit_code, 0)
