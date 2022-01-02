@@ -13,10 +13,11 @@
 - [x] Coverage: divorced at date
 - [x] Coverage: combine divorced and married
 - [x] Remove unused renderKidsLinks
-- [ ] Coverage: born None
-- [ ] Coverage: died None
-- [ ] Coverage: house
+- [ ] Coverage: born: None
+- [ ] Coverage: died: None
+- [x] Coverage: house
 - [ ] Coverage: subfamily
+- [ ] Coverage: subhouse
 - [ ] Coverage: escape without quotes
 - [x] Redundant: RenderKids when no kids
 - [ ] Configuration framework

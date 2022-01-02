@@ -286,7 +286,7 @@ digraph G {{
             families:
               - parents: [ Alice ]
         """))
-        self.assertEqual(renderFamily(tree, None, tree.families[0], [666] ), [
+        self.assertEqual(renderFamily(tree, None, tree.families[0], ['666'] ), [
             'subgraph cluster_family_666 {',
             [
                 'label=""',
@@ -324,12 +324,68 @@ digraph G {{
             ''
         ])
 
+    def test_renderFamily_house(self):
+        tree = Nissaga(**ns.loads("""
+            families:
+              - parents: [ Alice ]
+                house: My House
+        """))
+        self.assertEqual(renderFamily(tree, None, tree.families[0], ['666'] ), [
+            'subgraph cluster_family_666 {',
+            [
+                'label=""',
+                'style="invis"',
+                'margin=0',
+                '',
+                '############################################################################',
+                '# House 666 - My House',
+                '############################################################################',
+                '',
+                'label=<<b>My House</b>>',
+                'style="filled"',
+                'color="#f4f4f4"',
+                'labeljust="l"',
+                'fontname="Helvetica, Arial, sans-serif"',
+                'fontsize=16',
+                'margin=10',
+                '',
+                '# Family [Alice] -> [none]',
+                '# '
+                '--------------------------------------------------------------------------',
+                '',
+                'union_666 [',
+                [
+                    'fillcolor="#3498db"',
+                    'shape="circle"',
+                    'style="filled"',
+                    'penwidth=1',
+                    'color="white"',
+                    'label=""',
+                    'height=0.11',
+                    'width=0.11',
+                    'fontname="Helvetica, Arial, sans-serif"',
+                    'fontsize=9',
+                    'fontcolor="#660000"'
+                ],
+                ']',
+                '',
+                '{"Alice"} -> union_666 [',
+                [
+                    'color="#3498db"', 'weight=2'
+                ],
+                ']',
+                '# No children'
+            ],
+            '}',
+            ''
+        ])
+
     def test_renderFamily_manyParent(self):
         tree = Nissaga(**ns.loads("""
             families:
               - parents: [ Alice, Barbara ]
         """))
-        self.assertEqual(renderFamily(tree, None, tree.families[0], [666] ), [
+        self.assertEqual(renderFamily(tree, None, tree.families[0], ['666'] ), [
             'subgraph cluster_family_666 {',
             [
                 'label=""',
@@ -374,7 +430,7 @@ digraph G {{
                 married: 2022-01-02
 
         """))
-        self.assertEqual(renderFamily(tree, None, tree.families[0], [666] ), [
+        self.assertEqual(renderFamily(tree, None, tree.families[0], ['666'] ), [
             'subgraph cluster_family_666 {',
             [
                 'label=""',
@@ -420,7 +476,7 @@ digraph G {{
                 married: false
 
         """))
-        self.assertEqual(renderFamily(tree, None, tree.families[0], [666] ), [
+        self.assertEqual(renderFamily(tree, None, tree.families[0], ['666'] ), [
             'subgraph cluster_family_666 {',
             [
                 'label=""',
@@ -466,7 +522,7 @@ digraph G {{
                 divorced: 2022-01-02
 
         """))
-        self.assertEqual(renderFamily(tree, None, tree.families[0], [666] ), [
+        self.assertEqual(renderFamily(tree, None, tree.families[0], ['666'] ), [
             'subgraph cluster_family_666 {',
             [
                 'label=""',
@@ -512,7 +568,7 @@ digraph G {{
                 divorced: true
 
         """))
-        self.assertEqual(renderFamily(tree, None, tree.families[0], [666] ), [
+        self.assertEqual(renderFamily(tree, None, tree.families[0], ['666'] ), [
             'subgraph cluster_family_666 {',
             [
                 'label=""',
@@ -559,7 +615,7 @@ digraph G {{
                 divorced: 2022-01-02
 
         """))
-        self.assertEqual(renderFamily(tree, None, tree.families[0], [666] ), [
+        self.assertEqual(renderFamily(tree, None, tree.families[0], ['666'] ), [
             'subgraph cluster_family_666 {',
             [
                 'label=""',
@@ -603,7 +659,7 @@ digraph G {{
             families:
               - children: [ Alice ]
         """))
-        self.assertEqual(renderFamily(tree, None, tree.families[0], [666] ), [
+        self.assertEqual(renderFamily(tree, None, tree.families[0], ['666'] ), [
             'subgraph cluster_family_666 {',
             [
                 'label=""',
@@ -647,7 +703,7 @@ digraph G {{
             families:
               - children: [ Alice, Barbara ]
         """))
-        self.assertEqual(renderFamily(tree, None, tree.families[0], [666] ), [
+        self.assertEqual(renderFamily(tree, None, tree.families[0], ['666'] ), [
             'subgraph cluster_family_666 {',
             [
                 'label=""',
@@ -693,7 +749,7 @@ digraph G {{
               - parents: [ Alice, Barbara ]
                 children: [ Carol, Diane ]
         """))
-        self.assertEqual(renderFamily(tree, None, tree.families[0], [666] ), [
+        self.assertEqual(renderFamily(tree, None, tree.families[0], ['666'] ), [
             'subgraph cluster_family_666 {',
             [
                 'label=""',
