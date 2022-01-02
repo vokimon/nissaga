@@ -1,5 +1,10 @@
 import unittest
-from .render import indenter, low, render
+from .render import (
+    indenter,
+    low,
+    render,
+    renderFamily,
+)
 from .models import Nissaga
 from yamlns import namespace as ns
 
@@ -274,4 +279,140 @@ digraph G {{
                 name="Alice",
                 avatar='pics/avatar.jpg',
         ))
+
+
+    def test_renderFamily_singleParent(self):
+        tree = Nissaga(**ns.loads("""
+            families:
+              - parents: [ Alice ]
+        """))
+        self.assertEqual(renderFamily(tree, None, tree.families[0], [666] ), [
+            'subgraph cluster_family_666 {',
+            [
+                'label=""',
+                'style="invis"',
+                'margin=0',
+                '',
+                '# Family [Alice] -> [none]',
+                '# '
+                '--------------------------------------------------------------------------',
+                '',
+                'union_666 [',
+                [],
+                [
+                    'fillcolor="#3498db"',
+                    'shape="circle"',
+                    'style="filled"',
+                    'penwidth=1',
+                    'color="white"',
+                    'label=""',
+                    'height=0.11',
+                    'width=0.11',
+                    'fontname="Helvetica, Arial, sans-serif"',
+                    'fontsize=9',
+                    'fontcolor="#660000"'
+                ],
+                ']',
+                '',
+                '{"Alice"} -> union_666 [',
+                [
+                    'color="#3498db"', 'weight=2'
+                ],
+                ']',
+                '# No children'
+            ],
+            '}',
+            ''
+        ])
+
+    def test_renderFamily_manyParent(self):
+        tree = Nissaga(**ns.loads("""
+            families:
+              - parents: [ Alice, Barbara ]
+        """))
+        self.assertEqual(renderFamily(tree, None, tree.families[0], [666] ), [
+            'subgraph cluster_family_666 {',
+            [
+                'label=""',
+                'style="invis"',
+                'margin=0',
+                '',
+                '# Family [Alice, Barbara] -> [none]',
+                '# '
+                '--------------------------------------------------------------------------',
+                '',
+                'union_666 [',
+                [],
+                [
+                    'fillcolor="#3498db"',
+                    'shape="circle"',
+                    'style="filled"',
+                    'penwidth=1',
+                    'color="white"',
+                    'label=""',
+                    'height=0.11',
+                    'width=0.11',
+                    'fontname="Helvetica, Arial, sans-serif"',
+                    'fontsize=9',
+                    'fontcolor="#660000"'
+                ],
+                ']',
+                '',
+                '{"Alice", "Barbara"} -> union_666 [',
+                [
+                    'color="#3498db"', 'weight=2'
+                ],
+                ']',
+                '# No children'
+            ],
+            '}',
+            ''
+        ])
+
+
+    def test_renderFamily_singleChild(self):
+        tree = Nissaga(**ns.loads("""
+            families:
+              - children: [ Alice ]
+        """))
+        self.assertEqual(renderFamily(tree, None, tree.families[0], [666] ), [
+            'subgraph cluster_family_666 {',
+            [
+                'label=""',
+                 'style="invis"',
+                 'margin=0',
+                 '',
+                 '# Family [none] -> [Alice]',
+                 '# '
+                 '--------------------------------------------------------------------------',
+                 '',
+                 '# No parents',
+                 'siblings_666 [',
+                 [
+                     'fillcolor="#3498db"',
+                      'shape="triangle"',
+                      'orientation=90',
+                      'style="filled"',
+                      'label=""',
+                      'penwidth=0',
+                      'height=0.1',
+                      'width=0.1'
+                ],
+                ']',
+                'siblings_666 -> {"Alice"} [',
+                [
+                    'color="#3498db"',
+                    'dir="forward"',
+                    'arrowhead="tee"',
+                    'arrowsize=2',
+                    'weight=2',
+                    'tailport="se"'
+                ],
+                ']'
+            ],
+            '}',
+            ''
+
+        ])
+
 
