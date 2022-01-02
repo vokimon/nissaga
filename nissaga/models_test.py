@@ -1,9 +1,9 @@
-from unittest import TestCase
+import unittest
 from . import models
 from yamlns import namespace as ns
 from capturer import CaptureOutput
 
-class Nissaga_Test(TestCase):
+class Nissaga_Test(unittest.TestCase):
 
     from yamlns.testutils import assertNsEqual
 
@@ -26,6 +26,7 @@ class Nissaga_Test(TestCase):
         ))
 
     def basePerson(self, **kwds):
+        """Single place to change the Person dict default expectation"""
         base = ns.loads("""\
             name: null
             age: null
@@ -47,6 +48,7 @@ class Nissaga_Test(TestCase):
         return base
 
     def baseFamily(self, **kwds):
+        """Single place to change the Family dict default expectation"""
         base = ns.loads("""\
             parents: []
             children: []
@@ -61,6 +63,7 @@ class Nissaga_Test(TestCase):
         return base
 
     def baseNissaga(self, **kwds):
+        """Single place to change the Nissaga dict default expectation"""
         base = ns.loads("""\
             families: []
             people: {}
@@ -214,6 +217,49 @@ class Nissaga_Test(TestCase):
         """,
         [
             "\x1b[33mWarning: Person childid specified twice\x1b[0m"
+        ])
+
+
+    def test_normalize_duppedDetailsInline_warned(self):
+        self.assertNormalize(
+        """
+            families:
+            - children:
+              - personId:
+                  name: Inline Children
+            - parents:
+              - personId:
+                  name: Inlined Parent
+        """,
+        """\
+            families:
+            - children: [personId]
+            - parents: [personId]
+            people:
+              personId:
+                name: Inlined Parent # TODO: Should it be the not inline one?
+        """,
+        [
+            "\x1b[33mWarning: Person personId specified twice\x1b[0m",
+        ])
+
+    @unittest.skip("The warning is still not implemented")
+    def test_normalize_unrelated_warns(self):
+        self.assertNormalize(
+        """
+            families: []
+            people:
+              unrelated:
+                name: Unrelated Name
+        """,
+        """\
+            families: []
+            people:
+              unrelated:
+                name: Unrelated Name
+        """,
+        [
+            "\x1b[33mWarning: Person personId is unrelated\x1b[0m",
         ])
 
 
