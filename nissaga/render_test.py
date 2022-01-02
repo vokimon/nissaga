@@ -367,6 +367,52 @@ digraph G {{
             ''
         ])
 
+    def test_renderFamily_marriedAtDate(self):
+        tree = Nissaga(**ns.loads("""
+            families:
+              - parents: [ Alice, Barbara ]
+                married: 2022-01-02
+
+        """))
+        self.assertEqual(renderFamily(tree, None, tree.families[0], [666] ), [
+            'subgraph cluster_family_666 {',
+            [
+                'label=""',
+                'style="invis"',
+                'margin=0',
+                '',
+                '# Family [Alice, Barbara] -> [none]',
+                '# '
+                '--------------------------------------------------------------------------',
+                '',
+                'union_666 [',
+                [
+                    'xlabel="⚭ 2022-01-02"', # this is new
+                    'fillcolor="#3498db"',
+                    'shape="circle"',
+                    'style="filled"',
+                    'penwidth=1',
+                    'color="white"',
+                    'label=""',
+                    'height=0.11',
+                    'width=0.11',
+                    'fontname="Helvetica, Arial, sans-serif"',
+                    'fontsize=9',
+                    'fontcolor="#660000"'
+                ],
+                ']',
+                '',
+                '{"Alice", "Barbara"} -> union_666 [',
+                [
+                    'color="#3498db"', 'weight=2'
+                ],
+                ']',
+                '# No children'
+            ],
+            '}',
+            ''
+        ])
+
     def test_renderFamily_unmarried(self):
         tree = Nissaga(**ns.loads("""
             families:
@@ -386,8 +432,8 @@ digraph G {{
                 '--------------------------------------------------------------------------',
                 '',
                 'union_666 [',
-                'xlabel="⚯"', # this is new
                 [
+                    'xlabel="⚯"', # this is new
                     'fillcolor="#3498db"',
                     'shape="circle"',
                     'style="filled"',
@@ -422,24 +468,24 @@ digraph G {{
             'subgraph cluster_family_666 {',
             [
                 'label=""',
-                 'style="invis"',
-                 'margin=0',
-                 '',
-                 '# Family [none] -> [Alice]',
-                 '# '
-                 '--------------------------------------------------------------------------',
-                 '',
-                 '# No parents',
-                 'siblings_666 [',
-                 [
-                     'fillcolor="#3498db"',
-                      'shape="triangle"',
-                      'orientation=90',
-                      'style="filled"',
-                      'label=""',
-                      'penwidth=0',
-                      'height=0.1',
-                      'width=0.1'
+                'style="invis"',
+                'margin=0',
+                '',
+                '# Family [none] -> [Alice]',
+                '# '
+                '--------------------------------------------------------------------------',
+                '',
+                '# No parents',
+                'siblings_666 [',
+                [
+                    'fillcolor="#3498db"',
+                    'shape="triangle"',
+                    'orientation=90',
+                    'style="filled"',
+                    'label=""',
+                    'penwidth=0',
+                    'height=0.1',
+                    'width=0.1'
                 ],
                 ']',
                 'siblings_666 -> {"Alice"} [',
@@ -466,24 +512,24 @@ digraph G {{
             'subgraph cluster_family_666 {',
             [
                 'label=""',
-                 'style="invis"',
-                 'margin=0',
-                 '',
-                 '# Family [none] -> [Alice, Barbara]',
-                 '# '
-                 '--------------------------------------------------------------------------',
-                 '',
-                 '# No parents',
-                 'siblings_666 [',
-                 [
-                     'fillcolor="#3498db"',
-                      'shape="triangle"',
-                      'orientation=90',
-                      'style="filled"',
-                      'label=""',
-                      'penwidth=0',
-                      'height=0.1',
-                      'width=0.1'
+                'style="invis"',
+                'margin=0',
+                '',
+                '# Family [none] -> [Alice, Barbara]',
+                '# '
+                '--------------------------------------------------------------------------',
+                '',
+                '# No parents',
+                'siblings_666 [',
+                [
+                    'fillcolor="#3498db"',
+                    'shape="triangle"',
+                    'orientation=90',
+                    'style="filled"',
+                    'label=""',
+                    'penwidth=0',
+                    'height=0.1',
+                    'width=0.1'
                 ],
                 ']',
                 'siblings_666 -> {"Alice", "Barbara"} [',

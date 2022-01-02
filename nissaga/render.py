@@ -108,13 +108,12 @@ def renderFamily(root, house, family, path):
         state = '\n'.join(state)
 
         return [
-            f'{union} [',
-        ] + (
-            [ f'xlabel="{state}"' ] if state else []
-        ) + [
-            applyStyles(root, ':union', pre=dict(
-                fillcolor=familyColor,
-            )),
+            f'{union} [', (
+                ([ f'xlabel="{state}"' ] if state else []) +
+                applyStyles(root, ':union', pre=dict(
+                    fillcolor=familyColor,
+                ))
+            ),
             ']',
             '',
         ] + ([
