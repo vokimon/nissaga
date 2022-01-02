@@ -109,7 +109,9 @@ def renderFamily(root, house, family, path):
 
         return [
             f'{union} [',
-            f'xlabel="{state}"' if state else [],
+        ] + (
+            [ f'xlabel="{state}"' ] if state else []
+        ) + [
             applyStyles(root, ':union', pre=dict(
                 fillcolor=familyColor,
             )),
@@ -155,15 +157,6 @@ def renderFamily(root, house, family, path):
             ']',
         ]
 
-    # TODO: Unused
-    def renderKidLinks(family, id):
-        return [
-            '',
-            f'{" -> ".join([escape(p) for p in family.children])} [',
-            applyStyles(root, ':child-link', pre=dict(style='invis')),
-            ']'
-        ]
-
     familyColor = familyColors[ int(path[-1]) % len(familyColors) ]
     slug='_'.join(str(p) for p in path)
     jointparents = ', '.join([p for p in family.parents or [] if p]) or "none"
@@ -183,9 +176,7 @@ def renderFamily(root, house, family, path):
             renderParents(family, slug) +
             renderLink(family, slug) +
             renderKids(family, slug) +
-            #(renderKidLinks(family, slug) if len(family.children)>1 else []) +
-            [
-            ],
+            [],
         '}',
         '',
     ]
