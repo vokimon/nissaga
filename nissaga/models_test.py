@@ -98,7 +98,13 @@ class Nissaga_Test(TestCase):
         base.update(**kwds)
         return base
 
-    def assertNormalizedNissaga(self, nissaga, expected):
+    def assertNormalize(self, input, expected, expected_warnings=[]):
+        nissaga = models.Nissaga(**ns.loads(input))
+
+        with CaptureOutput() as errorlog:
+            nissaga.normalize()
+            warnings =  errorlog.get_lines()
+
         data = ns.loads(expected)
         self.assertNsEqual(
             ns(nissaga.dict()),
@@ -113,20 +119,19 @@ class Nissaga_Test(TestCase):
                 )),
             )
         )
+        self.assertEqual(warnings, expected_warnings)
 
     def test_normalize_parentByName_kept(self):
-        data = ns.loads("""
+        self.assertNormalize(
+        """
             families:
             - parents:
               - parentid
             people:
               parentid:
                 name: Parent Name
-        """)
-        n = models.Nissaga(**data)
-        n.normalize()
-
-        self.assertNormalizedNissaga(n, """\
+        """,
+        """\
             families:
             - parents: [parentid]
             people:
@@ -135,18 +140,16 @@ class Nissaga_Test(TestCase):
         """)
 
     def test_normalize_childByName_kept(self):
-        data = ns.loads("""
+        self.assertNormalize(
+        """
             families:
             - children:
               - childid
             people:
               childid:
                 name: Child Name
-        """)
-        n = models.Nissaga(**data)
-        n.normalize()
-
-        self.assertNormalizedNissaga(n, """\
+        """,
+        """\
             families:
             - children: [childid]
             people:
@@ -155,16 +158,14 @@ class Nissaga_Test(TestCase):
         """)
 
     def test_normalize_inlineParent_moved(self):
-        data = ns.loads("""
+        self.assertNormalize(
+        """
             families:
             - parents:
               - parentid:
                   name: Parent Name
-        """)
-        n = models.Nissaga(**data)
-        n.normalize()
-
-        self.assertNormalizedNissaga(n, """\
+        """,
+        """
             families:
             - parents: [parentid]
             people:
@@ -173,36 +174,31 @@ class Nissaga_Test(TestCase):
         """)
 
     def test_normalize_undetailedParent_filledAndWarned(self):
-        data = ns.loads("""
+        self.assertNormalize(
+        """
             families:
             - parents:
               - parentid
-        """)
-        n = models.Nissaga(**data)
-
-        with CaptureOutput() as errorlog:
-            n.normalize()
-            self.assertEqual(errorlog.get_lines(), [
-                "\x1b[33mWarning: Person parentid not detailed\x1b[0m"
-            ])
-
-        self.assertNormalizedNissaga(n, """\
+        """,
+        """\
             families:
             - parents: [parentid]
             people:
               parentid: {}
-        """)
+        """,
+        [
+            "\x1b[33mWarning: Person parentid not detailed\x1b[0m"
+        ])
+
     def test_normalize_inlineChild_moved(self):
-        data = ns.loads("""
+        self.assertNormalize(
+        """
             families:
             - children:
               - childid:
                   name: Child Name
-        """)
-        n = models.Nissaga(**data)
-        n.normalize()
-
-        self.assertNormalizedNissaga(n, """\
+        """,
+        """
             families:
             - children: [childid]
             people:
@@ -211,28 +207,25 @@ class Nissaga_Test(TestCase):
         """)
 
     def test_normalize_undetailedChild_filledAndWarned(self):
-        data = ns.loads("""
+        self.assertNormalize(
+        """
             families:
             - children:
               - childid
-        """)
-        n = models.Nissaga(**data)
-
-        with CaptureOutput() as errorlog:
-            n.normalize()
-            self.assertEqual(errorlog.get_lines(), [
-                "\x1b[33mWarning: Person childid not detailed\x1b[0m"
-            ])
-
-        self.assertNormalizedNissaga(n, """\
+        """,
+        """
             families:
             - children: [childid]
             people:
               childid: {}
-        """)
+        """,
+        [
+            "\x1b[33mWarning: Person childid not detailed\x1b[0m"
+        ])
 
     def test_normalize_duppedDetails_warned(self):
-        data = ns.loads("""
+        self.assertNormalize(
+        """
             families:
             - children:
               - childid:
@@ -240,22 +233,17 @@ class Nissaga_Test(TestCase):
             people:
               childid:
                 name: Name
-        """)
-        n = models.Nissaga(**data)
-
-        with CaptureOutput() as errorlog:
-            n.normalize()
-            self.assertEqual(errorlog.get_lines(), [
-                "\x1b[33mWarning: Person childid specified twice\x1b[0m"
-            ])
-
-        self.assertNormalizedNissaga(n, """\
+        """,
+        """\
             families:
             - children: [childid]
             people:
               childid:
                 name: Inline Name # TODO: Should it be the not inline one?
-        """)
+        """,
+        [
+            "\x1b[33mWarning: Person childid specified twice\x1b[0m"
+        ])
 
 
 
