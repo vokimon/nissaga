@@ -78,6 +78,12 @@ class Nissaga_Test(unittest.TestCase):
         with CaptureOutput() as errorlog:
             nissaga.normalize()
             warnings =  errorlog.get_lines()
+            # KLUDGE: capture library leaves this open
+            if errorlog.merged:
+                errorlog.output.output_handle.close()
+            else:
+                errorlog.stdout.output_handle.close()
+                errorlog.stderr.output_handle.close()
 
         data = ns.loads(expected)
         self.assertNsEqual(
