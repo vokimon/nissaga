@@ -1,3 +1,10 @@
+# Unreleased
+
+- Almost full test coverage
+- Fix: Pydantic in Python 3.6 read bools as integers
+- Fix: dot indentation corrections
+- Removed unused code
+
 # 0.3.0 2021-12-31
 
 - Better input format documentation

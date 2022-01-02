@@ -1,6 +1,8 @@
 # Pending tasks
 
 - [ ] Make the schema documentation to work on github
+- [ ] Implement parents2 and children2 used in kingraph
+- [ ] Make pets part of the family
 - [ ] CLI: Controlling the output filename
 - [ ] CLI: Enable or disabling autoview
 - [ ] When Python<=3.7, use `from __future__ import annotations` to define Family inline https://pydantic-docs.helpmanual.io/usage/postponed_annotations/
@@ -10,7 +12,7 @@
 - [ ] Coverage: died: None
 - [ ] Coverage: escape without quotes
 - [ ] Normalize: Warn unrelated persons
-- [ ] Review: on dupped, which one should be considered?
+- [ ] Review: on dupped person details, which version should prevail?
 - [ ] Configuration framework
 - [ ] Config: formats: output formats to use when no format specified by cli (default: pdf)
 - [ ] Config: dateformat: date format to display, defaut ISO-8601 ("%Y-%m-%d", resulting in YYYY-MM-DD)
