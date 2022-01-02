@@ -3,3 +3,4 @@ pydantic
 consolemsg
 graphviz
 capturer
+typer

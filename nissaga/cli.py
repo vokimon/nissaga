@@ -6,25 +6,44 @@ from yamlns import namespace as ns
 from consolemsg import step, error
 import graphviz
 from pathlib import Path
+import typer
+from typing import List, Union, Optional
+from enum import Enum
 
-supportedFormats = 'pdf svg png jpg'
+class SchemaFormat(str, Enum):
+    json = 'json'
+    yaml = 'yaml'
 
-def main():
-    import sys
+class OutputFormat(str, Enum):
+    pdf = 'pdf'
+    svg = 'svg'
+    png = 'png'
+    dot = 'dot'
+    jpg = 'jpg'
 
-    if 'schema' in sys.argv:
-        formats = [a for a in sys.argv if a in ('json', 'yaml')] or ['yaml']
-        if 'json' in formats:
-            Path('nissaga-schema.json').write_text(schema_json(), encoding='utf8')
-        if 'yaml' in formats:
-            Path('nissaga-schema.yaml').write_text(schema_yaml(), encoding='utf8')
-        sys.exit(0)
+app = typer.Typer(
+    name='nissaga',
+    help="Nissaga is a genealogy tree generator",
+    no_args_is_help = False,
+)
 
-    inputfile = Path(sys.argv[1])
-    formats = [f for f in sys.argv[2:]] or ['pdf']
+@app.command()
+def draw(
+    yamlfile: Path = typer.Argument(...,
+        help = "Input yaml file to process",
+        exists=True,
+        dir_okay=False,
+        readable=True,
+        allow_dash=True,
+    ),
+    format: Optional[List[OutputFormat]] = typer.Argument(None,
+        help = "Output formats, pdf if not specified",
+    ),
+):
+    "Draws the tree for the input file"
 
-    step("Loading {}...", inputfile)
-    data = ns.load(inputfile)
+    data = ns.load(yamlfile)
+    formats = [f.value for f in format] or ['pdf']
 
     step("Validating...")
     p=Nissaga(**data)
@@ -32,9 +51,7 @@ def main():
     step("Normalizing...")
     p.normalize()
 
-    #print(ns(p.dict()).dump())
-
-    dotfile = inputfile.with_suffix('.dot')
+    dotfile = yamlfile.with_suffix('.dot')
 
     step("Generating graph...")
     dot = render(p)
@@ -43,7 +60,7 @@ def main():
     gv = graphviz.Source(dot)
     for format in formats:
         if format == 'dot': continue
-        outputfile = inputfile.with_suffix('.'+format)
+        outputfile = yamlfile.with_suffix('.'+format)
         step("Generating {}...", outputfile)
         try:
             temp = gv.render(dotfile, format=format, view=False)
@@ -56,3 +73,19 @@ def main():
         dotfile.unlink()
 
 
+@app.command("schema")
+def schema(
+    format: SchemaFormat = typer.Argument('yaml', 
+        help= "Format",
+    ),
+):
+    "Dumps the schema for the input files"
+    if format == 'json':
+        step("Generating 'nissaga-schema.json'")
+        Path('nissaga-schema.json').write_text(schema_json(), encoding='utf8')
+    elif format == 'yaml':
+        step("Generating 'nissaga-schema.yaml'")
+        Path('nissaga-schema.yaml').write_text(schema_yaml(), encoding='utf8')
+
+def main():
+    app()
