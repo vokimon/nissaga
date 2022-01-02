@@ -94,9 +94,9 @@ def renderFamily(root, house, family, path):
         union = f'union_{id}'
         state = []
         married = formatdate(family.married)
-        if married is False:
+        if married is False or married == 0:
             state.append('⚯')
-        elif married is not True:
+        elif married is not True and married != 1:
             state.append(f'⚭ {married}')
 
         divorced = formatdate(family.divorced)

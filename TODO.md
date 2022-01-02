@@ -6,13 +6,13 @@
 - [ ] When Python<=3.7, use `from __future__ import annotations` to define Family inline https://pydantic-docs.helpmanual.io/usage/postponed_annotations/
 - [ ] Scaping quotes and other characters
 - [ ] class attribute keept on dot, so that svg has it
-- [ ] Coverage: parents and children
+- [x] Coverage: parents and children
 - [x] Coverage: unmarried
 - [x] Coverage: married at date
 - [x] Coverage: divorced
 - [x] Coverage: divorced at date
 - [x] Coverage: combine divorced and married
-- [ ] Remove unused renderKidsLinks
+- [x] Remove unused renderKidsLinks
 - [ ] Coverage: born None
 - [ ] Coverage: died None
 - [ ] Coverage: house
