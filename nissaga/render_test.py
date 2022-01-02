@@ -412,7 +412,50 @@ digraph G {{
             ],
             '}',
             ''
+        ])
 
+    def test_renderFamily_manyChilds(self):
+        tree = Nissaga(**ns.loads("""
+            families:
+              - children: [ Alice, Barbara ]
+        """))
+        self.assertEqual(renderFamily(tree, None, tree.families[0], [666] ), [
+            'subgraph cluster_family_666 {',
+            [
+                'label=""',
+                 'style="invis"',
+                 'margin=0',
+                 '',
+                 '# Family [none] -> [Alice, Barbara]',
+                 '# '
+                 '--------------------------------------------------------------------------',
+                 '',
+                 '# No parents',
+                 'siblings_666 [',
+                 [
+                     'fillcolor="#3498db"',
+                      'shape="triangle"',
+                      'orientation=90',
+                      'style="filled"',
+                      'label=""',
+                      'penwidth=0',
+                      'height=0.1',
+                      'width=0.1'
+                ],
+                ']',
+                'siblings_666 -> {"Alice", "Barbara"} [',
+                [
+                    'color="#3498db"',
+                    'dir="forward"',
+                    'arrowhead="tee"',
+                    'arrowsize=2',
+                    'weight=2',
+                    'tailport="se"'
+                ],
+                ']'
+            ],
+            '}',
+            ''
         ])
 
 
