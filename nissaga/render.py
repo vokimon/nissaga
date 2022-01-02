@@ -182,7 +182,7 @@ def renderFamily(root, house, family, path):
             ] +
             renderParents(family, slug) +
             renderLink(family, slug) +
-            (renderKids(family, slug) if family.children else ['# No children']) +
+            renderKids(family, slug) +
             #(renderKidLinks(family, slug) if len(family.children)>1 else []) +
             [
             ],

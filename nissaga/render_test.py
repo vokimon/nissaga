@@ -458,7 +458,7 @@ digraph G {{
         ])
 
 
-    def test_renderFamily_parentsAndChild(self):
+    def test_renderFamily_parentsAndChildren(self):
         tree = Nissaga(**ns.loads("""
             families:
               - parents: [ Alice, Barbara ]
