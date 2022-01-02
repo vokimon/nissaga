@@ -13,12 +13,13 @@
 - [x] Coverage: divorced at date
 - [x] Coverage: combine divorced and married
 - [x] Remove unused renderKidsLinks
-- [ ] Coverage: born: None
-- [ ] Coverage: died: None
 - [x] Coverage: house
 - [x] Coverage: subfamily
-- [ ] Coverage: subhouse
+- [x] Coverage: subhouse
+- [ ] Coverage: born: None
+- [ ] Coverage: died: None
 - [ ] Coverage: escape without quotes
+- [x] Coverage: normalize
 - [x] Redundant: RenderKids when no kids
 - [ ] Configuration framework
 - [ ] Config: formats: output formats to use when no format specified by cli (default: pdf)
