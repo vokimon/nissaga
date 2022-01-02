@@ -19,7 +19,12 @@
 - [ ] Coverage: born: None
 - [ ] Coverage: died: None
 - [ ] Coverage: escape without quotes
-- [x] Coverage: normalize
+- [x] Coverage: normalize inlined parent
+- [x] Coverage: normalize unspecified parent
+- [x] Coverage: normalize inlined child
+- [x] Coverage: normalize unspecified child
+- [x] Coverage: normalize dupped details
+- [ ] Review: on dupped, which one should be considered?
 - [x] Redundant: RenderKids when no kids
 - [ ] Configuration framework
 - [ ] Config: formats: output formats to use when no format specified by cli (default: pdf)
