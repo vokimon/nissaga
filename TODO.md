@@ -16,7 +16,7 @@
 - [ ] Coverage: born: None
 - [ ] Coverage: died: None
 - [x] Coverage: house
-- [ ] Coverage: subfamily
+- [x] Coverage: subfamily
 - [ ] Coverage: subhouse
 - [ ] Coverage: escape without quotes
 - [x] Redundant: RenderKids when no kids
