@@ -949,4 +949,169 @@ digraph G {{
             ''
         ])
 
+    def test_renderFamily_subhouse(self):
+        tree = Nissaga(**ns.loads("""
+            families:
+              - parents: [ Alice ]
+                children: [ Barbara ]
+                house: Parent House
+                families:
+                - parents: [Barbara]
+                  children: [Carol]
+                  house: Child House
+        """))
+        self.assertEqual(renderFamily(tree, None, tree.families[0], ['666'] ), [
+            'subgraph cluster_family_666 {',
+            [
+                'label=""',
+                'style="invis"',
+                'margin=0',
+                '',
+                # This block is new
+                '############################################################################',
+                '# House 666 - Parent House',
+                '############################################################################',
+                '',
+                'label=<<b>Parent House</b>>',
+                'style="filled"',
+                'color="#f4f4f4"',
+                'labeljust="l"',
+                'fontname="Helvetica, Arial, sans-serif"',
+                'fontsize=16',
+                'margin=10',
+                '',
+                # End of new block
+                'subgraph cluster_family_666_0 {',
+                [
+                    'label=""',
+                    'style="invis"',
+                    'margin=0',
+                    '',
+                    # This block is new
+                    '############################################################################',
+                    '# House 666.0 - Child House',
+                    '############################################################################',
+                    '',
+                    'label=<<b>Child House</b>>',
+                    'style="filled"',
+                    'color="#fafafa"', # This is different from outer house
+                    'labeljust="l"',
+                    'fontname="Helvetica, Arial, sans-serif"',
+                    'fontsize=16',
+                    'margin=10',
+                    '',
+                    # End of new block
+                    '# Family [Barbara] -> [Carol]',
+                    '# '
+                    '--------------------------------------------------------------------------',
+                    '',
+                    'union_666_0 [',
+                    [
+                        'fillcolor="#1abc9c"',
+                        'shape="circle"',
+                        'style="filled"',
+                        'penwidth=1',
+                        'color="white"',
+                        'label=""',
+                        'height=0.11',
+                        'width=0.11',
+                        'fontname="Helvetica, Arial, sans-serif"',
+                        'fontsize=9',
+                        'fontcolor="#660000"'
+                    ],
+                    ']',
+                    '',
+                    '{"Barbara"} -> union_666_0 [',
+                    [
+                        'color="#1abc9c"', 'weight=2'
+                    ],
+                    ']',
+                    'union_666_0 -> siblings_666_0 [',
+                    [
+                        'color="#1abc9c"',
+                        'weight=3'
+                    ],
+                    ']',
+                    'siblings_666_0 [',
+                    [
+                        'fillcolor="#1abc9c"',
+                        'shape="triangle"',
+                        'orientation=90',
+                        'style="filled"',
+                        'label=""',
+                        'penwidth=0',
+                        'height=0.1',
+                        'width=0.1',
+                    ],
+                    ']',
+                    'siblings_666_0 -> {"Carol"} [',
+                    [
+                        'color="#1abc9c"',
+                        'dir="forward"',
+                        'arrowhead="tee"',
+                        'arrowsize=2',
+                        'weight=2',
+                        'tailport="se"',
+                    ],
+                    ']'
+                ], # End of new block
+                '}',
+                '',
+                '# Family [Alice] -> [Barbara]',
+                '# '
+                '--------------------------------------------------------------------------',
+                '',
+                'union_666 [',
+                [
+                    'fillcolor="#3498db"',
+                    'shape="circle"',
+                    'style="filled"',
+                    'penwidth=1',
+                    'color="white"',
+                    'label=""',
+                    'height=0.11',
+                    'width=0.11',
+                    'fontname="Helvetica, Arial, sans-serif"',
+                    'fontsize=9',
+                    'fontcolor="#660000"',
+                ],
+                ']',
+                '',
+                '{"Alice"} -> union_666 [',
+                [
+                    'color="#3498db"', 'weight=2',
+                ],
+                ']',
+                'union_666 -> siblings_666 [',
+                [
+                    'color="#3498db"', 'weight=3'
+                ],
+                ']',
+                'siblings_666 [',
+                [
+                    'fillcolor="#3498db"',
+                     'shape="triangle"',
+                     'orientation=90',
+                     'style="filled"',
+                     'label=""',
+                     'penwidth=0',
+                     'height=0.1',
+                     'width=0.1'
+                ],
+                ']',
+                'siblings_666 -> {"Barbara"} [',
+                [
+                    'color="#3498db"',
+                    'dir="forward"',
+                    'arrowhead="tee"',
+                    'arrowsize=2',
+                    'weight=2',
+                    'tailport="se"'
+                ],
+                ']'
+            ],
+            '}',
+            ''
+        ])
+
 
