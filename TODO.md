@@ -2,6 +2,7 @@
 
 - [ ] Make the schema documentation to work on github
 - [ ] Implement parents2 and children2 used in kingraph
+- [ ] Use graphviz.FORMATS for the available output formats
 - [ ] Make pets part of the family
 - [ ] CLI: Controlling the output filename
 - [ ] CLI: Enable or disabling autoview
