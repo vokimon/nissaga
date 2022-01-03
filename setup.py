@@ -19,7 +19,7 @@ setup(
 	packages=find_packages(exclude=['*[tT]est*']),
     entry_points = {
         'console_scripts': [
-            'nissaga=nissaga.cli:main',
+            'nissaga=nissaga.cli:app',
         ],
     },
 	install_requires=open('requirements.txt').read().splitlines(),

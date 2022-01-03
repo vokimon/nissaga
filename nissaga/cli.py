@@ -116,6 +116,3 @@ def schema(
         step("Generating 'nissaga-schema.yaml'")
         Path('nissaga-schema.yaml').write_text(schema_yaml(), encoding='utf8')
 
-
-def main():
-    app()
