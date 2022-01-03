@@ -12,6 +12,8 @@
 - [ ] Coverage: born: None
 - [ ] Coverage: died: None
 - [ ] Coverage: escape without quotes
+- [ ] Move final format rendering to rendering
+- [ ] Coverage: handle final format rendering failures
 - [ ] Normalize: Warn unrelated persons
 - [ ] Review: on dupped person details, which version should prevail?
 - [ ] Configuration framework
@@ -22,6 +24,8 @@
 - [ ] Config: picdir: prefix to the pics
 - [ ] Config: docdir: prefix to the docs
 - [ ] CLI documentation: typer nissaga.cli utils docs --output cli.md
+- [ ] CLI: Dash as input file
+- [ ] CLI: Dash as output file
 
 # Done
 

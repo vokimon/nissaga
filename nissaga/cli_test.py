@@ -3,17 +3,7 @@ from .cli import app
 from typer.testing import CliRunner
 from pathlib import Path
 import consolemsg
-
-yaml="""\
-families:
-- parents:
-  - alice
-- children:
-  - barbara
-people:
-  alice: {}
-  barbara: {}
-"""
+from . import __version__
 
 import sys
 
@@ -41,6 +31,17 @@ class Cli_Test(unittest.TestCase):
 
     def chtempdir(self):
         return self.runner.isolated_filesystem()
+
+    def test_version(self):
+        with self.chtempdir() as path:
+            result = self.runner.invoke(app, [
+                '--version',
+            ])
+            self.assertFiles([])
+            self.assertEqual(result.exit_code, 0)
+            self.assertEqual(result.output, (
+                f"Nissaga {__version__}\n"
+            ))
 
     def test_schema_defaultYaml(self):
         with self.chtempdir() as path:

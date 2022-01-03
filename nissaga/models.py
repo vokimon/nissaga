@@ -134,8 +134,8 @@ Family.update_forward_refs()
  
 class Nissaga(BaseModel):
     """Top level element containing the data required to build a family tree"""
-    styles: Dict = None
-    families: List[Family] = None
+    styles: Optional[Dict] = None
+    families: Optional[List[Family]] = None
     people: Dict[str, Person] = ns()
 
     class Config:

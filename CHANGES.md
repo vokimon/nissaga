@@ -1,5 +1,9 @@
 # Unreleased
 
+- New cli interface based on Typer with autocompletion and help
+  - Breaking: Generating the tree needs `draw` subcommand
+  - Added `--version` option
+  - Added `--backend` option to show graphviz information
 - Almost full test coverage
 - Fix: Pydantic in Python 3.6 read bools as integers
 - Fix: dot indentation corrections

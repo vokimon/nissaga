@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 
-from nissaga.models import Nissaga, schema_json, schema_yaml
-from nissaga.render import render
 from yamlns import namespace as ns
 from consolemsg import step, error
 import graphviz
@@ -9,6 +7,9 @@ from pathlib import Path
 import typer
 from typing import List, Union, Optional
 from enum import Enum
+from .models import Nissaga, schema_json, schema_yaml
+from .render import render
+from . import __version__
 
 class SchemaFormat(str, Enum):
     json = 'json'
@@ -22,10 +23,36 @@ class OutputFormat(str, Enum):
     jpg = 'jpg'
 
 app = typer.Typer(
-    name='nissaga',
-    help="Nissaga is a genealogy tree generator",
     no_args_is_help = False,
 )
+
+def version_callback(value: bool):
+    if not value: return
+    typer.echo(f"Nissaga {__version__}")
+    raise typer.Exit()
+
+def backend_callback(value: bool):
+    if not value: return
+    typer.echo(f"Using GraphViz {'.'.join(str(x) for x in graphviz.version())}")
+    typer.echo(f"Supported output formats: {', '.join(graphviz.FORMATS)}")
+    raise typer.Exit()
+
+@app.callback()
+def nissaga(
+    version: Optional[bool] = typer.Option(
+        None, "--version",
+        callback=version_callback,
+        is_eager=True,
+        help="Show the version and exit.",
+    ),
+    backend: Optional[bool] = typer.Option(
+        None, "--backend",
+        callback=backend_callback,
+        is_eager=True,
+        help="Show GraphViz backend information and exit.",
+    ),
+):
+    "Nissaga is a genealogy tree generator"
 
 @app.command()
 def draw(
