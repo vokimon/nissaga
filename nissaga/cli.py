@@ -34,7 +34,7 @@ def draw(
         exists=True,
         dir_okay=False,
         readable=True,
-        allow_dash=True,
+        #allow_dash=True,
     ),
     format: Optional[List[OutputFormat]] = typer.Argument(None,
         help = "Output formats, pdf if not specified",
@@ -88,6 +88,7 @@ def schema(
     elif format == 'yaml':
         step("Generating 'nissaga-schema.yaml'")
         Path('nissaga-schema.yaml').write_text(schema_yaml(), encoding='utf8')
+
 
 def main():
     app()
