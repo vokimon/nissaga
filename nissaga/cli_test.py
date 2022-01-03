@@ -43,6 +43,18 @@ class Cli_Test(unittest.TestCase):
                 f"Nissaga {__version__}\n"
             ))
 
+    def test_backend(self):
+        with self.chtempdir() as path:
+            result = self.runner.invoke(app, [
+                '--backend',
+            ])
+            self.assertFiles([])
+            self.assertEqual(result.exit_code, 0)
+            self.assertIn(
+                f"Using GraphViz ",
+                result.output,
+            )
+
     def test_schema_defaultYaml(self):
         with self.chtempdir() as path:
             result = self.runner.invoke(app, [
