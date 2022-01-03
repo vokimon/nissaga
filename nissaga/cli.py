@@ -104,7 +104,7 @@ def draw(
 
 @app.command("schema")
 def schema(
-    format: SchemaFormat = typer.Argument('yaml', 
+    format: SchemaFormat = typer.Argument('yaml',
         help= "Format",
     ),
 ):
