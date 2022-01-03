@@ -28,12 +28,8 @@ You need to install [graphviz]. Not the python wrapper library, but the program 
 
 ## Usage
 
-The command line interface is still quite simple and
-future versions will evolve it to a more powerful one.
-Right now it works like this:
-
 ```bash
-nissaga myfamily.yaml
+nissaga draw myfamily.yaml
 ```
 
 This generates a file `myfamily.pdf`
@@ -41,8 +37,11 @@ This generates a file `myfamily.pdf`
 You can specify a second parameter to choose the output format: png, svg or any supported by graphviz.
 
 ```bash
-nissaga myfamily.yaml svg
+nissaga draw myfamily.yaml svg
 ```
+
+Get more information on the [command line documentation](docs/cli.md).
+
 
 ## Input file
 
