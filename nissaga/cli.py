@@ -99,7 +99,7 @@ def draw(
         step("Generating {}...", dotfile)
 
 
-@app.command("schema")
+@app.command()
 def schema(
     format: SchemaFormat = typer.Argument('yaml',
         help= "Format",
