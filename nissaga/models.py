@@ -1,7 +1,9 @@
 import graphviz
 from pydantic import BaseModel, Extra, AnyHttpUrl, Field
 from yamlns import namespace as ns
-from typing import Union, Optional, Dict, List 
+from typing import (
+    Union, Optional, Dict, List, Tuple,
+)
 import datetime
 from consolemsg import warn, step
 from pathlib import Path

@@ -105,6 +105,32 @@ class Cli_Test(unittest.TestCase):
             ])
             self.assertEqual(result.exit_code, 0)
 
+    def test_draw_png_and_jpg(self):
+        with self.chtempdir() as path:
+            Path('alice.yaml').write_text("""
+            families:
+            - children: [alice]
+            people:
+                alice: {}
+            """, encoding='utf8')
+            result = self.runner.invoke(app, [
+                'draw',
+                'alice.yaml',
+                'png',
+                'jpg'
+            ])
+            self.assertEqual(result.output, (
+                "\x1b[34;1m:: Loading alice.yaml...\x1b[0m\n"
+                "\x1b[34;1m:: Generating alice.png...\x1b[0m\n"
+                "\x1b[34;1m:: Generating alice.jpg...\x1b[0m\n"
+                ))
+            self.assertFiles([
+                'alice.jpg',
+                'alice.png',
+                'alice.yaml',
+            ])
+            self.assertEqual(result.exit_code, 0)
+
     def test_draw_svg(self):
         with self.chtempdir() as path:
             Path('alice.yaml').write_text("""
