@@ -147,6 +147,13 @@ class Nissaga(BaseModel):
         processFamily(self, self.people)
         instantianteUndetailedPersons(self.people)
 
+    @staticmethod
+    def load(filename):
+        data = ns.load(Path(filename))
+        nissaga = Nissaga(**data)
+        nissaga.normalize()
+        return nissaga
+
 def instantianteUndetailedPersons(persons):
     for id, person in persons.items():
         if person is not None: continue

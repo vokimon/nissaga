@@ -69,12 +69,10 @@ def draw(
 ):
     "Draws the tree for the input file"
 
-    step(f"Loading {yamlfile}...")
-    data = ns.load(yamlfile)
     formats = [f.value for f in format] or ['pdf']
 
-    p=Nissaga(**data)
-    p.normalize()
+    step(f"Loading {yamlfile}...")
+    p = Nissaga.load(yamlfile)
 
     dotfile = yamlfile.with_suffix('.dot')
 
@@ -93,6 +91,7 @@ def draw(
             print(dir(exception))
             error(exception.stderr)
             error("Intermediate dot file dumped as output.dot")
+
     if 'dot' not in formats:
         dotfile.unlink()
     else:
