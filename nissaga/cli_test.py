@@ -96,9 +96,7 @@ class Cli_Test(unittest.TestCase):
                 'alice.yaml',
             ])
             self.assertEqual(result.output, (
-                "\x1b[34;1m:: Validating...\x1b[0m\n"
-                "\x1b[34;1m:: Normalizing...\x1b[0m\n"
-                "\x1b[34;1m:: Generating graph...\x1b[0m\n"
+                "\x1b[34;1m:: Loading alice.yaml...\x1b[0m\n"
                 "\x1b[34;1m:: Generating alice.pdf...\x1b[0m\n"
                 ))
             self.assertFiles([
@@ -121,9 +119,7 @@ class Cli_Test(unittest.TestCase):
                 'svg',
             ])
             self.assertEqual(result.output, (
-                "\x1b[34;1m:: Validating...\x1b[0m\n"
-                "\x1b[34;1m:: Normalizing...\x1b[0m\n"
-                "\x1b[34;1m:: Generating graph...\x1b[0m\n"
+                "\x1b[34;1m:: Loading alice.yaml...\x1b[0m\n"
                 "\x1b[34;1m:: Generating alice.svg...\x1b[0m\n"
                 ))
             self.assertFiles([
@@ -146,9 +142,7 @@ class Cli_Test(unittest.TestCase):
                 'dot',
             ])
             self.assertEqual(result.output, (
-                "\x1b[34;1m:: Validating...\x1b[0m\n"
-                "\x1b[34;1m:: Normalizing...\x1b[0m\n"
-                "\x1b[34;1m:: Generating graph...\x1b[0m\n"
+                "\x1b[34;1m:: Loading alice.yaml...\x1b[0m\n"
                 "\x1b[34;1m:: Generating alice.dot...\x1b[0m\n"
                 ))
             self.assertFiles([
