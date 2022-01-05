@@ -112,3 +112,21 @@ def schema(
         step("Generating 'nissaga-schema.yaml'")
         Path('nissaga-schema.yaml').write_text(schema_yaml(), encoding='utf8')
 
+@app.command()
+def dates(
+    yamlfile: Path = typer.Argument(...,
+        help = "Input yaml file to process",
+        exists=True,
+        dir_okay=False,
+        readable=True,
+        #allow_dash=True,
+    ),
+):
+    """Compile dates."""
+    from .anniversaries_test import compileAniversaries
+    nissaga = Nissaga.load(yamlfile)
+    for date, reason in sorted(compileAniversaries(nissaga)):
+        print(date, reason)
+
+
+    
