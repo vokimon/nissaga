@@ -7,7 +7,7 @@ from pathlib import Path
 import typer
 from typing import List, Union, Optional
 from enum import Enum
-from .models import Nissaga, schema_json, schema_yaml
+from .models import Nissaga, schema_json, schema_yaml, draw
 from .render import render
 from . import __version__
 
@@ -54,8 +54,8 @@ def nissaga(
 ):
     "Nissaga is a genealogy tree generator"
 
-@app.command()
-def draw(
+@app.command('draw')
+def draw_command(
     yamlfile: Path = typer.Argument(...,
         help = "Input yaml file to process",
         exists=True,
@@ -70,33 +70,7 @@ def draw(
     "Draws the tree for the input file"
 
     formats = [f.value for f in format] or ['pdf']
-
-    step(f"Loading {yamlfile}...")
-    p = Nissaga.load(yamlfile)
-
-    dotfile = yamlfile.with_suffix('.dot')
-
-    dot = render(p)
-    Path(dotfile).write_text(dot, encoding='utf8')
-
-    gv = graphviz.Source(dot)
-    for format in formats:
-        if format == 'dot': continue
-        outputfile = yamlfile.with_suffix('.'+format)
-        step("Generating {}...", outputfile)
-        try:
-            temp = gv.render(dotfile, format=format, view=False)
-            Path(temp).rename(outputfile)
-        except graphviz.backend.CalledProcessError as exception:
-            print(dir(exception))
-            error(exception.stderr)
-            error("Intermediate dot file dumped as output.dot")
-
-    if 'dot' not in formats:
-        dotfile.unlink()
-    else:
-        step("Generating {}...", dotfile)
-
+    return draw(yamlfile, formats)
 
 @app.command()
 def schema(

@@ -191,5 +191,32 @@ def schema_json():
 def schema_yaml():
     return ns(Nissaga.schema()).dump()
 
+def draw(yamlfile, formats):
+
+    step(f"Loading {yamlfile}...")
+    p = Nissaga.load(yamlfile)
+
+    dotfile = yamlfile.with_suffix('.dot')
+
+    dot = render(p)
+    Path(dotfile).write_text(dot, encoding='utf8')
+
+    gv = graphviz.Source(dot)
+    for format in formats:
+        if format == 'dot': continue
+        outputfile = yamlfile.with_suffix('.'+format)
+        step("Generating {}...", outputfile)
+        try:
+            temp = gv.render(dotfile, format=format, view=False)
+            Path(temp).rename(outputfile)
+        except graphviz.backend.CalledProcessError as exception:
+            print(dir(exception))
+            error(exception.stderr)
+            error("Intermediate dot file dumped as output.dot")
+
+    if 'dot' not in formats:
+        dotfile.unlink()
+    else:
+        step("Generating {}...", dotfile)
 
 
