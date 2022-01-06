@@ -1,8 +1,9 @@
 import unittest
-from .cli import app
+import datetime
 from typer.testing import CliRunner
 from pathlib import Path
 import consolemsg
+from .cli import app
 from . import __version__
 
 import sys
@@ -177,5 +178,27 @@ class Cli_Test(unittest.TestCase):
             ])
             self.assertEqual(result.exit_code, 0)
 
+
+    def test_draw_dot(self):
+        with self.chtempdir() as path:
+            Path('alice.yaml').write_text("""
+            families:
+            - children: [alice]
+            people:
+                alice:
+                    born: 2010-12-31
+            """, encoding='utf8')
+            result = self.runner.invoke(app, [
+                'dates',
+                'alice.yaml',
+            ])
+            year=datetime.date.today().year
+            self.assertEqual(result.output, (
+                f"{year}-12-31 alice will turn 12.\n"
+                ))
+            self.assertFiles([
+                'alice.yaml',
+            ])
+            self.assertEqual(result.exit_code, 0)
 
 
