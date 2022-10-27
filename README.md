@@ -1,3 +1,5 @@
+![Logo](docs/nissaga-logo.svg)
+
 # Nissaga, genealogy tree generator
 
 [![CI](https://github.com/vokimon/nissaga/actions/workflows/main.yml/badge.svg)](https://github.com/vokimon/nissaga/actions/workflows/main.yml)
