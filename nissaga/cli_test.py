@@ -194,7 +194,7 @@ class Cli_Test(unittest.TestCase):
             ])
             year=datetime.date.today().year
             self.assertEqual(result.output, (
-                f"{year}-12-31 alice will turn 12.\n"
+                f"{year}-12-31 alice will turn {year-2010}.\n"
                 ))
             self.assertFiles([
                 'alice.yaml',
