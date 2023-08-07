@@ -263,7 +263,7 @@ digraph G {{
             self.personTemplate(
                 id="Alice",
                 name="Alice",
-                extra='\n    URL="http://google.com"',
+                extra='\n    URL="http://google.com/"', # TODO: Pydantic 2 adds the slash
         ))
 
     def test_render_withPics(self):

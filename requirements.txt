@@ -1,5 +1,5 @@
 yamlns
-pydantic
+pydantic>=2
 consolemsg
 graphviz
 capturer
