@@ -12,7 +12,7 @@ class Nissaga_Test(unittest.TestCase):
 
     def test_Person_defaults(self):
         p = models.Person()
-        self.assertNsEqual(ns(p.dict()), self.basePerson())
+        self.assertNsEqual(ns(p.model_dump()), self.basePerson())
 
     def test_Person_overrides(self):
         data = ns.loads("""
@@ -20,7 +20,7 @@ class Nissaga_Test(unittest.TestCase):
             comment: A comment
         """)
         p = models.Person(**data)
-        self.assertNsEqual(ns(p.dict()), self.basePerson(
+        self.assertNsEqual(ns(p.model_dump()), self.basePerson(
             comment = "A comment",
             fullname = "Perico Palotes",
         ))
@@ -87,7 +87,7 @@ class Nissaga_Test(unittest.TestCase):
 
         data = ns.loads(expected)
         self.assertNsEqual(
-            ns(nissaga.dict()),
+            ns(nissaga.model_dump()),
             self.baseNissaga(
                 families = [
                     self.baseFamily(**family)

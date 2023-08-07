@@ -1,6 +1,7 @@
 import graphviz
-from pydantic import BaseModel, Extra, AnyHttpUrl, Field
+from pydantic import BaseModel, ConfigDict, AnyHttpUrl, Field
 from yamlns import namespace as ns
+import json
 from typing import (
     Union, Optional, Dict, List, Tuple,
 )
@@ -42,7 +43,7 @@ class Person(BaseModel):
         "Just for the record, not shown. "
         "Sometimes is the only information available in gravestones."
     ))
-    from_: Optional[str] = Field(None, description=(
+    from_: Optional[str] = Field(None, alias='from', description=(
         "Place of origin. "
         "Just for the record, not shown."
     ))
@@ -72,17 +73,14 @@ class Person(BaseModel):
     gender: Optional[str] = Field(None, description=(
         "Not used yet."
     ))
-    class_: Optional[List[str]] = Field([], description=(
+    class_: Optional[List[str]] = Field([], alias='class', description=(
         "Space separated style classes for the person. "
         "Specific attributes can be specified for the persons having a given class."
     ))
 
-    class Config:
-        extra = Extra.forbid
-        fields = dict(
-            from_ = 'from',
-            class_ = 'class',
-        )
+    model_config: ConfigDict = ConfigDict(
+        extra = 'forbid'
+    )
 
 # You can reference persons by its id but you can also
 # define them inline with a single item dict.
@@ -129,19 +127,23 @@ class Family(BaseModel):
         "You could alternatively define children's families at the same level."
     ))
 
-    class Config:
-        extra = Extra.forbid
+    model_config: ConfigDict = ConfigDict(
+        extra = 'forbid'
+    )
 
-Family.update_forward_refs()
- 
+
+Family.model_rebuild()
+
+
 class Nissaga(BaseModel):
     """Top level element containing the data required to build a family tree"""
     styles: Optional[Dict] = None
     families: Optional[List[Family]] = None
     people: Dict[str, Person] = ns()
 
-    class Config:
-        extra = Extra.forbid
+    model_config: ConfigDict = ConfigDict(
+        extra = 'forbid'
+    )
 
     def normalize(self):
         processFamily(self, self.people)
@@ -186,10 +188,10 @@ def processFamily(context, people):
         processFamily(family, people)
 
 def schema_json():
-    return Nissaga.schema_json(indent=2)
+    return json.dumps(Nissaga.model_json_schema(), indent=2)
 
 def schema_yaml():
-    return ns(Nissaga.schema()).dump()
+    return ns(Nissaga.model_json_schema()).dump()
 
 def draw(yamlfile, formats):
 
