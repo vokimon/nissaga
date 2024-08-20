@@ -69,7 +69,7 @@ def draw_command(
 ):
     "Draws the tree for the input file"
 
-    formats = [f.value for f in format] or ['pdf']
+    formats = [f.value for f in format or [OutputFormat.pdf]]
     return draw(yamlfile, formats)
 
 @app.command()
