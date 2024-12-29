@@ -1,6 +1,0 @@
-yamlns
-pydantic>=2
-consolemsg
-graphviz
-capturer
-typer

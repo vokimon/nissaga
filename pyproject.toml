@@ -1,0 +1,65 @@
+
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nissaga"
+description='Genealogy tree generator'
+authors = [
+    { name="David García Garzón", email="voki@canvoki.net" },
+]
+readme = "README.md"
+requires-python = ">=3.8"
+license = { file="LICENSE"}
+keywords=["genealogy", "yaml"]
+
+classifiers = [
+	'Topic :: Sociology :: Genealogy',
+	'Intended Audience :: End Users/Desktop',
+	'Development Status :: 5 - Production/Stable',
+	'License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)',
+	'Operating System :: OS Independent',
+	'Environment :: Console',
+	'Programming Language :: Python',
+	'Programming Language :: Python :: 3',
+	'Programming Language :: Python :: 3.8',
+	'Programming Language :: Python :: 3.9',
+	'Programming Language :: Python :: 3.10',
+	'Programming Language :: Python :: 3.11',
+	'Programming Language :: Python :: 3.12',
+]
+
+dependencies = [
+	'yamlns',
+	'pydantic>=2',
+	'consolemsg',
+	'graphviz',
+	'capturer',
+	'typer',
+	'pytest', # testing
+	'pytest-cov<4', # testing
+]
+
+[project.scripts]
+nissaga = "nissaga.cli:app"
+
+[project.urls]
+Homepage = "https://vokimon.github.io/nissaga"
+Repository = "https://github.com/vokimon/nissaga"
+Changelog = "https://github.com/vokimon/nissaga/blob/master/CHANGES.md"
+
+[tool.setuptools.dynamic]
+version = {attr = "mymodule.__version__"}
+
+[tool.setuptools.packages]
+find = {}
+
+[tool.coverage.run]
+relative_files = true
+branch = true
+omit = ["**/*test.py"]
+
+[tool.pytest.ini_options]
+addopts = "--cov=nissaga"
+
