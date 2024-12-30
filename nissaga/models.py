@@ -134,12 +134,22 @@ class Family(BaseModel):
 
 Family.model_rebuild()
 
+class Configuration(BaseModel):
+
+    dateFormat: str = Field("%Y-%M-%d", description=(
+        "Format to be used to show dates. "
+    ))
+    avatarSize: Tuple[int, int] = Field((40,40), description=(
+        "Avatar image size (with, height) in pixels"
+    ))
+
 
 class Nissaga(BaseModel):
     """Top level element containing the data required to build a family tree"""
     styles: Optional[Dict] = None
     families: Optional[List[Family]] = None
     people: Dict[str, Person] = ns()
+    config: Optional[Configuration] = None
 
     model_config: ConfigDict = ConfigDict(
         extra = 'forbid'

@@ -68,6 +68,7 @@ class Nissaga_Test(unittest.TestCase):
             families: []
             people: {}
             styles: null
+            config: null
         """)
         base.update(**kwds)
         return base
